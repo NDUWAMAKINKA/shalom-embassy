@@ -2,6 +2,13 @@
 
 A complete, responsive, static website for **Shalom Embassy Ministries International**, Lusaka, Zambia. Built around the church’s official logo, its teal-and-gold palette, and the message **“Nothing missing. Nothing broken.”**
 
+## Live site
+
+- **Website:** https://nduwamakinka.github.io/shalom-embassy/
+- **Repository:** https://github.com/NDUWAMAKINKA/shalom-embassy
+
+The site is deployed with GitHub Pages from the `main` branch.
+
 ## Pages
 
 | File | Purpose |
