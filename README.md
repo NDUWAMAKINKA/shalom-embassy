@@ -38,8 +38,9 @@ Then visit `http://localhost:8000`.
   - Midnight navy: `#071a36`
   - Logo teal: `#10709c`
   - Turquoise: `#106f93`
-  - Gold: `#d4a63f`
-  - Light gold: `#eccb7a`
+  - Gold: `#e2b42c`
+  - Logo-rim gold: `#f0c12e` (used for the fine structural borders)
+  - Light gold: `#f6d468`
   - Cream/paper: `#fdfaf3` and `#f8f1e3`
 - **Typography:** Fraunces (display serif) and Manrope (sans), self-hosted in `assets/fonts/`.
 - **No frameworks, no build step.** Everything is plain HTML, CSS, and JavaScript.

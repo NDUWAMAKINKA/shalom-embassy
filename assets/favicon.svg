@@ -1,12 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <rect width="64" height="64" rx="14" fill="#071a36"/>
-  <ellipse cx="32" cy="33" rx="26" ry="21" fill="#0b3358" stroke="#d4a63f" stroke-width="1.6"/>
-  <ellipse cx="32" cy="33" rx="22" ry="17" fill="none" stroke="#eccb7a" stroke-width="0.5" opacity="0.5"/>
-  <path d="M18 27c4.5-2.2 9.2-2 13.8.8V44c-4.6-2.8-9.3-3-13.8-.8V27Z" fill="#fffdf8" stroke="#d4a63f" stroke-width="1.1" stroke-linejoin="round"/>
-  <path d="M46 27c-4.5-2.2-9.2-2-13.8.8V44c4.6-2.8 9.3-3 13.8-.8V27Z" fill="#fffdf8" stroke="#d4a63f" stroke-width="1.1" stroke-linejoin="round"/>
-  <path d="M32 28v16" stroke="#d4a63f" stroke-width="1"/>
+  <ellipse cx="32" cy="33" rx="26" ry="21" fill="#0b3358" stroke="#e2b42c" stroke-width="1.6"/>
+  <ellipse cx="32" cy="33" rx="22" ry="17" fill="none" stroke="#f0c12e" stroke-width="0.5" opacity="0.5"/>
+  <path d="M18 27c4.5-2.2 9.2-2 13.8.8V44c-4.6-2.8-9.3-3-13.8-.8V27Z" fill="#fffdf8" stroke="#e2b42c" stroke-width="1.1" stroke-linejoin="round"/>
+  <path d="M46 27c-4.5-2.2-9.2-2-13.8.8V44c4.6-2.8 9.3-3 13.8-.8V27Z" fill="#fffdf8" stroke="#e2b42c" stroke-width="1.1" stroke-linejoin="round"/>
+  <path d="M32 28v16" stroke="#e2b42c" stroke-width="1"/>
   <path d="M22 31.5c2.6-1 5.2-.8 7.4.4M22 35c2.6-1 5.2-.8 7.4.4M22 38.5c2.6-1 5.2-.8 7.4.4" stroke="#0b3358" stroke-width="0.6" opacity="0.6"/>
   <path d="M42 31.5c-2.6-1-5.2-.8-7.4.4M42 35c-2.6-1-5.2-.8-7.4.4M42 38.5c-2.6-1-5.2-.8-7.4.4" stroke="#0b3358" stroke-width="0.6" opacity="0.6"/>
-  <path d="M23 22.5h7.2M33.8 22.5H41" stroke="#eccb7a" stroke-width="1.1" stroke-linecap="round"/>
-  <text x="32" y="21" text-anchor="middle" font-family="Georgia, serif" font-size="3.8" fill="#eccb7a" letter-spacing=".5">JUDGES 6:24</text>
+  <path d="M23 22.5h7.2M33.8 22.5H41" stroke="#f0c12e" stroke-width="1.1" stroke-linecap="round"/>
+  <text x="32" y="21" text-anchor="middle" font-family="Georgia, serif" font-size="3.8" fill="#f0c12e" letter-spacing=".5">JUDGES 6:24</text>
 </svg>
