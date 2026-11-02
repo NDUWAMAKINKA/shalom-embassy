@@ -1,0 +1,9 @@
+# Local archive — not needed for the deployed site
+MEDIA FILES/originals/
+WEB FILES.txt
+
+# OS / editor files
+Thumbs.db
+.DS_Store
+desktop.ini
+*.log

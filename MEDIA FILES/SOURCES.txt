@@ -1,0 +1,92 @@
+SHALOM EMBASSY MINISTRIES INTERNATIONAL — MEDIA SOURCES
+========================================================
+
+OFFICIAL LOGO
+-------------
+The logo used in the website header, footer, favicon and social share image
+was extracted from the church's official "Prayer & Fasting Sunday Service"
+poster / YouTube thumbnail:
+
+  https://www.youtube.com/watch?v=TLpDwYK1tLM
+
+It was cropped to the oval seal and converted to a transparent PNG for use
+on the website. The logo and all church marks remain the property of
+Shalom Embassy Ministries International.
+
+WEBSITE / SOCIAL CHANNELS
+-------------------------
+YouTube:    https://www.youtube.com/@apostlesundaysinyangwe
+Facebook:   https://www.facebook.com/ApostleSundaySinyangwe/
+Instagram:  https://www.instagram.com/apostlesundaysinyangwe/
+X:          https://x.com/ApostleSundayS
+Telegram:   https://t.me/apostlesundaysinyangwe
+WhatsApp:   https://whatsapp.com/channel/0029VaIULXfHbFVE2fsv3f1p
+Dunamis:    https://dunamisgospel.org/homepage/
+
+PHOTO SOURCES
+-------------
+The photographs in assets/img were sourced from the church's public
+Facebook page and official YouTube channel, including these public posts
+and video thumbnails:
+
+  Sunday worship / congregation:
+    https://www.facebook.com/ApostleSundaySinyangwe/
+    YouTube video W2lcZ14Dy1I
+
+  Apostle Sunday Sinyangwe portrait:
+    https://www.youtube.com/@apostlesundaysinyangwe
+    Channel avatar (s900)
+
+  Apostle Sunday preaching:
+    YouTube video Q3f7WFBNnns
+
+  Congregation / worship:
+    Facebook public page image 468309113_1200661734757372_8390162493991220526_n
+    YouTube videos DUA5y_Zk2Ho, v-WObP47Um8, e0BOfXlqgVs, JjcGamEqUxo
+
+  Apostle Sunday & Pastor Bube Sinyangwe:
+    YouTube video XjKuzph9cOM
+
+  Event posters:
+    https://www.youtube.com/@apostlesundaysinyangwe
+    Videos: z-W8hnyaXWI (Big Sunday), 0L8NJ4ZlL7k (17th anniversary),
+            9EermTXSfkM (My Worship My Weapon 3.0),
+            0m0BfbNJNPI (Night of Freedom),
+            TLpDwYK1tLM (Prayer & Fasting Sunday)
+
+  Sermon thumbnails:
+    Official YouTube video thumbnails for X5W0Oatkq-s, aizSPbaxWPk,
+    0m0BfbNJNPI, pHWBSKnwoPs, Ww_R2n1nuhU, TLpDwYK1tLM, Q-rqEVUTFNQ,
+    iS2lLkwNVoI, 8h3pT5O3zLo, n2ineKxjv_Q, 9EermTXSfkM, FrhKuEvjZwk
+
+The selected source images are kept in MEDIA FILES/originals for future
+reference. Files in assets/img are cropped, resized and compressed copies.
+
+MAP
+---
+The local map image assets/img/map-lusaka.jpg was built from OpenStreetMap
+tiles around Lusaka:
+
+  https://www.openstreetmap.org/
+  © OpenStreetMap contributors, Open Database Licence (ODbL)
+
+The website also links to Google Maps for live directions.
+
+CONTENT SOURCES
+---------------
+Service times, phone numbers, address, event dates and ministry names were
+taken from the church's public YouTube channel, public Facebook page,
+official event posters, and public business listings:
+
+  https://www.youtube.com/@apostlesundaysinyangwe
+  https://www.facebook.com/ApostleSundaySinyangwe/
+  https://zambia.worldplaces.me/religious-organizations-in-lusaka/52033214-shalom-embassy-ministries-headquarters.html
+
+Always confirm current details with the church office before publishing.
+
+CONTACT
+-------
+Prayer line: +260 974 807 770
+Church office: +260 977 846 660
+Address: Behind Livonia Complex, Off Mumbwa Road, Garden House,
+         Lusaka, Zambia
