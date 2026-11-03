@@ -72,34 +72,6 @@ tiles around Lusaka:
 
 The website also links to Google Maps for live directions.
 
-LANGUAGE SOURCES
-----------------
-Zambia's five most widely spoken languages were identified from public
-language data and the 2010 census summary for widely used languages of
-communication:
-
-  https://en.wikipedia.org/wiki/Languages_of_Zambia
-
-Greetings and expressions were checked against Zambian language guides:
-
-  Zambian Translators International:
-    https://zamtransinternational.weebly.com/bemba.html
-    https://zamtransinternational.weebly.com/nyanja.html
-    https://zamtransinternational.weebly.com/kaonde.html
-    https://zamtransinternational.weebly.com/lozi.html
-
-  Silozi Basics (Zambian Translators International):
-    https://zamtransinternational.weebly.com/uploads/2/3/0/5/23058288/silozi_basics.docx
-
-  Useful phrases for Zambia (Bemba, Nyanja, Tonga, Lozi):
-    https://33travels.com/useful-phrases-for-tourists-in-zambia/
-
-  Kaonde greeting reference:
-    https://langmaps.com/en/wordmap/kqn
-
-English is the official language of Zambia. Speaker estimates are approximate
-and shown for context only.
-
 CONTENT SOURCES
 ---------------
 Service times, phone numbers, address, event dates and ministry names were

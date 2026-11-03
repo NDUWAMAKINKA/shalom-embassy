@@ -13,9 +13,8 @@ The site is deployed with GitHub Pages from the `main` branch.
 
 | File | Purpose |
 |------|---------|
-| `index.html` | Home — hero, welcome, service times, mandate, latest messages, ministries, languages, gallery, visit |
+| `index.html` | Home — hero, welcome, service times, mandate, latest messages, ministries, gallery, visit |
 | `about.html` | Story, timeline, mission/vision, leadership, spiritual heritage, beliefs, ministries |
-| `languages.html` | Zambia’s five most widely spoken languages, greetings, language spotlight |
 | `sermons.html` | Featured message, filterable message library, YouTube channel links |
 | `gatherings.html` | Weekly gatherings, what to expect, recent highlights, anniversary, visit |
 | `give.html` | Giving & partnership, ways to give, integrity note |
@@ -31,8 +30,6 @@ python -m http.server 8000
 ```
 
 Then visit `http://localhost:8000`.
-
-For exact webfont rendering, use the local server. Some browsers block webfont files when `index.html` is opened directly with `file://`; the site falls back to Georgia and Segoe UI but works normally over HTTP/HTTPS.
 
 ## Design
 
@@ -54,8 +51,6 @@ For exact webfont rendering, use the local server. Some browsers block webfont f
 - Sticky header with mobile navigation overlay and focus management
 - Live countdown to the next Sunday 07:00 CAT gathering (Africa/Lusaka)
 - Scroll reveal animations, animated statistics, reduced-motion support
-- Zambian language spotlight with keyboard-accessible tabs, copy-greeting action, and a floating language launcher on every page
-- Language greetings for Bemba, Nyanja, Tonga, Lozi, and Kaonde with verified local phrases
 - Sermon category filters
 - Accessible photo lightbox with keyboard controls
 - Contact/prayer form that opens WhatsApp with the message pre-filled
@@ -63,10 +58,6 @@ For exact webfont rendering, use the local server. Some browsers block webfont f
 - SEO meta tags, Open Graph/Twitter cards, and Church JSON-LD
 - Responsive down to 390px; no horizontal overflow
 - Local OpenStreetMap-derived map image, so the visit section never shows a blank iframe
-
-### Languages
-
-The language section celebrates Zambia’s five most widely spoken languages: **Bemba, Nyanja, Tonga, Lozi, and Kaonde**. English is the official language of Zambia and the language of the website. The greetings were checked against Zambian language guides, including Zambian Translators International and public Silozi learning material. Speaker figures are approximate and vary by source. The floating globe opens a language panel; selecting a greeting shows a short welcome toast and links to the full language page.
 
 ## Important content notes
 
