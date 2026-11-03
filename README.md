@@ -59,6 +59,18 @@ Then visit `http://localhost:8000`.
 - Responsive down to 390px; no horizontal overflow
 - Local OpenStreetMap-derived map image, so the visit section never shows a blank iframe
 
+## Translation concept — notes from Royal Priesthood
+
+The Royal Priesthood Assemblies site uses a fully local translation system rather than a Google Translate widget:
+
+- Each language has a complete English-to-language phrase map loaded from `js__local-text.js`.
+- A header language selector stores the chosen code in `localStorage` and updates the page `lang` attribute.
+- On selection, the script walks every visible text node and translatable attribute, applies the map, and protects proper nouns such as church names, bank names, and account details with `notranslate`.
+- Navigation, mobile menus, form placeholders, and dynamically inserted gallery text are translated too; a `MutationObserver` catches later changes.
+- There is no translation network request, spinner, or third-party widget. Returning to English restores the original English strings.
+
+To reproduce this exactly for Shalom Embassy, the same architecture can be used, but the full phrase maps for every page must be supplied/approved in each language. Machine translation is not reliable enough for Tonga, Lozi, or Kaonde, so the language feature was removed rather than shipping a partial or inaccurate translation.
+
 ## Important content notes
 
 Service times, phone numbers, the address, and social links were taken from the church’s public YouTube channel, Facebook page, and official service posters:
@@ -85,7 +97,7 @@ The map is a locally stored OpenStreetMap-derived image centred on the Garden Ho
 
 ## Photo credits
 
-All photographs are from the church’s public Facebook page and official YouTube channel, plus official service posters. They were cropped, resized, and compressed for web use. See `MEDIA FILES/SOURCES.txt` for the source list. The originals are kept in `MEDIA FILES/originals/` for future use.
+All photographs are from the church's public Facebook page and official YouTube channel, plus official service posters. They were cropped, resized, and compressed for web use. The Shalom Worship, Battle Axe Youth, and Big Sunday images were refreshed with stronger official service photography. See `MEDIA FILES/SOURCES.txt` for the source list. The originals are kept in `MEDIA FILES/originals/` for future use.
 
 If the church has higher-resolution originals, replace the matching files in `assets/img/` using the same filenames and keep the `width`/`height` attributes in the HTML.
 
