@@ -455,6 +455,8 @@
   loadSocial();
   window.setTimeout(() => loadLive(false), 500);
   window.setInterval(() => {
-    if (document.visibilityState === "visible") loadLive(true);
+    if (document.visibilityState !== "visible") return;
+    loadSocial();
+    loadLive(true);
   }, 10 * 60 * 1000);
 })();
