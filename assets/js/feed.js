@@ -7,6 +7,8 @@
   "use strict";
 
   const FEED_URL = "data/feed.json";
+  const YOUTUBE_READER =
+    "https://r.jina.ai/https://www.youtube.com/@apostlesundaysinyangwe/videos";
 
   const escapeHtml = (value) =>
     String(value || "")
@@ -248,22 +250,99 @@
     }
   }
 
+  function parseYouTubeMarkdown(text) {
+    const items = [];
+    const seen = new Set();
+    const pattern =
+      /\[!\[[^\]]*\]\((https:\/\/i\.ytimg\.com\/vi\/[^)\s]+)\)\s*([\d:]+)\]\((https:\/\/www\.youtube\.com\/watch\?v=([A-Za-z0-9_-]{11}))\)\s*\n+\s*###\s*\[([^\]]+)\]\([^)]+\)\s*\n+\s*([^\n]+)/g;
+    let match;
+    while ((match = pattern.exec(text)) !== null) {
+      const id = match[4];
+      if (seen.has(id)) continue;
+      seen.add(id);
+      const dateLine = match[6] || "";
+      const relative = dateLine.replace(/^\s*[\d.,KMB]+\s*/i, "").trim();
+      items.push({
+        id,
+        title: match[5].trim(),
+        url: `https://www.youtube.com/watch?v=${id}`,
+        image: `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`,
+        thumbnail: `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`,
+        date: relative,
+        source: "YouTube",
+      });
+      if (items.length >= 8) break;
+    }
+    return items;
+  }
+
+  async function fetchYouTubeLive() {
+    const response = await fetch(YOUTUBE_READER, {
+      cache: "no-store",
+      headers: { Accept: "text/plain" },
+    });
+    if (!response.ok) return [];
+    return parseYouTubeMarkdown(await response.text());
+  }
+
   async function loadFeed() {
+    let feed = { sermons: [], updates: [], gallery: [], events: [] };
+
     try {
       const response = await fetch(FEED_URL + "?v=" + Date.now(), {
         cache: "no-store",
       });
-      if (!response.ok) return;
-      const feed = await response.json();
-      window.__shalomFeedUpdated = feed.updated || "";
-      renderSermons(feed.sermons);
-      renderUpdates(feed.updates);
-      renderGallery(feed.gallery);
-      renderEvents(feed.events);
+      if (response.ok) feed = await response.json();
     } catch (error) {
-      // Keep the curated static content if the feed is unavailable.
-      if (window.console) console.warn("Shalom feed unavailable:", error);
+      // Keep the curated static content if the JSON feed is unavailable.
+      if (window.console) console.warn("Shalom feed JSON unavailable:", error);
     }
+
+    try {
+      const live = await fetchYouTubeLive();
+      if (live.length) {
+        const metaUpdates = (feed.updates || []).filter(
+          (item) => item.source !== "YouTube"
+        );
+        const metaGallery = (feed.gallery || []).filter(
+          (item) => item.source !== "YouTube"
+        );
+        feed.sermons = live.slice(0, 6);
+        feed.updates = metaUpdates
+          .concat(
+            live.map((item) => ({
+              source: "YouTube",
+              text: item.title,
+              image: item.image,
+              url: item.url,
+              date: item.date,
+            }))
+          )
+          .slice(0, 6);
+        feed.gallery = metaGallery
+          .concat(
+            live.map((item) => ({
+              src: item.image,
+              alt: item.title,
+              caption: item.title,
+              url: item.url,
+              source: "YouTube",
+            }))
+          )
+          .slice(0, 8);
+        feed.updated = new Date().toISOString();
+      }
+    } catch (error) {
+      // The static feed remains a complete fallback.
+      if (window.console) console.warn("Live YouTube feed unavailable:", error);
+    }
+
+    window.__shalomFeedUpdated = feed.updated || "";
+    renderSermons(feed.sermons);
+    renderUpdates(feed.updates);
+    renderGallery(feed.gallery);
+    renderEvents(feed.events);
+    updateTimestamp();
   }
 
   if (document.readyState === "loading") {

@@ -68,11 +68,15 @@ The site now has a feed pipeline that keeps these sections fresh:
 - **Latest moments** — new gallery images from connected social accounts
 - **Upcoming events** — from a public church calendar (ICS)
 
-`scripts/update_feed.py` writes `data/feed.json`; `assets/js/feed.js` reads it and renders the sections. The included GitHub Action (`.github/workflows/update-feed.yml`) runs every 15 minutes and commits any changes.
+`scripts/update_feed.py` writes `data/feed.json`; `assets/js/feed.js` reads it and renders the sections. YouTube is also refreshed live in the browser on every visit through a public reader, so the newest uploads appear without waiting for a build.
 
 ### What works immediately
 
 YouTube is public, so the latest sermons, updates and moments update automatically with no setup.
+
+### Optional GitHub Action
+
+The included workflow (`.github/workflows/update-feed.yml`) refreshes the static JSON and social images. It is **manual-dispatch only** because GitHub Actions requires an active billing/actions setup on the account. Run it from **Actions → Update social feed → Run workflow** when that is available, or run `python scripts/update_feed.py` locally and commit the result.
 
 ### Optional feeds
 
