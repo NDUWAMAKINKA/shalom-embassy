@@ -20,6 +20,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="assets/img/logo-official-128.png" sizes="128x128" type="image/png">
   <link rel="apple-touch-icon" href="assets/img/logo-official-128.png">
+  <link rel="preload" as="image" href="assets/img/hero-sanctuary.webp" imagesrcset="assets/img/hero-sanctuary-960.webp 960w, assets/img/hero-sanctuary.webp 1600w" imagesizes="100vw" fetchpriority="high">
   <link rel="preload" href="assets/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/styles.css">
@@ -66,7 +67,7 @@
 </div><header class="site-header" id="site-header">
   <div class="container header__inner">
     <a class="brand " href="index.html" aria-label="Shalom Embassy Ministries International — home">
-  <img class="brand__logo" src="assets/img/logo-official.png" alt="Shalom Embassy Ministries International" width="480" height="198">
+  <img class="brand__logo" src="assets/img/logo-official.webp" alt="Shalom Embassy Ministries International" width="480" height="198">
 </a>
     <nav class="nav" id="primary-nav" aria-label="Primary navigation">
       <ul class="nav__list">
@@ -85,21 +86,21 @@
           <svg class="icon lang-toggle__chevron" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg>
         </button>
         <div class="lang-menu" id="lang-menu" data-lang-menu role="listbox" aria-label="Select language" hidden>
-          <p class="lang-group" role="presentation">Zambian languages</p>
-          <button type="button" role="option" data-lang="bem" aria-selected="false">Bemba</button>
-          <button type="button" role="option" data-lang="nya" aria-selected="false">Nyanja</button>
-          <button type="button" role="option" data-lang="toi" aria-selected="false">Tonga</button>
-          <button type="button" role="option" data-lang="loz" aria-selected="false">Lozi</button>
-          <button type="button" role="option" data-lang="tum" aria-selected="false">Tumbuka</button>
+          <p class="lang-group" role="presentation"><img class="lang-flag" src="assets/img/flags/zm.svg" alt="" width="20" height="13" loading="lazy"> Zambian languages</p>
+          <button type="button" role="option" data-lang="bem" aria-selected="false"><span class="lang-option-main"><img class="lang-flag" src="assets/img/flags/zm.svg" alt="" width="20" height="13" loading="lazy"> <span>Bemba</span></span></button>
+          <button type="button" role="option" data-lang="nya" aria-selected="false"><span class="lang-option-main"><img class="lang-flag" src="assets/img/flags/zm.svg" alt="" width="20" height="13" loading="lazy"> <span>Nyanja</span></span></button>
+          <button type="button" role="option" data-lang="toi" aria-selected="false"><span class="lang-option-main"><img class="lang-flag" src="assets/img/flags/zm.svg" alt="" width="20" height="13" loading="lazy"> <span>Tonga</span></span></button>
+          <button type="button" role="option" data-lang="loz" aria-selected="false"><span class="lang-option-main"><img class="lang-flag" src="assets/img/flags/zm.svg" alt="" width="20" height="13" loading="lazy"> <span>Lozi</span></span></button>
+          <button type="button" role="option" data-lang="tum" aria-selected="false"><span class="lang-option-main"><img class="lang-flag" src="assets/img/flags/zm.svg" alt="" width="20" height="13" loading="lazy"> <span>Tumbuka</span></span></button>
           <p class="lang-group" role="presentation">World languages</p>
-          <button type="button" role="option" data-lang="en" aria-selected="true">English</button>
-          <button type="button" role="option" data-lang="hi" aria-selected="false">Hindi</button>
-          <button type="button" role="option" data-lang="fr" aria-selected="false">French</button>
-          <button type="button" role="option" data-lang="de" aria-selected="false">German</button>
-          <button type="button" role="option" data-lang="it" aria-selected="false">Italian</button>
-          <button type="button" role="option" data-lang="pt" aria-selected="false">Portuguese</button>
-          <button type="button" role="option" data-lang="ru" aria-selected="false">Russian</button>
-          <button type="button" role="option" data-lang="es" aria-selected="false">Spanish</button>
+          <button type="button" role="option" data-lang="en" aria-selected="true"><span class="lang-option-main"><img class="lang-flag" src="assets/img/flags/gb.svg" alt="" width="20" height="13" loading="lazy"> <span>English</span></span></button>
+          <button type="button" role="option" data-lang="hi" aria-selected="false"><span class="lang-option-main"><img class="lang-flag" src="assets/img/flags/in.svg" alt="" width="20" height="13" loading="lazy"> <span>Hindi</span></span></button>
+          <button type="button" role="option" data-lang="fr" aria-selected="false"><span class="lang-option-main"><img class="lang-flag" src="assets/img/flags/fr.svg" alt="" width="20" height="13" loading="lazy"> <span>French</span></span></button>
+          <button type="button" role="option" data-lang="de" aria-selected="false"><span class="lang-option-main"><img class="lang-flag" src="assets/img/flags/de.svg" alt="" width="20" height="13" loading="lazy"> <span>German</span></span></button>
+          <button type="button" role="option" data-lang="it" aria-selected="false"><span class="lang-option-main"><img class="lang-flag" src="assets/img/flags/it.svg" alt="" width="20" height="13" loading="lazy"> <span>Italian</span></span></button>
+          <button type="button" role="option" data-lang="pt" aria-selected="false"><span class="lang-option-main"><img class="lang-flag" src="assets/img/flags/pt.svg" alt="" width="20" height="13" loading="lazy"> <span>Portuguese</span></span></button>
+          <button type="button" role="option" data-lang="ru" aria-selected="false"><span class="lang-option-main"><img class="lang-flag" src="assets/img/flags/ru.svg" alt="" width="20" height="13" loading="lazy"> <span>Russian</span></span></button>
+          <button type="button" role="option" data-lang="es" aria-selected="false"><span class="lang-option-main"><img class="lang-flag" src="assets/img/flags/es.svg" alt="" width="20" height="13" loading="lazy"> <span>Spanish</span></span></button>
         </div>
       </div>
       
@@ -114,7 +115,7 @@
 <div class="nav-backdrop" data-nav-backdrop aria-hidden="true"></div><main id="main">
 <section class="hero" aria-labelledby="hero-title">
   <div class="hero__media">
-    <img src="assets/img/hero-sanctuary.jpg" alt="The Shalom Embassy congregation gathered in the main auditorium in Lusaka" width="1920" height="1080" fetchpriority="high">
+    <img src="assets/img/hero-sanctuary.webp" srcset="assets/img/hero-sanctuary-960.webp 960w, assets/img/hero-sanctuary.webp 1600w" sizes="100vw" alt="The Shalom Embassy congregation gathered in the main auditorium in Lusaka" width="1920" height="1080" fetchpriority="high" decoding="async">
   </div>
   <div class="hero__overlay" aria-hidden="true"></div>
   <div class="container hero__inner">
@@ -177,10 +178,10 @@
   <div class="container about__grid">
     <div class="about__media reveal">
       <div class="about__portrait">
-        <img src="assets/img/pastor-portrait.jpg" alt="Apostle Sunday Sinyangwe, founder and president of Shalom Embassy Ministries International" width="900" height="900" loading="lazy" decoding="async">
+        <img src="assets/img/pastor-portrait.webp" alt="Apostle Sunday Sinyangwe, founder and president of Shalom Embassy Ministries International" width="900" height="900" loading="lazy" decoding="async">
       </div>
       <div class="about__photo">
-        <img src="assets/img/congregation.jpg" alt="The Shalom Embassy family standing in worship" width="1400" height="900" loading="lazy" decoding="async">
+        <img src="assets/img/congregation.webp" alt="The Shalom Embassy family standing in worship" width="1400" height="900" loading="lazy" decoding="async">
       </div>
       <div class="about__badge">
         <strong>17+</strong>
@@ -241,7 +242,7 @@
     <div class="gatherings__grid">
       <article class="gathering-card gathering-card--feature reveal">
         <div class="gathering-card__media">
-          <img src="assets/img/big-sunday.jpg" alt="A Sunday gathering in the Shalom Embassy main auditorium" width="1200" height="900" loading="lazy" decoding="async">
+          <img src="assets/img/big-sunday.webp" alt="A Sunday gathering in the Shalom Embassy main auditorium" width="1200" height="900" loading="lazy" decoding="async">
         </div>
         <div class="gathering-card__body">
           <span class="chip chip--gold">Every Sunday · 07:00 — 14:00</span>
@@ -336,7 +337,7 @@
     <div class="sermon-grid" data-feed-sermons>
       <article class="sermon-card reveal">
         <a class="sermon-card__media" href="https://www.youtube.com/watch?v=X5W0Oatkq-s" target="_blank" rel="noopener noreferrer" aria-label="Watch Power of God — Part 2 on YouTube">
-          <img src="assets/img/sermon-power-of-god.jpg" alt="Apostle Sunday Sinyangwe preaching in the main auditorium" width="960" height="540" loading="lazy" decoding="async">
+          <img src="assets/img/sermon-power-of-god.webp" alt="Apostle Sunday Sinyangwe preaching in the main auditorium" width="960" height="540" loading="lazy" decoding="async">
           <span class="sermon-card__play"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-play"></use></svg></span>
         </a>
         <div class="sermon-card__body">
@@ -348,7 +349,7 @@
 
       <article class="sermon-card reveal" style="--reveal-delay:.1s">
         <a class="sermon-card__media" href="https://www.youtube.com/watch?v=9EermTXSfkM" target="_blank" rel="noopener noreferrer" aria-label="Watch My Worship My Weapon 3.0 on YouTube">
-          <img src="assets/img/sermon-worship-weapon.jpg" alt="My Worship My Weapon 3.0 worship encounter poster" width="960" height="540" loading="lazy" decoding="async">
+          <img src="assets/img/sermon-worship-weapon.webp" alt="My Worship My Weapon 3.0 worship encounter poster" width="960" height="540" loading="lazy" decoding="async">
           <span class="sermon-card__play"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-play"></use></svg></span>
         </a>
         <div class="sermon-card__body">
@@ -360,7 +361,7 @@
 
       <article class="sermon-card reveal" style="--reveal-delay:.18s">
         <a class="sermon-card__media" href="https://www.youtube.com/watch?v=Ww_R2n1nuhU" target="_blank" rel="noopener noreferrer" aria-label="Watch Night of Solution on YouTube">
-          <img src="assets/img/sermon-night-of-solution.jpg" alt="Night of Solution gathering poster" width="960" height="540" loading="lazy" decoding="async">
+          <img src="assets/img/sermon-night-of-solution.webp" alt="Night of Solution gathering poster" width="960" height="540" loading="lazy" decoding="async">
           <span class="sermon-card__play"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-play"></use></svg></span>
         </a>
         <div class="sermon-card__body">
@@ -391,7 +392,7 @@
 
 <section class="quote-band">
   <div class="quote-band__bg">
-    <img src="assets/img/pastor-crowd.jpg" alt="" width="1600" height="900" loading="lazy" decoding="async">
+    <img src="assets/img/pastor-crowd.webp" alt="" width="1600" height="900" loading="lazy" decoding="async">
   </div>
   <div class="quote-band__overlay" aria-hidden="true"></div>
   <div class="container quote-band__inner reveal">
@@ -415,7 +416,7 @@
     <div class="ministry-grid">
       <article class="ministry-card reveal">
         <div class="ministry-card__media">
-          <img src="assets/img/worship-crowd.jpg" alt="Worshippers lifting their hands during a service" width="1038" height="592" loading="lazy" decoding="async">
+          <img src="assets/img/worship-crowd.webp" alt="Worshippers lifting their hands during a service" width="1038" height="592" loading="lazy" decoding="async">
         </div>
         <div class="ministry-card__body">
           <span class="ministry-card__tag">Prayer</span>
@@ -427,7 +428,7 @@
 
       <article class="ministry-card reveal" style="--reveal-delay:.1s">
         <div class="ministry-card__media">
-          <img src="assets/img/youth-worship.jpg" alt="Young people worshipping at the Battle Axe Youth Ministry" width="900" height="1000" loading="lazy" decoding="async">
+          <img src="assets/img/youth-worship.webp" alt="Young people worshipping at the Battle Axe Youth Ministry" width="900" height="1000" loading="lazy" decoding="async">
         </div>
         <div class="ministry-card__body">
           <span class="ministry-card__tag">Youth</span>
@@ -439,7 +440,7 @@
 
       <article class="ministry-card reveal" style="--reveal-delay:.18s">
         <div class="ministry-card__media">
-          <img src="assets/img/worship-singer.jpg" alt="A worship leader singing at Shalom Embassy" width="1200" height="800" loading="lazy" decoding="async">
+          <img src="assets/img/worship-singer.webp" alt="A worship leader singing at Shalom Embassy" width="1200" height="800" loading="lazy" decoding="async">
         </div>
         <div class="ministry-card__body">
           <span class="ministry-card__tag">Worship</span>
@@ -464,38 +465,38 @@
     </div>
 
     <div class="gallery__grid reveal">
-      <button class="gallery__item gallery__item--large" type="button" data-lightbox="assets/img/congregation.jpg" data-caption="Sunday worship at Shalom Embassy">
-        <img src="assets/img/congregation.jpg" alt="The congregation standing in worship" width="1400" height="900" loading="lazy" decoding="async">
+      <button class="gallery__item gallery__item--large" type="button" data-lightbox="assets/img/congregation.webp" data-caption="Sunday worship at Shalom Embassy">
+        <img src="assets/img/congregation.webp" alt="The congregation standing in worship" width="1400" height="900" loading="lazy" decoding="async">
         <span class="gallery__zoom"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-expand"></use></svg></span>
         <span class="gallery__caption">Sunday worship</span>
       </button>
-      <button class="gallery__item gallery__item--tall" type="button" data-lightbox="assets/img/youth-worship.jpg" data-caption="The next generation at the Battle Axe Youth Ministry">
-        <img src="assets/img/youth-worship.jpg" alt="Young people worshipping together" width="900" height="1000" loading="lazy" decoding="async">
+      <button class="gallery__item gallery__item--tall" type="button" data-lightbox="assets/img/youth-worship.webp" data-caption="The next generation at the Battle Axe Youth Ministry">
+        <img src="assets/img/youth-worship.webp" alt="Young people worshipping together" width="900" height="1000" loading="lazy" decoding="async">
         <span class="gallery__zoom"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-expand"></use></svg></span>
         <span class="gallery__caption">The next generation</span>
       </button>
-      <button class="gallery__item" type="button" data-lightbox="assets/img/pastor-wife.jpg" data-caption="Apostle Sunday and Pastor Bube Sinyangwe">
-        <img src="assets/img/pastor-wife.jpg" alt="Apostle Sunday and Pastor Bube Sinyangwe" width="1200" height="800" loading="lazy" decoding="async">
+      <button class="gallery__item" type="button" data-lightbox="assets/img/pastor-wife.webp" data-caption="Apostle Sunday and Pastor Bube Sinyangwe">
+        <img src="assets/img/pastor-wife.webp" alt="Apostle Sunday and Pastor Bube Sinyangwe" width="1200" height="800" loading="lazy" decoding="async">
         <span class="gallery__zoom"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-expand"></use></svg></span>
         <span class="gallery__caption">Apostle Sunday &amp; Pastor Bube</span>
       </button>
-      <button class="gallery__item" type="button" data-lightbox="assets/img/auditorium.jpg" data-caption="The Shalom Embassy main auditorium">
-        <img src="assets/img/auditorium.jpg" alt="The Shalom Embassy main auditorium during a service" width="1400" height="900" loading="lazy" decoding="async">
+      <button class="gallery__item" type="button" data-lightbox="assets/img/auditorium.webp" data-caption="The Shalom Embassy main auditorium">
+        <img src="assets/img/auditorium.webp" alt="The Shalom Embassy main auditorium during a service" width="1400" height="900" loading="lazy" decoding="async">
         <span class="gallery__zoom"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-expand"></use></svg></span>
         <span class="gallery__caption">Our home in Lusaka</span>
       </button>
-      <button class="gallery__item gallery__item--wide" type="button" data-lightbox="assets/img/pastor-crowd.jpg" data-caption="A word for the people">
-        <img src="assets/img/pastor-crowd.jpg" alt="Apostle Sunday Sinyangwe ministering to the congregation" width="1600" height="900" loading="lazy" decoding="async">
+      <button class="gallery__item gallery__item--wide" type="button" data-lightbox="assets/img/pastor-crowd.webp" data-caption="A word for the people">
+        <img src="assets/img/pastor-crowd.webp" alt="Apostle Sunday Sinyangwe ministering to the congregation" width="1600" height="900" loading="lazy" decoding="async">
         <span class="gallery__zoom"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-expand"></use></svg></span>
         <span class="gallery__caption">A word for the people</span>
       </button>
-      <button class="gallery__item" type="button" data-lightbox="assets/img/worship-singer.jpg" data-caption="Worship that makes room for God">
-        <img src="assets/img/worship-singer.jpg" alt="A worship leader singing" width="1200" height="800" loading="lazy" decoding="async">
+      <button class="gallery__item" type="button" data-lightbox="assets/img/worship-singer.webp" data-caption="Worship that makes room for God">
+        <img src="assets/img/worship-singer.webp" alt="A worship leader singing" width="1200" height="800" loading="lazy" decoding="async">
         <span class="gallery__zoom"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-expand"></use></svg></span>
         <span class="gallery__caption">Worship that makes room</span>
       </button>
-      <button class="gallery__item" type="button" data-lightbox="assets/img/congregation-close.jpg" data-caption="A family gathered in His presence">
-        <img src="assets/img/congregation-close.jpg" alt="Members of the congregation listening to the Word" width="1200" height="800" loading="lazy" decoding="async">
+      <button class="gallery__item" type="button" data-lightbox="assets/img/congregation-close.webp" data-caption="A family gathered in His presence">
+        <img src="assets/img/congregation-close.webp" alt="Members of the congregation listening to the Word" width="1200" height="800" loading="lazy" decoding="async">
         <span class="gallery__zoom"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-expand"></use></svg></span>
         <span class="gallery__caption">A family gathered</span>
       </button>
@@ -551,7 +552,7 @@
     </div>
     <div class="map-card reveal" style="--reveal-delay:.12s">
       <div class="map-card__map">
-        <img src="assets/img/map-lusaka.jpg" alt="Map of central Lusaka showing the area around Shalom Embassy Ministries International" width="900" height="600" loading="lazy" decoding="async">
+        <img src="assets/img/map-lusaka.webp" alt="Map of central Lusaka showing the area around Shalom Embassy Ministries International" width="900" height="600" loading="lazy" decoding="async">
         <span class="map-card__pin"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-pin"></use></svg></span>
         <span class="map-card__label">Garden House · Lusaka</span>
         <a class="map-card__open" href="https://www.google.com/maps/search/?api=1&amp;query=Shalom+Embassy+Ministries+International+Lusaka" target="_blank" rel="noopener noreferrer">Open in Maps <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></a>
@@ -573,7 +574,7 @@
   <div class="container footer__grid">
     <div class="footer__brand">
       <a class="brand " href="index.html" aria-label="Shalom Embassy Ministries International — home">
-  <img class="brand__logo" src="assets/img/logo-official.png" alt="Shalom Embassy Ministries International" width="480" height="198">
+  <img class="brand__logo" src="assets/img/logo-official.webp" alt="Shalom Embassy Ministries International" width="480" height="198">
 </a>
       <p class="footer__desc">A home of healing and deliverance in Lusaka, Zambia — carrying the promise of wholeness to a generation.</p>
       <p class="footer__mission">Nothing missing. Nothing broken.</p>

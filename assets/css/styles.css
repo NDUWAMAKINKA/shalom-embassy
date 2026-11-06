@@ -5314,3 +5314,25 @@ body.nav-open .nav-backdrop {
     top: var(--lang-menu-top, calc(var(--header-h) + 8px));
   }
 }
+
+.lang-option-main {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.lang-flag {
+  width: 20px;
+  height: 13px;
+  flex: 0 0 auto;
+  border-radius: 2px;
+  object-fit: cover;
+  box-shadow: 0 0 0 1px rgba(7, 26, 54, 0.14);
+}
+
+.lang-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}

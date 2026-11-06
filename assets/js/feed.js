@@ -32,6 +32,22 @@
 
   const isExternal = (url) => /^https?:\/\//i.test(url || "");
 
+  function attachImageFallbacks(root) {
+    root.querySelectorAll("img").forEach((img) => {
+      img.addEventListener(
+        "error",
+        () => {
+          if (img.dataset.fallback) return;
+          img.dataset.fallback = "1";
+          img.src = img.src
+            .replace("hqdefault", "mqdefault")
+            .replace("maxresdefault", "hqdefault");
+        },
+        { once: true }
+      );
+    });
+  }
+
   function renderSermons(items) {
     const grid = document.querySelector("[data-feed-sermons]");
     if (!grid || !items || !items.length) return;
@@ -41,7 +57,7 @@
       .map((item) => {
         const url = escapeHtml(item.url);
         const title = escapeHtml(item.title);
-        const image = escapeHtml(item.image || item.thumbnail);
+        const image = escapeHtml((item.image || item.thumbnail || "").replace("maxresdefault.jpg", "hqdefault.jpg"));
         const date = escapeHtml(item.date || "Latest");
         return (
           '<article class="sermon-card">' +
@@ -54,7 +70,7 @@
           image +
           '" alt="' +
           title +
-          '" width="960" height="540" loading="eager" decoding="async">' +
+          '" width="960" height="540" loading="lazy" decoding="async">' +
           '<span class="sermon-card__play">' +
           icon("play") +
           "</span></a>" +
@@ -76,16 +92,7 @@
       })
       .join("");
 
-    // Some older uploads do not expose a maxres thumbnail.
-    grid.querySelectorAll("img").forEach((img) => {
-      img.addEventListener(
-        "error",
-        () => {
-          img.src = img.src.replace("maxresdefault", "hqdefault");
-        },
-        { once: true }
-      );
-    });
+    attachImageFallbacks(grid);
   }
 
   function renderUpdates(items) {
@@ -100,7 +107,7 @@
         const text = escapeHtml(item.text);
         const source = escapeHtml(item.source || "Update");
         const date = escapeHtml(item.date || "");
-        const image = escapeHtml(item.image || "");
+        const image = escapeHtml((item.image || "").replace("maxresdefault.jpg", "hqdefault.jpg"));
         const media = image
           ? '<a class="update-card__media" href="' +
             url +
@@ -111,7 +118,7 @@
             image +
             '" alt="' +
             text +
-            '" width="960" height="600" loading="eager" decoding="async">' +
+            '" width="960" height="600" loading="lazy" decoding="async">' +
             '<span class="update-card__source ' +
             sourceClass(item.source) +
             '">' +
@@ -139,6 +146,7 @@
       })
       .join("");
 
+    attachImageFallbacks(grid);
     section.hidden = false;
     updateTimestamp();
   }
@@ -152,7 +160,7 @@
       .slice(0, 8)
       .map((item) => {
         const url = escapeHtml(item.url);
-        const image = escapeHtml(item.src || item.image);
+        const image = escapeHtml((item.src || item.image || "").replace("maxresdefault.jpg", "hqdefault.jpg"));
         const caption = escapeHtml(item.caption || item.alt || "Shalom Embassy");
         const source = escapeHtml(item.source || "Gallery");
         return (
@@ -165,7 +173,7 @@
           image +
           '" alt="' +
           caption +
-          '" width="800" height="800" loading="eager" decoding="async">' +
+          '" width="800" height="800" loading="lazy" decoding="async">' +
           '<span class="feed-gallery__source ' +
           sourceClass(item.source) +
           '">' +
@@ -178,6 +186,7 @@
       })
       .join("");
 
+    attachImageFallbacks(grid);
     section.hidden = false;
     updateTimestamp();
   }
@@ -228,6 +237,7 @@
       })
       .join("");
 
+    attachImageFallbacks(grid);
     section.hidden = false;
     updateTimestamp();
   }
@@ -266,8 +276,8 @@
         id,
         title: match[5].trim(),
         url: `https://www.youtube.com/watch?v=${id}`,
-        image: `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`,
-        thumbnail: `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`,
+        image: `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
+        thumbnail: `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
         date: relative,
         source: "YouTube",
       });
