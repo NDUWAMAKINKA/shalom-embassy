@@ -32,19 +32,23 @@
 
   const isExternal = (url) => /^https?:\/\//i.test(url || "");
 
+  const hdThumb = (url) =>
+    String(url || "").replace(/\/(?:hq|sd|mq)default\.jpg/i, "/maxresdefault.jpg");
+
   function attachImageFallbacks(root) {
     root.querySelectorAll("img").forEach((img) => {
-      img.addEventListener(
-        "error",
-        () => {
-          if (img.dataset.fallback) return;
-          img.dataset.fallback = "1";
-          img.src = img.src
-            .replace("hqdefault", "mqdefault")
-            .replace("maxresdefault", "hqdefault");
-        },
-        { once: true }
-      );
+      img.addEventListener("error", function onError() {
+        const src = img.getAttribute("src") || "";
+        if (src.includes("maxresdefault")) {
+          img.src = src.replace("maxresdefault", "hqdefault");
+        } else if (src.includes("sddefault")) {
+          img.src = src.replace("sddefault", "hqdefault");
+        } else if (src.includes("hqdefault")) {
+          img.src = src.replace("hqdefault", "mqdefault");
+        } else {
+          img.removeEventListener("error", onError);
+        }
+      });
     });
   }
 
@@ -57,7 +61,7 @@
       .map((item) => {
         const url = escapeHtml(item.url);
         const title = escapeHtml(item.title);
-        const image = escapeHtml((item.image || item.thumbnail || "").replace("maxresdefault.jpg", "hqdefault.jpg"));
+        const image = escapeHtml(hdThumb(item.image || item.thumbnail || ""));
         const date = escapeHtml(item.date || "Latest");
         return (
           '<article class="sermon-card">' +
@@ -107,7 +111,7 @@
         const text = escapeHtml(item.text);
         const source = escapeHtml(item.source || "Update");
         const date = escapeHtml(item.date || "");
-        const image = escapeHtml((item.image || "").replace("maxresdefault.jpg", "hqdefault.jpg"));
+        const image = escapeHtml(hdThumb(item.image || ""));
         const media = image
           ? '<a class="update-card__media" href="' +
             url +
@@ -160,7 +164,7 @@
       .slice(0, 8)
       .map((item) => {
         const url = escapeHtml(item.url);
-        const image = escapeHtml((item.src || item.image || "").replace("maxresdefault.jpg", "hqdefault.jpg"));
+        const image = escapeHtml(hdThumb(item.src || item.image || ""));
         const caption = escapeHtml(item.caption || item.alt || "Shalom Embassy");
         const source = escapeHtml(item.source || "Gallery");
         return (
@@ -276,8 +280,8 @@
         id,
         title: match[5].trim(),
         url: `https://www.youtube.com/watch?v=${id}`,
-        image: `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
-        thumbnail: `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
+        image: `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`,
+        thumbnail: `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`,
         date: relative,
         source: "YouTube",
       });
