@@ -287,12 +287,30 @@
   }
 
   async function fetchYouTubeLive() {
-    const response = await fetch(YOUTUBE_READER, {
-      cache: "no-store",
-      headers: { Accept: "text/plain" },
-    });
-    if (!response.ok) return [];
-    return parseYouTubeMarkdown(await response.text());
+    const controller = new AbortController();
+    const timeout = window.setTimeout(function () {
+      controller.abort();
+    }, 7000);
+    try {
+      const response = await fetch(YOUTUBE_READER, {
+        cache: "no-store",
+        headers: { Accept: "text/plain" },
+        signal: controller.signal,
+      });
+      if (!response.ok) return [];
+      return parseYouTubeMarkdown(await response.text());
+    } finally {
+      window.clearTimeout(timeout);
+    }
+  }
+
+  function renderFeed(feed) {
+    window.__shalomFeedUpdated = feed.updated || "";
+    renderSermons(feed.sermons);
+    renderUpdates(feed.updates);
+    renderGallery(feed.gallery);
+    renderEvents(feed.events);
+    updateTimestamp();
   }
 
   async function loadFeed() {
@@ -307,6 +325,8 @@
       // Keep the curated static content if the JSON feed is unavailable.
       if (window.console) console.warn("Shalom feed JSON unavailable:", error);
     }
+
+    renderFeed(feed);
 
     try {
       const live = await fetchYouTubeLive();
@@ -355,9 +375,37 @@
     updateTimestamp();
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", loadFeed);
-  } else {
+  var feedStarted = false;
+  function startFeed() {
+    if (feedStarted) return;
+    feedStarted = true;
     loadFeed();
+  }
+
+  function scheduleFeed() {
+    var anchor = document.querySelector("[data-feed-sermons]");
+    if (!anchor) return;
+    if ("IntersectionObserver" in window) {
+      var observer = new IntersectionObserver(
+        function (entries) {
+          if (entries.some(function (entry) { return entry.isIntersecting; })) {
+            observer.disconnect();
+            startFeed();
+          }
+        },
+        { rootMargin: "900px 0px" }
+      );
+      observer.observe(anchor);
+    } else {
+      window.addEventListener("load", function () {
+        window.setTimeout(startFeed, 1200);
+      });
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", scheduleFeed);
+  } else {
+    scheduleFeed();
   }
 })();
