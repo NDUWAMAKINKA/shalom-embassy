@@ -10,6 +10,7 @@
   const header = document.getElementById("site-header");
   const nav = document.getElementById("primary-nav");
   const navToggle = document.querySelector(".nav-toggle");
+  const navBackdrop = document.querySelector("[data-nav-backdrop]");
   const toTop = document.querySelector(".to-top");
   const mainContent = document.getElementById("main");
   const siteFooter = document.querySelector(".site-footer");
@@ -48,6 +49,10 @@
     nav.querySelectorAll("a").forEach((link) => {
       link.addEventListener("click", () => setNav(false));
     });
+  }
+
+  if (navBackdrop) {
+    navBackdrop.addEventListener("click", () => setNav(false));
   }
 
   document.addEventListener("keydown", (event) => {
@@ -168,6 +173,7 @@
     const minutesEl = countdown.querySelector("[data-countdown-minutes]");
     const secondsEl = countdown.querySelector("[data-countdown-seconds]");
     const pad = (value) => String(value).padStart(2, "0");
+    let countdownState = "waiting";
 
     const updateCountdown = () => {
       const now = new Date();
@@ -183,7 +189,10 @@
 
       if (isLive) {
         countdown.classList.add("is-live");
-        if (label) label.textContent = "Happening now — you are welcome";
+        if (label && countdownState !== "live") {
+          label.textContent = "Happening now - you are welcome";
+          countdownState = "live";
+        }
         if (daysEl) daysEl.textContent = "00";
         if (hoursEl) hoursEl.textContent = "00";
         if (minutesEl) minutesEl.textContent = "00";
@@ -192,7 +201,10 @@
       }
 
       countdown.classList.remove("is-live");
-      if (label) label.textContent = "Next Sunday service in";
+      if (label && countdownState !== "waiting") {
+        label.textContent = "Next Sunday service in";
+        countdownState = "waiting";
+      }
 
       let daysAhead = (7 - catDay) % 7;
       if (daysAhead === 0 && (catHour > 14 || (catHour === 14 && catMinute > 0))) {

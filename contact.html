@@ -53,6 +53,31 @@
       </div>
     </nav>
     <div class="header__actions">
+      <div class="lang-switcher" data-lang-switcher>
+        <button class="lang-toggle" type="button" data-lang-toggle aria-expanded="false" aria-haspopup="listbox" aria-controls="lang-menu">
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-globe"></use></svg>
+          <span class="lang-toggle__current" data-lang-current>English</span>
+          <svg class="icon lang-toggle__chevron" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg>
+        </button>
+        <div class="lang-menu" id="lang-menu" data-lang-menu role="listbox" aria-label="Select language" hidden>
+          <p class="lang-group" role="presentation">Zambian languages</p>
+          <button type="button" role="option" data-lang="bem" aria-selected="false">Bemba</button>
+          <button type="button" role="option" data-lang="nya" aria-selected="false">Nyanja</button>
+          <button type="button" role="option" data-lang="toi" aria-selected="false">Tonga</button>
+          <button type="button" role="option" data-lang="loz" aria-selected="false">Lozi</button>
+          <button type="button" role="option" data-lang="tum" aria-selected="false">Tumbuka</button>
+          <p class="lang-group" role="presentation">World languages</p>
+          <button type="button" role="option" data-lang="en" aria-selected="true">English</button>
+          <button type="button" role="option" data-lang="hi" aria-selected="false">Hindi</button>
+          <button type="button" role="option" data-lang="fr" aria-selected="false">French</button>
+          <button type="button" role="option" data-lang="de" aria-selected="false">German</button>
+          <button type="button" role="option" data-lang="it" aria-selected="false">Italian</button>
+          <button type="button" role="option" data-lang="pt" aria-selected="false">Portuguese</button>
+          <button type="button" role="option" data-lang="ru" aria-selected="false">Russian</button>
+          <button type="button" role="option" data-lang="es" aria-selected="false">Spanish</button>
+        </div>
+      </div>
+      
       <a class="btn btn--gold btn--sm" href="contact.html#visit">Plan a visit <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
         <span class="nav-toggle__lines" aria-hidden="true"><span></span><span></span><span></span></span>
@@ -60,7 +85,8 @@
       </button>
     </div>
   </div>
-</header><main id="main">
+</header>
+<div class="nav-backdrop" data-nav-backdrop aria-hidden="true"></div><main id="main">
 <section class="page-hero">
   <div class="page-hero__media">
     <img src="assets/img/auditorium.jpg" alt="The Shalom Embassy main auditorium in Lusaka" width="1400" height="900">
@@ -309,7 +335,10 @@
     <figcaption id="lightbox-caption" data-lightbox-caption></figcaption>
   </figure>
   <button class="lightbox__nav lightbox__nav--next" type="button" data-lightbox-next aria-label="Next photo"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></button>
-</dialog><script src="assets/js/main.js" defer></script>
+</dialog><script src="assets/js/local-text.js" defer></script>
+<script src="assets/js/shalom-text.js" defer></script>
+<script src="assets/js/i18n.js" defer></script>
+<script src="assets/js/main.js" defer></script>
 <script src="assets/js/feed.js" defer></script>
 </body>
 </html>
