@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sermons & Messages | Shalom Embassy Ministries International</title>
-  <meta name="description" content="Watch messages from Apostle Sunday Sinyangwe and the Shalom Embassy family. Find teaching, worship, prayer, and Sunday messages.">
+  <meta name="description" content="Explore the Shalom Embassy sermon library and books: 50+ messages from Apostle Sunday Sinyangwe and Pastor Bupe Sinyangwe, with live updates from the church channels.">
   <meta name="theme-color" content="#071a36">
   <meta name="author" content="Shalom Embassy Ministries International">
   <meta property="og:type" content="website">
@@ -47,7 +47,7 @@
 </a>
     <nav class="nav" id="primary-nav" aria-label="Primary navigation">
       <ul class="nav__list">
-        <li><a class="nav__link" href="index.html">Home</a></li><li><a class="nav__link" href="about.html">About</a></li><li><a class="nav__link" href="sermons.html">Sermons</a></li><li><a class="nav__link" href="gatherings.html">Gatherings</a></li><li><a class="nav__link" href="give.html">Give</a></li><li><a class="nav__link" href="contact.html">Contact</a></li>
+        <li><a class="nav__link" href="index.html">Home</a></li><li><a class="nav__link" href="about.html">About</a></li><li><a class="nav__link" href="sermons.html">Sermons</a></li><li><a class="nav__link" href="sermons.html#books">Books</a></li><li><a class="nav__link" href="gatherings.html">Gatherings</a></li><li><a class="nav__link" href="give.html">Give</a></li><li><a class="nav__link" href="contact.html">Contact</a></li>
       </ul>
       <div class="nav__mobile-cta">
         <a class="btn btn--gold" href="contact.html#visit">Plan a visit <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></a>
@@ -144,11 +144,21 @@
         <button class="filter-btn" type="button" data-filter="prayer" aria-pressed="false">Prayer</button>
         <button class="filter-btn" type="button" data-filter="worship" aria-pressed="false">Worship</button>
         <button class="filter-btn" type="button" data-filter="teaching" aria-pressed="false">Teaching</button>
+        <button class="filter-btn" type="button" data-filter="conference" aria-pressed="false">Conference</button>
+        <button class="filter-btn" type="button" data-filter="pastor-bupe" aria-pressed="false">Pastor Bupe</button>
       </div>
-      <p class="filter-count" data-filter-count>12 messages</p>
+      <p class="filter-count" data-filter-count>50 messages</p>
     </div>
 
-    <div class="sermon-grid">
+    <div class="sermon-tools reveal">
+      <label class="sermon-search" for="sermon-search">
+        <span class="sermon-search__label">Search the library</span>
+        <input id="sermon-search" type="search" data-sermon-search placeholder="Search by title, speaker, or series..." autocomplete="off">
+      </label>
+      <p class="sermon-sync" data-sermon-sync data-state="loading"><span class="sermon-sync__dot" aria-hidden="true"></span> Syncing the newest messages...</p>
+    </div>
+
+    <div class="sermon-grid" data-sermon-library data-sermon-grid>
       <article class="sermon-card reveal" data-category="teaching">
         <a class="sermon-card__media" href="https://www.youtube.com/watch?v=X5W0Oatkq-s" target="_blank" rel="noopener noreferrer" aria-label="Watch Power of God — Part 2">
           <img src="assets/img/sermon-power-of-god.webp?v=hd" alt="Power of God — Part 2" width="960" height="540" loading="lazy" decoding="async">
@@ -293,6 +303,75 @@
         </div>
       </article>
     </div>
+
+    <div class="sermon-more">
+      <button class="btn btn--navy" type="button" data-sermon-more>Load more messages</button>
+    </div>
+
+    <section class="channel-strip" data-channel-strip hidden aria-label="Latest from our social channels">
+      <div class="channel-strip__head">
+        <p class="eyebrow">Latest across our channels</p>
+        <span class="channel-strip__live">Auto-updating</span>
+      </div>
+      <div class="channel-strip__grid" data-channel-grid></div>
+    </section>
+  </div>
+</section>
+
+<section class="section books-section" id="books">
+  <div class="container">
+    <div class="section-head section-head--row reveal">
+      <div>
+        <p class="eyebrow">Books &amp; prayer resources</p>
+        <h2>The Shalom library.</h2>
+        <p>Annual prayer guides and books from the house, gathered in one place.</p>
+      </div>
+      <a class="link-arrow section-head__link" href="contact.html">Request a title</a>
+    </div>
+
+    <div class="book-feature reveal">
+      <div class="book-cover" aria-hidden="true">
+        <span class="book-cover__brand">Shalom Embassy</span>
+        <span class="book-cover__rule"></span>
+        <span class="book-cover__title">Prayer Book<br>of the Year</span>
+        <span class="book-cover__year">2026</span>
+        <span class="book-cover__foot">Standing In The Gap</span>
+      </div>
+      <div class="book-body">
+        <span class="book-kicker">Featured prayer resource</span>
+        <h3>Prayer Book of the Year</h3>
+        <p>The annual prayer guide from Shalom Embassy and the Standing In The Gap prayer family. Use it for personal devotion, family prayer, and corporate intercession.</p>
+        <ul class="book-points">
+          <li>Daily prayer focus</li>
+          <li>Scripture-led confession</li>
+          <li>Family and national intercession</li>
+        </ul>
+        <p class="book-note">Current 2026 edition. Past editions are available through the church office.</p>
+        <div class="book-actions">
+          <a class="btn" href="contact.html">Request a copy</a>
+          <a class="btn btn--ghost-light" href="https://www.youtube.com/watch?v=HvxDnmC83WY" target="_blank" rel="noopener noreferrer">Watch the prayer-book testimony</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="book-shelf">
+      <article class="book-card reveal">
+        <span class="book-kicker">Pastor Bupe Sinyangwe</span>
+        <h3>Books &amp; teaching resources</h3>
+        <p>A dedicated shelf for Pastor Bupe's published books is being prepared. For current titles, orders, or to share a cover, contact the church office.</p>
+        <a class="link-arrow" href="contact.html">Request Pastor Bupe's book list</a>
+      </article>
+      <article class="book-card reveal" style="--reveal-delay:.08s">
+        <span class="book-kicker">From Pastor Bupe</span>
+        <h3>Messages to strengthen you</h3>
+        <ul class="book-links">
+          <li><a href="https://www.youtube.com/watch?v=7gxMZtyKPqQ" target="_blank" rel="noopener noreferrer">The Anointing</a></li>
+          <li><a href="https://www.youtube.com/watch?v=ZM4eXHSk-cM" target="_blank" rel="noopener noreferrer">The Wisdom of God</a></li>
+          <li><a href="https://www.youtube.com/watch?v=-qi_JBzBBxg" target="_blank" rel="noopener noreferrer">Making Your Life Count</a></li>
+          <li><a href="https://www.youtube.com/watch?v=2XWrUfFw-r4" target="_blank" rel="noopener noreferrer">Focus</a></li>
+        </ul>
+      </article>
+    </div>
   </div>
 </section>
 
@@ -351,7 +430,7 @@
       <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">Our story</a></li>
-        <li><a href="sermons.html">Sermons</a></li>
+        <li><a href="sermons.html">Sermons</a></li><li><a href="sermons.html#books">Books</a></li>
         <li><a href="gatherings.html">Gatherings</a></li>
         <li><a href="give.html">Give</a></li>
         <li><a href="contact.html">Contact</a></li>
@@ -394,5 +473,6 @@
   </figure>
   <button class="lightbox__nav lightbox__nav--next" type="button" data-lightbox-next aria-label="Next photo"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></button>
 </dialog><script src="assets/js/main.js" defer></script>
+<script src="assets/js/sermon-library.js" defer></script>
 </body>
 </html>

@@ -260,7 +260,7 @@
   const filterCards = document.querySelectorAll("[data-category]");
   const filterCount = document.querySelector("[data-filter-count]");
 
-  if (filterButtons.length && filterCards.length) {
+  if (filterButtons.length && filterCards.length && !document.querySelector("[data-sermon-library]")) {
     filterButtons.forEach((button) => {
       button.addEventListener("click", () => {
         const filter = button.dataset.filter;
