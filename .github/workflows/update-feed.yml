@@ -1,0 +1,47 @@
+name: Update social feed
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: shalom-social-feed
+  cancel-in-progress: true
+
+jobs:
+  update-feed:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the site
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Refresh the feed
+        env:
+          FACEBOOK_PAGE_ID: ${{ secrets.FACEBOOK_PAGE_ID }}
+          FACEBOOK_ACCESS_TOKEN: ${{ secrets.FACEBOOK_ACCESS_TOKEN }}
+          INSTAGRAM_USER_ID: ${{ secrets.INSTAGRAM_USER_ID }}
+          INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+          CALENDAR_ICS_URL: ${{ secrets.CALENDAR_ICS_URL }}
+        run: python scripts/update_feed.py
+
+      - name: Commit any new content
+        run: |
+          git config user.name "Shalom Embassy Feed"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/feed.json
+          if [ -d assets/img/feed ]; then git add assets/img/feed; fi
+          if git diff --cached --quiet; then
+            echo "No feed changes."
+            exit 0
+          fi
+          git commit -m "Update social feed"
+          git push

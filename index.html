@@ -307,7 +307,7 @@
       <a class="link-arrow section-head__link" href="sermons.html">Sermon library</a>
     </div>
 
-    <div class="sermon-grid">
+    <div class="sermon-grid" data-feed-sermons>
       <article class="sermon-card reveal">
         <a class="sermon-card__media" href="https://www.youtube.com/watch?v=X5W0Oatkq-s" target="_blank" rel="noopener noreferrer" aria-label="Watch Power of God — Part 2 on YouTube">
           <img src="assets/img/sermon-power-of-god.jpg" alt="Apostle Sunday Sinyangwe preaching in the main auditorium" width="960" height="540" loading="lazy" decoding="async">
@@ -344,6 +344,22 @@
         </div>
       </article>
     </div>
+  </div>
+</section>
+
+
+<section class="section updates feed-section" data-feed-updates-section hidden>
+  <div class="container">
+    <div class="section-head section-head--row reveal">
+      <div>
+        <p class="eyebrow">Latest from Shalom</p>
+        <h2>Fresh from the family.</h2>
+        <p>New moments, messages, and updates from our church family — pulled automatically from our channels.</p>
+      </div>
+      <a class="link-arrow section-head__link" href="https://www.youtube.com/@apostlesundaysinyangwe" target="_blank" rel="noopener noreferrer">Follow along</a>
+    </div>
+    <div class="update-grid" data-feed-updates></div>
+    <p class="feed-updated" data-feed-updated></p>
   </div>
 </section>
 
@@ -461,6 +477,21 @@
   </div>
 </section>
 
+
+<section class="section section--cream feed-section" data-feed-gallery-section hidden>
+  <div class="container">
+    <div class="section-head section-head--row reveal">
+      <div>
+        <p class="eyebrow">Latest moments</p>
+        <h2>New frames from the family.</h2>
+        <p>The newest images and moments from our social channels.</p>
+      </div>
+      <a class="link-arrow section-head__link" href="https://www.instagram.com/apostlesundaysinyangwe/" target="_blank" rel="noopener noreferrer">Follow us</a>
+    </div>
+    <div class="feed-gallery__grid" data-feed-gallery></div>
+  </div>
+</section>
+
 <section class="section visit" id="visit">
   <div class="container visit__grid">
     <div class="visit__content reveal">
@@ -572,5 +603,6 @@
   </figure>
   <button class="lightbox__nav lightbox__nav--next" type="button" data-lightbox-next aria-label="Next photo"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></button>
 </dialog><script src="assets/js/main.js" defer></script>
+<script src="assets/js/feed.js" defer></script>
 </body>
 </html>

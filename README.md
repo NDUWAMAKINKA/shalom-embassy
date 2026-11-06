@@ -59,6 +59,41 @@ Then visit `http://localhost:8000`.
 - Responsive down to 390px; no horizontal overflow
 - Local OpenStreetMap-derived map image, so the visit section never shows a blank iframe
 
+## Auto-updating social feed
+
+The site now has a feed pipeline that keeps these sections fresh:
+
+- **Latest sermons** — home page message cards
+- **Latest from Shalom** — new YouTube, Facebook and Instagram posts
+- **Latest moments** — new gallery images from connected social accounts
+- **Upcoming events** — from a public church calendar (ICS)
+
+`scripts/update_feed.py` writes `data/feed.json`; `assets/js/feed.js` reads it and renders the sections. The included GitHub Action (`.github/workflows/update-feed.yml`) runs every 15 minutes and commits any changes.
+
+### What works immediately
+
+YouTube is public, so the latest sermons, updates and moments update automatically with no setup.
+
+### Optional feeds
+
+Add these in GitHub → **Settings → Secrets and variables → Actions**:
+
+| Secret | Purpose |
+|---|---|
+| `FACEBOOK_PAGE_ID` | Facebook page ID |
+| `FACEBOOK_ACCESS_TOKEN` | Meta page access token with `pages_read_engagement` |
+| `INSTAGRAM_USER_ID` | Instagram business account ID |
+| `INSTAGRAM_ACCESS_TOKEN` | Meta token with Instagram basic display permissions |
+| `CALENDAR_ICS_URL` | Public Google Calendar / ICS address |
+
+Once the Meta secrets exist, Facebook and Instagram posts appear first, with their images downloaded into `assets/img/feed/`. The calendar secret turns on the Upcoming Events section. Without those secrets, YouTube fills the updates and gallery slots, and the events section stays hidden.
+
+To refresh manually, run:
+
+```powershell
+python scripts/update_feed.py
+```
+
 ## Translation concept — notes from Royal Priesthood
 
 The Royal Priesthood Assemblies site uses a fully local translation system rather than a Google Translate widget:
