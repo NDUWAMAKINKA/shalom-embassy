@@ -438,7 +438,7 @@
 })();
 
 
-/* Translation maps load on demand from assets/js/translations.js. */
+/* Translation maps load on demand from assets/js/i18n/<language>.js. */
 
 /*
  * Shalom Embassy localization engine.
@@ -668,24 +668,28 @@
     observer.observe(document.body, { childList: true, subtree: true });
   }
 
-  var translationsPromise = null;
+  var translationPromises = {};
   var requestedLanguage = "en";
 
-  function loadTranslations() {
-    if (window.SHALOM_BASE_TEXT && window.SHALOM_TEXT) return Promise.resolve();
-    if (translationsPromise) return translationsPromise;
-    translationsPromise = new Promise(function (resolve, reject) {
+  function hasLanguage(lang) {
+    return !!(window.SHALOM_BASE_TEXT && window.SHALOM_BASE_TEXT[lang]);
+  }
+
+  function loadTranslations(lang) {
+    if (hasLanguage(lang)) return Promise.resolve();
+    if (translationPromises[lang]) return translationPromises[lang];
+    translationPromises[lang] = new Promise(function (resolve, reject) {
       var script = document.createElement("script");
-      script.src = "assets/js/translations.js";
+      script.src = "assets/js/i18n/" + lang + ".js";
       script.async = true;
       script.onload = function () { resolve(); };
       script.onerror = function () {
-        translationsPromise = null;
+        delete translationPromises[lang];
         reject(new Error("Unable to load translations"));
       };
       document.head.appendChild(script);
     });
-    return translationsPromise;
+    return translationPromises[lang];
   }
 
   function applyLanguage(lang) {
@@ -695,7 +699,7 @@
       apply("en");
       return;
     }
-    loadTranslations()
+    loadTranslations(code)
       .then(function () {
         if (requestedLanguage === code) apply(code);
       })

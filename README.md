@@ -102,11 +102,11 @@ python scripts/update_feed.py
 
 The Royal Priesthood Assemblies site uses a fully local translation system rather than a Google Translate widget:
 
-- Each language has a complete English-to-language phrase map loaded from `js__local-text.js`.
+- Each language has its own English-to-language phrase map in `assets/js/i18n/<code>.js`, loaded only when that language is chosen.
 - A header language selector stores the chosen code in `localStorage` and updates the page `lang` attribute.
 - On selection, the script walks every visible text node and translatable attribute, applies the map, and protects proper nouns such as church names, bank names, and account details with `notranslate`.
 - Navigation, mobile menus, form placeholders, and dynamically inserted gallery text are translated too; a `MutationObserver` catches later changes.
-- There is no translation network request, spinner, or third-party widget. Returning to English restores the original English strings.
+- There is no third-party translation widget or runtime machine-translation call. Returning to English restores the original English strings.
 
 To reproduce this exactly for Shalom Embassy, the same architecture can be used, but the full phrase maps for every page must be supplied/approved in each language. Machine translation is not reliable enough for Tonga, Lozi, or Kaonde, so the language feature was removed rather than shipping a partial or inaccurate translation.
 
