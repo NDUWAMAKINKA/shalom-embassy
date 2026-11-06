@@ -5327,9 +5327,21 @@ body.nav-open .nav-backdrop {
   height: 13px;
   flex: 0 0 auto;
   border-radius: 2px;
-  object-fit: cover;
+  background-image: url("../img/flags-sprite.webp");
+  background-repeat: no-repeat;
+  background-size: 300% 300%;
   box-shadow: 0 0 0 1px rgba(7, 26, 54, 0.14);
 }
+
+.lang-flag--zambia { background-position: 0 0; }
+.lang-flag--united-kingdom { background-position: 50% 0; }
+.lang-flag--india { background-position: 100% 0; }
+.lang-flag--france { background-position: 0 50%; }
+.lang-flag--germany { background-position: 50% 50%; }
+.lang-flag--italy { background-position: 100% 50%; }
+.lang-flag--portugal { background-position: 0 100%; }
+.lang-flag--russia { background-position: 50% 100%; }
+.lang-flag--spain { background-position: 100% 100%; }
 
 .lang-group {
   display: flex;
