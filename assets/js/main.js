@@ -31,6 +31,11 @@
     if (mainContent) mainContent.toggleAttribute("inert", open);
     if (siteFooter) siteFooter.toggleAttribute("inert", open);
 
+    if (open && header) {
+      var top = Math.max(0, Math.round(header.getBoundingClientRect().bottom));
+      document.documentElement.style.setProperty("--drawer-top", top + "px");
+    }
+
     if (open) {
       const firstLink = nav ? nav.querySelector("a") : null;
       window.setTimeout(() => firstLink && firstLink.focus(), 120);
@@ -1992,6 +1997,13 @@ window.SHALOM_TEXT = {
     menu.hidden = false;
     switcher.classList.add("is-open");
     toggle.setAttribute("aria-expanded", "true");
+    var header = document.querySelector(".site-header");
+    if (header) {
+      document.documentElement.style.setProperty(
+        "--lang-menu-top",
+        Math.max(0, Math.round(header.getBoundingClientRect().bottom + 8)) + "px"
+      );
+    }
     var selected = menu.querySelector("[aria-selected='true']");
     if (selected) selected.focus();
   }

@@ -5300,3 +5300,17 @@ body.nav-open .nav-backdrop {
     max-width: 48px;
   }
 }
+
+@media (max-width: 1024px) {
+  .nav {
+    top: var(--drawer-top, 70px);
+    height: calc(100dvh - var(--drawer-top, 70px));
+    padding-top: 24px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .lang-menu {
+    top: var(--lang-menu-top, calc(var(--header-h) + 8px));
+  }
+}
