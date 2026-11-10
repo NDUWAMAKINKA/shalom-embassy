@@ -47,6 +47,21 @@ and video thumbnails:
     Facebook public page image 468309113_1200661734757372_8390162493991220526_n
     YouTube videos DUA5y_Zk2Ho, v-WObP47Um8, e0BOfXlqgVs, JjcGamEqUxo
 
+  Homepage welcome collage:
+    Church-supplied Apostle Sunday & Pastor Bupe Sinyangwe portrait
+    (assets/img/pastor-couple.webp; replaces the repeated congregation photo)
+
+  Additional unique section images:
+    Men's Fellowship  -> YouTube video DUA5y_Zk2Ho
+    Battle Axe Youth  -> YouTube video v-WObP47Um8
+    Deliverance       -> YouTube video e0BOfXlqgVs
+    Preaching stage   -> YouTube video W2lcZ14Dy1I
+    Congregation wide -> YouTube video fb_6 public still
+    Worship crowd     -> public Facebook / YouTube worship still
+    Virtuous Women    -> church-supplied Apostle Sunday & Pastor Bupe portrait
+                        (assets/img/pastor-wife.webp — a different frame from the
+                        homepage collage portrait)
+
   Shalom Worship card (worship-singer.jpg):
     YouTube video oAejT--j9nQ
     "Esther Chungu Women's Day Ministration at Shalom Embassy"

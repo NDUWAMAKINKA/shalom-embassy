@@ -772,7 +772,7 @@
     if (translationPromises[lang]) return translationPromises[lang];
     translationPromises[lang] = new Promise(function (resolve, reject) {
       var script = document.createElement("script");
-      script.src = "assets/js/i18n/" + lang + ".js?v=20261109";
+      script.src = "assets/js/i18n/" + lang + ".js?v=library1";
       script.async = true;
       script.onload = function () { resolve(); };
       script.onerror = function () {
