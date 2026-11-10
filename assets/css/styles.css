@@ -17,7 +17,7 @@ picture {
 
 @font-face {
   font-family: "Fraunces";
-  src: url("../fonts/fraunces-italic-latin.woff2") format("woff2");
+  src: url("../fonts/fraunces-italic-latin-fast.woff2") format("woff2");
   font-weight: 300 700;
   font-style: italic;
   font-display: swap;
