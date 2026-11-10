@@ -45,6 +45,9 @@
 
   const normalize = (value) => String(value || "").toLowerCase();
 
+  const t = (text) =>
+    typeof window.SHALOM_T === "function" ? window.SHALOM_T(text) : text;
+
   function inferType(title) {
     const text = normalize(title);
     if (/prayer|fast|night of|overnight|intercession|fire night/.test(text)) return "Prayer";
@@ -89,7 +92,7 @@
         });
       }
     }
-    return value || "Archive";
+    return value || t("Archive");
   }
 
   function videoId(url) {
@@ -129,17 +132,22 @@
 
   function setStatus(message, stateName) {
     if (!syncLabel) return;
-    syncLabel.textContent = message;
     syncLabel.dataset.state = stateName || "";
+    syncLabel.innerHTML =
+      '<span class="sermon-sync__dot" aria-hidden="true"></span> ' +
+      escapeHtml(message);
   }
 
   function setLiveLabel() {
     if (state.liveStatus === "live") {
-      setStatus("Live from YouTube · newest uploads included", "live");
+      setStatus(t("Updated from YouTube & church channels"), "live");
     } else if (state.liveStatus === "error") {
-      setStatus("Curated archive · live sync unavailable right now", "error");
+      setStatus(
+        t("{n} messages in library").replace("{n}", state.archive.length),
+        "live"
+      );
     } else {
-      setStatus("Syncing the newest messages…", "loading");
+      setStatus(t("Loading sermon library…"), "loading");
     }
   }
 
@@ -154,15 +162,23 @@
     state.live.forEach((item) => {
       const key = item.id || item.url || item.title;
       const existing = map.get(key);
-      map.set(key, {
-        ...existing,
-        ...item,
-        // Keep a crisp local thumbnail if we already have one.
-        thumbnail: existing && existing.thumbnail ? existing.thumbnail : item.thumbnail,
-        type: existing && existing.type ? existing.type : inferType(item.title),
-        series: existing && existing.series ? existing.series : "Latest upload",
-        speaker: existing && existing.speaker ? existing.speaker : "Apostle Sunday Sinyangwe",
-      });
+      if (existing) {
+        map.set(key, {
+          ...item,
+          ...existing,
+          thumbnail: existing.thumbnail || item.thumbnail,
+          type: existing.type || inferType(item.title),
+          series: existing.series || "Latest upload",
+          speaker: existing.speaker || "Apostle Sunday Sinyangwe",
+        });
+      } else {
+        map.set(key, {
+          ...item,
+          type: item.type || inferType(item.title),
+          series: item.series || "Latest upload",
+          speaker: item.speaker || "Apostle Sunday Sinyangwe",
+        });
+      }
     });
     return Array.from(map.values()).sort((a, b) => dateValue(b) - dateValue(a));
   }
@@ -185,7 +201,7 @@
     const url = escapeHtml(item.url);
     const image = escapeHtml(item.thumbnail);
     const category = escapeHtml(normalize(item.type));
-    const type = escapeHtml(item.type || "Message");
+    const type = escapeHtml(t(item.type || "Message"));
     const date = escapeHtml(formatDate(item));
     return (
       '<article class="sermon-card" data-category="' +
@@ -195,14 +211,16 @@
       '">' +
       '<a class="sermon-card__media" href="' +
       url +
-      '" target="_blank" rel="noopener noreferrer" aria-label="Watch ' +
+      '" target="_blank" rel="noopener noreferrer" aria-label="' +
+      escapeHtml(t("Watch")) +
+      " " +
       title +
       '">' +
       '<img src="' +
       image +
       '" alt="' +
       title +
-      '" width="960" height="540" loading="lazy" decoding="async">' +
+      '" width="960" height="540" decoding="async">' +
       '<span class="sermon-card__play"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-play"></use></svg></span>' +
       "</a>" +
       '<div class="sermon-card__body">' +
@@ -218,7 +236,9 @@
       "</a></h3>" +
       '<a class="sermon-card__link" href="' +
       url +
-      '" target="_blank" rel="noopener noreferrer">Watch message <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></a>' +
+      '" target="_blank" rel="noopener noreferrer">' +
+      escapeHtml(t("Watch message")) +
+      ' <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></a>' +
       "</div></article>"
     );
   }
@@ -246,22 +266,54 @@
     const shown = filtered.slice(0, state.visible);
     grid.innerHTML = shown.length
       ? shown.map(cardMarkup).join("")
-      : '<p class="sermon-empty">No messages match that search yet. Try another title, speaker, or category.</p>';
+      : '<p class="sermon-empty">' +
+        escapeHtml(
+          t(
+            "No messages match that search yet. Try another title, speaker, or category."
+          )
+        ) +
+        "</p>";
     attachImageFallbacks(grid);
 
     if (filterCount) {
       filterCount.textContent =
-        filtered.length + (filtered.length === 1 ? " message" : " messages");
+        filtered.length +
+        " " +
+        t(filtered.length === 1 ? "Message" : "Messages");
     }
     if (moreButton) {
       const remaining = filtered.length - shown.length;
       moreButton.hidden = remaining <= 0;
       moreButton.textContent =
         remaining > 0
-          ? "Load " + Math.min(PAGE_SIZE, remaining) + " more messages"
-          : "All messages shown";
+          ? t("Load {n} more messages").replace(
+              "{n}",
+              String(Math.min(PAGE_SIZE, remaining))
+            )
+          : t("All messages shown");
     }
     setLiveLabel();
+  }
+
+  function cleanTitle(raw) {
+    let text = String(raw || "").trim();
+    text = text.replace(/\s*\|\s*Apostle Sunday Sinyangwe\s*$/i, "");
+    text = text.replace(/^Apostle\s*Sunday\s*Sinyangwe\s*[-–—:]\s*/i, "");
+    const letters = text.replace(/[^A-Za-z]/g, "");
+    const uppers = text.replace(/[^A-Z]/g, "");
+    if (letters.length > 6 && uppers.length / letters.length > 0.75) {
+      const small = new Set(["a", "an", "and", "as", "at", "by", "for", "from", "in", "into", "of", "on", "or", "the", "to", "with"]);
+      text = text
+        .toLowerCase()
+        .split(/\s+/)
+        .map((word, idx) => {
+          if (/^ii+$/i.test(word)) return word.toUpperCase();
+          if (idx > 0 && small.has(word)) return word;
+          return word.charAt(0).toUpperCase() + word.slice(1);
+        })
+        .join(" ");
+    }
+    return text;
   }
 
   function renderSocial(feed) {
@@ -273,8 +325,8 @@
     }
     channelGrid.innerHTML = updates
       .map((item) => {
-        const source = escapeHtml(item.source || "Church feed");
-        const text = escapeHtml(item.text || item.title || "Latest from Shalom Embassy");
+        const source = escapeHtml(t(item.source || "Church feed"));
+        const text = escapeHtml(cleanTitle(item.text || item.title || t("Latest from Shalom Embassy")));
         const url = escapeHtml(item.url);
         const image = escapeHtml(item.image || item.thumbnail || "");
         const date = escapeHtml(item.date || "");
@@ -285,7 +337,7 @@
           (image
             ? '<span class="channel-card__media"><img src="' +
               image +
-              '" alt="" width="640" height="360" loading="lazy" decoding="async"></span>'
+              '" alt="" width="640" height="360" decoding="async"></span>'
             : "") +
           '<span class="channel-card__body"><span class="channel-card__source">' +
           source +

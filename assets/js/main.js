@@ -25,7 +25,12 @@
 
     const toggleLabel = navToggle.querySelector(".sr-only");
     if (toggleLabel) {
-      toggleLabel.textContent = open ? "Close menu" : "Open menu";
+      toggleLabel.textContent =
+        typeof window.SHALOM_T === "function"
+          ? window.SHALOM_T(open ? "Close menu" : "Open menu")
+          : open
+            ? "Close menu"
+            : "Open menu";
     }
 
     if (mainContent) mainContent.toggleAttribute("inert", open);
@@ -112,9 +117,17 @@
           }
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -50px 0px" }
+      { threshold: 0.05, rootMargin: "40px 0px -10px 0px" }
     );
     revealItems.forEach((item) => revealObserver.observe(item));
+
+    if (window.location.hash) {
+      const target = document.querySelector(window.location.hash);
+      if (target) {
+        target.querySelectorAll(".reveal").forEach(revealNow);
+        if (target.classList.contains("reveal")) revealNow(target);
+      }
+    }
   } else {
     revealItems.forEach(revealNow);
   }
@@ -180,22 +193,49 @@
     const pad = (value) => String(value).padStart(2, "0");
     let countdownState = "waiting";
 
-    const updateCountdown = () => {
-      const now = new Date();
-      const cat = new Date(
-        now.toLocaleString("en-US", { timeZone: "Africa/Lusaka" })
-      );
+    const catDateParts = () => {
+      const parts = new Intl.DateTimeFormat("en-CA", {
+        timeZone: "Africa/Lusaka",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        hourCycle: "h23"
+      }).formatToParts(new Date());
+      const values = {};
+      parts.forEach((part) => {
+        if (part.type !== "literal") values[part.type] = part.value;
+      });
+      return {
+        year: Number(values.year),
+        month: Number(values.month),
+        day: Number(values.day),
+        hour: Number(values.hour),
+        minute: Number(values.minute)
+      };
+    };
 
-      const catDay = cat.getDay();
-      const catHour = cat.getHours();
-      const catMinute = cat.getMinutes();
+    const isMonthlySunday = (year, month, day) => {
+      const weekday = new Date(Date.UTC(year, month - 1, day)).getUTCDay();
+      const daysInMonth = new Date(Date.UTC(year, month, 0)).getUTCDate();
+      return weekday === 0 && (day <= 7 || day + 7 > daysInMonth);
+    };
+
+    const updateCountdown = () => {
+      const cat = catDateParts();
       const isLive =
-        catDay === 0 && (catHour > 7 || (catHour === 7 && catMinute >= 0)) && catHour < 14;
+        isMonthlySunday(cat.year, cat.month, cat.day) &&
+        cat.hour >= 7 &&
+        cat.hour < 14;
 
       if (isLive) {
         countdown.classList.add("is-live");
         if (label && countdownState !== "live") {
-          label.textContent = "Happening now - you are welcome";
+          label.textContent =
+            typeof window.SHALOM_T === "function"
+              ? window.SHALOM_T("Happening now - you are welcome")
+              : "Happening now - you are welcome";
           countdownState = "live";
         }
         if (daysEl) daysEl.textContent = "00";
@@ -207,37 +247,32 @@
 
       countdown.classList.remove("is-live");
       if (label && countdownState !== "waiting") {
-        label.textContent = "Next Sunday service in";
+        label.textContent =
+          typeof window.SHALOM_T === "function"
+            ? window.SHALOM_T("Next monthly Sunday service in")
+            : "Next monthly Sunday service in";
         countdownState = "waiting";
       }
 
-      let daysAhead = (7 - catDay) % 7;
-      if (daysAhead === 0 && (catHour > 14 || (catHour === 14 && catMinute > 0))) {
-        daysAhead = 7;
+      let target = null;
+      for (let ahead = 0; ahead <= 40; ahead += 1) {
+        const candidate = new Date(
+          Date.UTC(cat.year, cat.month - 1, cat.day + ahead)
+        );
+        const year = candidate.getUTCFullYear();
+        const month = candidate.getUTCMonth() + 1;
+        const day = candidate.getUTCDate();
+        if (!isMonthlySunday(year, month, day)) continue;
+        const passedToday = ahead === 0 && cat.hour >= 14;
+        if (passedToday) continue;
+        target = { year, month, day };
+        break;
       }
 
-      const targetCat = new Date(
-        cat.getFullYear(),
-        cat.getMonth(),
-        cat.getDate() + daysAhead,
-        7,
-        0,
-        0,
-        0
-      );
+      if (!target) return;
 
-      const targetUtc = Date.UTC(
-        targetCat.getFullYear(),
-        targetCat.getMonth(),
-        targetCat.getDate(),
-        5,
-        0,
-        0
-      );
-
-      let remaining = targetUtc - Date.now();
-      if (remaining < 0) remaining += 7 * 24 * 60 * 60 * 1000;
-
+      const targetUtc = Date.UTC(target.year, target.month - 1, target.day, 5, 0, 0);
+      const remaining = Math.max(0, targetUtc - Date.now());
       const totalSeconds = Math.floor(remaining / 1000);
       const days = Math.floor(totalSeconds / 86400);
       const hours = Math.floor((totalSeconds % 86400) / 3600);
@@ -321,6 +356,8 @@
 
     const openLightbox = (index, trigger) => {
       lastFocused = trigger || document.activeElement;
+      if (prevButton) prevButton.hidden = items.length <= 1;
+      if (nextButton) nextButton.hidden = items.length <= 1;
       render(index);
       if (typeof lightbox.showModal === "function") {
         lightbox.showModal();
@@ -430,6 +467,43 @@
     });
   });
 
+  /* ---------- Copy giving account details ---------- */
+
+  document.querySelectorAll("[data-copy]").forEach((button) => {
+    button.addEventListener("click", async () => {
+      const value = button.getAttribute("data-copy") || "";
+      const label = () =>
+        typeof window.SHALOM_T === "function" ? window.SHALOM_T("Copy") : "Copy";
+      const copiedLabel = () =>
+        typeof window.SHALOM_T === "function" ? window.SHALOM_T("Copied") : "Copied";
+
+      const markCopied = () => {
+        button.textContent = copiedLabel();
+        button.classList.add("is-copied");
+        window.setTimeout(() => {
+          button.textContent = label();
+          button.classList.remove("is-copied");
+        }, 1800);
+      };
+
+      try {
+        await navigator.clipboard.writeText(value);
+        markCopied();
+      } catch (error) {
+        const helper = document.createElement("textarea");
+        helper.value = value;
+        helper.setAttribute("readonly", "");
+        helper.style.position = "fixed";
+        helper.style.opacity = "0";
+        document.body.appendChild(helper);
+        helper.select();
+        const copied = document.execCommand("copy");
+        document.body.removeChild(helper);
+        if (copied) markCopied();
+      }
+    });
+  });
+
   /* ---------- Current year ---------- */
 
   document.querySelectorAll("[data-year]").forEach((element) => {
@@ -461,13 +535,13 @@
     { code: "loz", name: "Lozi", htmlLang: "loz", group: "zambian" },
     { code: "tum", name: "Tumbuka", htmlLang: "tum", group: "zambian" },
     { code: "en", name: "English", htmlLang: "en", group: "world" },
-    { code: "hi", name: "Hindi", htmlLang: "hi", group: "world" },
-    { code: "fr", name: "French", htmlLang: "fr", group: "world" },
-    { code: "de", name: "German", htmlLang: "de", group: "world" },
-    { code: "it", name: "Italian", htmlLang: "it", group: "world" },
-    { code: "pt", name: "Portuguese", htmlLang: "pt", group: "world" },
-    { code: "ru", name: "Russian", htmlLang: "ru", group: "world" },
-    { code: "es", name: "Spanish", htmlLang: "es", group: "world" }
+    { code: "hi", name: "हिन्दी", htmlLang: "hi", group: "world" },
+    { code: "fr", name: "Français", htmlLang: "fr", group: "world" },
+    { code: "de", name: "Deutsch", htmlLang: "de", group: "world" },
+    { code: "it", name: "Italiano", htmlLang: "it", group: "world" },
+    { code: "pt", name: "Português", htmlLang: "pt", group: "world" },
+    { code: "ru", name: "Русский", htmlLang: "ru", group: "world" },
+    { code: "es", name: "Español", htmlLang: "es", group: "world" }
   ];
 
   var byCode = {};
@@ -479,11 +553,11 @@
     var table = {};
     var base = (window.SHALOM_BASE_TEXT || {})[lang] || {};
     var supplement = (window.SHALOM_TEXT || {})[lang] || {};
-    Object.keys(supplement).forEach(function (key) {
-      table[key] = supplement[key];
-    });
     Object.keys(base).forEach(function (key) {
       table[key] = base[key];
+    });
+    Object.keys(supplement).forEach(function (key) {
+      table[key] = supplement[key];
     });
     return table;
   }
@@ -493,6 +567,14 @@
     var table = tableFor(lang);
     return table[fallback] || fallback;
   }
+
+  /* Exposed for schedule.js and any other component that builds text after
+     the initial translation pass. */
+  window.SHALOM_T = function (text) {
+    if (currentLanguage === "en") return text;
+    var table = tableFor(currentLanguage);
+    return table[text] || text;
+  };
 
   function readStored() {
     try {
@@ -514,21 +596,17 @@
     "script",
     "style",
     "noscript",
-    "textarea",
-    "select",
-    "option",
     "svg",
     ".lang-switcher",
     ".brand",
-    ".nav-toggle",
     "[translate='no']",
     ".notranslate",
-    ".countdown",
     ".tns-liveregion"
   ].join(",");
 
   var originalNodes = new Map();
   var originalAttrs = new Map();
+  var originalTitle = document.title;
   var currentLanguage = "en";
 
   function hasText(value) {
@@ -563,10 +641,10 @@
       items.push({ node: node, source: originalNodes.get(node) });
     }
 
-    document.querySelectorAll("[placeholder], [title], [aria-label]").forEach(function (element) {
+    document.querySelectorAll("[placeholder], [title], [aria-label], [alt], [data-caption]").forEach(function (element) {
       if (element.closest(SKIP_SELECTOR)) return;
       var saved = originalAttrs.get(element) || {};
-      ["placeholder", "title", "aria-label"].forEach(function (attribute) {
+      ["placeholder", "title", "aria-label", "alt", "data-caption"].forEach(function (attribute) {
         if (!element.hasAttribute(attribute)) return;
         if (!(attribute in saved)) saved[attribute] = element.getAttribute(attribute);
         if (hasText(saved[attribute])) {
@@ -643,10 +721,17 @@
     restoreOriginal();
     updateSwitcher(lang);
 
+    document.title = originalTitle;
     if (lang !== "en") {
       applyLocalPage(lang);
+      var titleSource = trimEdges(originalTitle).text;
+      var translatedTitle = tableFor(lang)[titleSource];
+      if (translatedTitle) document.title = translatedTitle;
     }
     startObserver(lang);
+    document.dispatchEvent(
+      new CustomEvent("shalom:language", { detail: { lang: lang } })
+    );
   }
 
   /* Dynamic content (feed cards, menus) is picked up after it is inserted. */
@@ -662,8 +747,15 @@
   function startObserver(lang) {
     if (lang === "en" || !window.MutationObserver) return;
     observedLanguage = lang;
-    observer = new MutationObserver(function () {
-      if (currentLanguage === observedLanguage) applyLocalPage(observedLanguage);
+    observer = new MutationObserver(function (mutations) {
+      var relevant = mutations.some(function (mutation) {
+        var target = mutation.target;
+        var element = target && target.nodeType === 1 ? target : target && target.parentElement;
+        return !(element && element.closest && element.closest(".countdown"));
+      });
+      if (relevant && currentLanguage === observedLanguage) {
+        applyLocalPage(observedLanguage);
+      }
     });
     observer.observe(document.body, { childList: true, subtree: true });
   }
@@ -680,7 +772,7 @@
     if (translationPromises[lang]) return translationPromises[lang];
     translationPromises[lang] = new Promise(function (resolve, reject) {
       var script = document.createElement("script");
-      script.src = "assets/js/i18n/" + lang + ".js";
+      script.src = "assets/js/i18n/" + lang + ".js?v=20261109";
       script.async = true;
       script.onload = function () { resolve(); };
       script.onerror = function () {

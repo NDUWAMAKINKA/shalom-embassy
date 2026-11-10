@@ -75,6 +75,28 @@ and video thumbnails:
     0m0BfbNJNPI, pHWBSKnwoPs, Ww_R2n1nuhU, TLpDwYK1tLM, Q-rqEVUTFNQ,
     iS2lLkwNVoI, 8h3pT5O3zLo, n2ineKxjv_Q, 9EermTXSfkM, FrhKuEvjZwk
 
+PAYMENT METHOD LOGOS
+--------------------
+The giving page uses the official marks of the payment providers. They are
+used only to identify the verified giving channels and remain the property
+of their respective owners:
+
+  Indo Zambia Bank (IZB):
+    https://izbassetsmain.blob.core.windows.net/izbwebassets/logo.png
+    Official bank logo, trimmed and saved as a high-resolution WebP/PNG.
+
+  Airtel Money:
+    https://www.airtel.africa/
+    Official Airtel wordmark, stored as a scalable SVG.
+
+  MTN Mobile Money:
+    https://www.mtn.com/wp-content/themes/mtn-refresh/public/img/mtn-logo.svg
+    Official MTN mark, placed on the official MTN yellow oval in SVG.
+
+  Zelle:
+    https://www.zellepay.com/
+    Official Zelle mark, stored as a scalable SVG.
+
 The selected source images are kept in MEDIA FILES/originals for future
 reference. Files in assets/img are cropped, resized and compressed copies.
 

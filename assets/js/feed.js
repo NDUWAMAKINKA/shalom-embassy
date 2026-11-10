@@ -18,6 +18,9 @@
       .replace(/"/g, "&quot;")
       .replace(/'/g, "&#39;");
 
+  const t = (text) =>
+    typeof window.SHALOM_T === "function" ? window.SHALOM_T(text) : text;
+
   const sourceClass = (source) => {
     const key = String(source || "").toLowerCase();
     if (key === "facebook") return "update-card__source--facebook";
@@ -34,6 +37,50 @@
 
   const hdThumb = (url) =>
     String(url || "").replace(/\/(?:hq|sd|mq)default\.jpg/i, "/maxresdefault.jpg");
+
+  const videoId = (url) => {
+    const match = String(url || "").match(/[?&]v=([A-Za-z0-9_-]{11})/);
+    return match ? match[1] : "";
+  };
+
+  const localThumbMap = {};
+
+  function inferCategory(title) {
+    const text = String(title || "").toLowerCase();
+    if (/prayer|fast|night of|overnight|intercession|fire night/.test(text)) return "Prayer";
+    if (/worship|weapon|ministration|music/.test(text)) return "Worship";
+    if (/sunday|service|miracle service/.test(text)) return "Sunday";
+    if (/conference|anniversary|summit/.test(text)) return "Conference";
+    return "Teaching";
+  }
+
+  function cleanTitle(raw) {
+    let text = String(raw || "").trim();
+    text = text.replace(/\s*\|\s*Apostle Sunday Sinyangwe\s*$/i, "");
+    text = text.replace(/^Apostle\s*Sunday\s*Sinyangwe\s*[-–—:]\s*/i, "");
+    const letters = text.replace(/[^A-Za-z]/g, "");
+    const uppers = text.replace(/[^A-Z]/g, "");
+    if (letters.length > 6 && uppers.length / letters.length > 0.75) {
+      const small = new Set(["a", "an", "and", "as", "at", "by", "for", "from", "in", "into", "of", "on", "or", "the", "to", "with"]);
+      text = text
+        .toLowerCase()
+        .split(/\s+/)
+        .map((word, idx) => {
+          if (/^ii+$/i.test(word)) return word.toUpperCase();
+          if (idx > 0 && small.has(word)) return word;
+          return word.charAt(0).toUpperCase() + word.slice(1);
+        })
+        .join(" ");
+    }
+    return text;
+  }
+
+  function resolveThumb(url, id) {
+    const vid = id || videoId(url);
+    if (vid && localThumbMap[vid]) return localThumbMap[vid];
+    if (String(url || "").startsWith("assets/")) return url;
+    return hdThumb(url);
+  }
 
   function attachImageFallbacks(root) {
     root.querySelectorAll("img").forEach((img) => {
@@ -60,16 +107,21 @@
       .slice(0, 3)
       .map((item) => {
         const url = escapeHtml(item.url);
-        const title = escapeHtml(item.title);
-        const image = escapeHtml(hdThumb(item.image || item.thumbnail || ""));
-        const date = escapeHtml(item.date || "Latest");
+        const title = escapeHtml(cleanTitle(item.title));
+        const category = escapeHtml(t(item.type || inferCategory(item.title)));
+        const image = escapeHtml(resolveThumb(item.image || item.thumbnail || "", item.id));
+        const date = escapeHtml(item.date || t("Recent"));
         return (
           '<article class="sermon-card">' +
           '<a class="sermon-card__media" href="' +
           url +
-          '" target="_blank" rel="noopener noreferrer" aria-label="Watch ' +
+          '" target="_blank" rel="noopener noreferrer" aria-label="' +
+          escapeHtml(t("Watch")) +
+          " " +
           title +
-          ' on YouTube">' +
+          " " +
+          escapeHtml(t("on YouTube")) +
+          '">' +
           '<img src="' +
           image +
           '" alt="' +
@@ -79,7 +131,9 @@
           icon("play") +
           "</span></a>" +
           '<div class="sermon-card__body">' +
-          '<div class="sermon-card__meta"><span>Latest</span><span class="dot"></span><span>' +
+          '<div class="sermon-card__meta"><span>' +
+          category +
+          '</span><span class="dot"></span><span>' +
           date +
           "</span></div>" +
           '<h3><a href="' +
@@ -89,7 +143,9 @@
           "</a></h3>" +
           '<a class="sermon-card__link" href="' +
           url +
-          '" target="_blank" rel="noopener noreferrer">Watch message ' +
+          '" target="_blank" rel="noopener noreferrer">' +
+          escapeHtml(t("Watch message")) +
+          " " +
           icon("arrow") +
           "</a></div></article>"
         );
@@ -108,16 +164,18 @@
       .slice(0, 6)
       .map((item) => {
         const url = escapeHtml(item.url);
-        const text = escapeHtml(item.text);
-        const source = escapeHtml(item.source || "Update");
+        const text = escapeHtml(cleanTitle(item.text));
+        const source = escapeHtml(t(item.source || "Update"));
         const date = escapeHtml(item.date || "");
-        const image = escapeHtml(hdThumb(item.image || ""));
+        const image = escapeHtml(resolveThumb(item.image || "", videoId(item.url)));
         const media = image
           ? '<a class="update-card__media" href="' +
             url +
-            '" target="_blank" rel="noopener noreferrer" aria-label="Open ' +
+            '" target="_blank" rel="noopener noreferrer" aria-label="' +
+            escapeHtml(t("Open post")) +
+            " " +
             source +
-            ' post">' +
+            '">' +
             '<img src="' +
             image +
             '" alt="' +
@@ -143,7 +201,9 @@
           "</p>" +
           '<a class="update-card__link" href="' +
           url +
-          '" target="_blank" rel="noopener noreferrer">Open post ' +
+          '" target="_blank" rel="noopener noreferrer">' +
+          escapeHtml(t("Open post")) +
+          " " +
           icon("arrow") +
           "</a></div></article>"
         );
@@ -164,13 +224,15 @@
       .slice(0, 8)
       .map((item) => {
         const url = escapeHtml(item.url);
-        const image = escapeHtml(hdThumb(item.src || item.image || ""));
-        const caption = escapeHtml(item.caption || item.alt || "Shalom Embassy");
-        const source = escapeHtml(item.source || "Gallery");
+        const image = escapeHtml(resolveThumb(item.src || item.image || "", videoId(item.url)));
+        const caption = escapeHtml(cleanTitle(item.caption || item.alt || t("Shalom Embassy photo")));
+        const source = escapeHtml(t(item.source || "Gallery"));
         return (
           '<a class="feed-gallery__item" href="' +
           url +
-          '" target="_blank" rel="noopener noreferrer" aria-label="Open ' +
+          '" target="_blank" rel="noopener noreferrer" aria-label="' +
+          escapeHtml(t("Open")) +
+          " " +
           caption +
           '">' +
           '<img src="' +
@@ -234,7 +296,9 @@
           url +
           '"' +
           external +
-          ">Details " +
+          ">" +
+          escapeHtml(t("Details")) +
+          " " +
           icon("arrow") +
           "</a></div></article>"
         );
@@ -251,7 +315,8 @@
     if (!target || !window.__shalomFeedUpdated) return;
     try {
       target.textContent =
-        "Last synced " +
+        t("Last synced") +
+        " " +
         new Date(window.__shalomFeedUpdated).toLocaleString("en-GB", {
           day: "numeric",
           month: "short",
@@ -329,6 +394,22 @@
       // Keep the curated static content if the JSON feed is unavailable.
       if (window.console) console.warn("Shalom feed JSON unavailable:", error);
     }
+
+    (feed.sermons || []).forEach((s) => {
+      const vid = s.id || videoId(s.url);
+      const img = s.thumbnail || s.image || "";
+      if (vid && img.startsWith("assets/")) localThumbMap[vid] = img;
+    });
+    (feed.updates || []).forEach((u) => {
+      const vid = videoId(u.url);
+      const img = u.image || "";
+      if (vid && img.startsWith("assets/")) localThumbMap[vid] = img;
+    });
+    (feed.gallery || []).forEach((g) => {
+      const vid = videoId(g.url);
+      const img = g.src || g.image || "";
+      if (vid && img.startsWith("assets/")) localThumbMap[vid] = img;
+    });
 
     renderFeed(feed);
 

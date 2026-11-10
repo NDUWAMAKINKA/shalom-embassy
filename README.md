@@ -17,7 +17,7 @@ The site is deployed with GitHub Pages from the `main` branch.
 | `about.html` | Story, timeline, mission/vision, leadership, spiritual heritage, beliefs, ministries |
 | `sermons.html` | Featured message, filterable message library, YouTube channel links |
 | `gatherings.html` | Weekly gatherings, what to expect, recent highlights, anniversary, visit |
-| `give.html` | Giving & partnership, ways to give, integrity note |
+| `give.html` | Giving & partnership, official IZB / Airtel Money / MTN Mobile Money / Zelle account details, integrity note |
 | `contact.html` | Contact cards, WhatsApp contact form, local map, service times, FAQ |
 
 ## Preview locally
@@ -49,7 +49,8 @@ Then visit `http://localhost:8000`.
 ## Key features
 
 - Sticky header with mobile navigation overlay and focus management
-- Live countdown to the next Sunday 07:00 CAT gathering (Africa/Lusaka)
+- Live countdown to the next monthly Sunday gathering — the first-Sunday Empowerment Sunday or last-Sunday 7 Hours service (Africa/Lusaka)
+- Live church calendar with automatic weekly and monthly recurrence dates
 - Scroll reveal animations, animated statistics, reduced-motion support
 - Sermon category filters
 - Accessible photo lightbox with keyboard controls
@@ -66,7 +67,7 @@ The site now has a feed pipeline that keeps these sections fresh:
 - **Latest sermons** — home page message cards
 - **Latest from Shalom** — new YouTube, Facebook and Instagram posts
 - **Latest moments** — new gallery images from connected social accounts
-- **Upcoming events** — from a public church calendar (ICS)
+- **Upcoming events** — calculated locally from the weekly and monthly recurrence rules on the Gatherings page
 
 `scripts/update_feed.py` writes `data/feed.json`; `assets/js/feed.js` reads it and renders the sections. YouTube is also refreshed live in the browser on every visit through a public reader, so the newest uploads appear without waiting for a build.
 
@@ -90,7 +91,7 @@ Add these in GitHub → **Settings → Secrets and variables → Actions**:
 | `INSTAGRAM_ACCESS_TOKEN` | Meta token with Instagram basic display permissions |
 | `CALENDAR_ICS_URL` | Public Google Calendar / ICS address |
 
-Once the Meta secrets exist, Facebook and Instagram posts appear first, with their images downloaded into `assets/img/feed/`. The calendar secret turns on the Upcoming Events section. Without those secrets, YouTube fills the updates and gallery slots, and the events section stays hidden.
+Once the Meta secrets exist, Facebook and Instagram posts appear first, with their images downloaded into `assets/img/feed/`. The public Gatherings calendar and Upcoming list are generated in the browser from the service recurrence rules and do not depend on the feed pipeline. `CALENDAR_ICS_URL` is retained for the optional social-feed script; it is not required for the church calendar.
 
 To refresh manually, run:
 
@@ -108,23 +109,39 @@ The Royal Priesthood Assemblies site uses a fully local translation system rathe
 - Navigation, mobile menus, form placeholders, and dynamically inserted gallery text are translated too; a `MutationObserver` catches later changes.
 - There is no third-party translation widget or runtime machine-translation call. Returning to English restores the original English strings.
 
-To reproduce this exactly for Shalom Embassy, the same architecture can be used, but the full phrase maps for every page must be supplied/approved in each language. Machine translation is not reliable enough for Tonga, Lozi, or Kaonde, so the language feature was removed rather than shipping a partial or inaccurate translation.
+For Shalom Embassy, the same architecture is used with a complete phrase map for every page in all 12 languages. The maps in `assets/js/i18n/` cover visible page text, placeholders, titles, `aria-label` text, image `alt` text, gallery captions, and the dynamically generated calendar, sermon-library, and social-feed labels. Tonga, Lozi, and Nyanja were translated separately from the other languages so the wording stays natural rather than falling back to a related language.
 
 ## Important content notes
 
 Service times, phone numbers, the address, and social links were taken from the church’s public YouTube channel, Facebook page, and official service posters:
 
-- **Sunday Big Sunday:** 07:00 — 14:00 CAT
-- **Wednesday Night of Solution:** 21:00 — 04:00 CAT
+- **7 Hours of Nothing Missing, Nothing Broken (Healing & Deliverance Service):** every last Sunday, 07:00 — 14:00 CAT
+- **Big Sunday:** quarterly, 07:00 — 14:00 CAT
+- **Night of Solution:** Wednesdays, 21:00 — 04:00 CAT
+- **Virtuous Women:** Tuesdays, 14:00 CAT
+- **Morning Glory:** Monday — Saturday, 06:00 CAT
+- **Midweek Service:** Wednesdays, 11:00 & 16:00 CAT
+- **Healing & Deliverance:** Thursdays, 18:00 CAT
+- **My Worship My Weapon 4:** first week of every month, Friday 21:00 CAT
+- **Empowerment Sunday:** first week of every month, Sunday 07:00 — 14:00 CAT
 - **Prayer line:** +260 974 807 770
 - **Church office:** +260 977 846 660
 - **Address:** Behind Livonia Complex, Off Mumbwa Road, Garden House, Lusaka, Zambia
+
+The Gatherings page includes a live church calendar that calculates the next weekly and monthly occurrences automatically, plus an Upcoming list. The homepage countdown points to the next first-Sunday (Empowerment Sunday) or last-Sunday (7 Hours) service.
 
 Please confirm these details with the church office before publishing, especially if times or phone numbers change.
 
 ### Giving
 
-No bank or mobile-money account numbers were published because they are not public. The giving page invites visitors to request details from the church office via WhatsApp. Add the official account details when the church provides them.
+The giving page publishes the official tithes and offerings channels supplied by the church:
+
+- **Indo Zambia Bank (IZB):** account number `0281110000013`
+- **Airtel Money:** Mercy Ngalande, `+260 974 807 770`
+- **MTN Mobile Money:** Mercy Ngalande, `+260 964 715 187`
+- **Zelle:** `sundaysgap@yahoo.com`
+
+The payment section uses local high-resolution brand assets: the official IZB logo, the official Airtel wordmark, the MTN logo on the brand yellow oval, and the official Zelle mark. Update these assets and numbers if the church changes banks or account holders.
 
 ### Contact form
 
