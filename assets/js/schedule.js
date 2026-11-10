@@ -182,12 +182,13 @@
     });
   }
 
-  function upcomingOccurrences(limit) {
+  function upcomingOccurrences(limit, specialOnly) {
     var today = makeDate(catToday().year, catToday().month, catToday().day);
     var nextByEvent = {};
     var cursor = today;
     for (var i = 0; i < 120; i += 1) {
       eventsFor(cursor).forEach(function (event) {
+        if (specialOnly && !event.special) return;
         if (!nextByEvent[event.id]) {
           nextByEvent[event.id] = { event: event, date: cursor };
         }
@@ -312,26 +313,28 @@
     var grid = document.querySelector("[data-schedule-upcoming]");
     if (!grid) return;
 
-    var items = upcomingOccurrences(8);
+    var limit = parseInt(grid.getAttribute("data-limit") || "8", 10) || 8;
+    var specialOnly = grid.getAttribute("data-special") === "true";
+    var items = upcomingOccurrences(limit, specialOnly);
     var html = "";
 
     html +=
       '<article class="event-card feed-event schedule-card schedule-card--quarterly">' +
-      '<div class="event-card__body">' +
-      '<p class="event-card__date">' +
-      '<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-calendar"></use></svg> ' +
-      t("Quarterly") +
-      "</p>" +
-      "<h3>" + t("Big Sunday") + "</h3>" +
-      "<p>" + t("Our quarterly gathering of the whole church family for a full day of worship, the Word, prophetic prayer, healing, and deliverance.") + "</p>" +
-      '<p class="feed-event__meta">' +
-      '<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg>' + t("07:00 — 14:00 CAT") +
-      '<span class="schedule-card__note">' + t("Date to be announced") + "</span>" +
-      "</p>" +
-      '<a class="sermon-card__link" href="contact.html#visit">' +
-      t("Plan your visit") +
-      ' <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></a>' +
-      "</div></article>";
+        '<div class="event-card__body">' +
+        '<p class="event-card__date">' +
+        '<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-calendar"></use></svg> ' +
+        t("Quarterly") +
+        "</p>" +
+        "<h3>" + t("Big Sunday") + "</h3>" +
+        "<p>" + t("Our quarterly gathering of the whole church family for a full day of worship, the Word, prophetic prayer, healing, and deliverance.") + "</p>" +
+        '<p class="feed-event__meta">' +
+        '<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg>' + t("07:00 — 14:00 CAT") +
+        '<span class="schedule-card__note">' + t("Date to be announced") + "</span>" +
+        "</p>" +
+        '<a class="sermon-card__link" href="contact.html#visit">' +
+        t("Plan your visit") +
+        ' <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></a>' +
+        "</div></article>";
 
     items.forEach(function (item) {
       html +=

@@ -274,7 +274,9 @@
         () => {
           const src = img.getAttribute("src") || "";
           if (src.includes("maxresdefault")) {
-            img.src = src.replace("maxresdefault", "hqdefault");
+            img.src = src.replace("maxresdefault", "sddefault");
+          } else if (src.includes("sddefault")) {
+            img.src = src.replace("sddefault", "hqdefault");
           } else if (src.includes("hqdefault")) {
             img.src = src.replace("hqdefault", "mqdefault");
           }
