@@ -3,6 +3,10 @@
    Design system & site styles
    ========================================================= */
 
+picture {
+  display: contents;
+}
+
 @font-face {
   font-family: "Fraunces";
   src: url("../fonts/fraunces-latin.woff2") format("woff2");
@@ -3505,7 +3509,7 @@ body.nav-open .nav-toggle__lines span:nth-child(3) {
   background: #e9e4d8;
 }
 
-.map-card__map > img {
+.map-card__map img {
   position: absolute;
   inset: 0;
   width: 100%;

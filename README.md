@@ -51,6 +51,8 @@ Then visit `http://localhost:8000`.
 - Sticky header with mobile navigation overlay and focus management
 - Live countdown to the next monthly Sunday gathering — the first-Sunday Empowerment Sunday or last-Sunday 7 Hours service (Africa/Lusaka)
 - Live church calendar with automatic weekly and monthly recurrence dates
+- Responsive AVIF/WebP images with preloaded page heroes and lazy loading below the fold
+- Minified CSS and cache-busted local assets for fast repeat visits
 - Scroll reveal animations, animated statistics, reduced-motion support
 - Sermon category filters
 - Accessible photo lightbox with keyboard controls

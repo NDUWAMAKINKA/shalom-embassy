@@ -83,7 +83,7 @@ def youtube_items() -> list[dict]:
         if not video_id:
             continue
 
-        thumbnail = f"https://i.ytimg.com/vi/{video_id}/maxresdefault.jpg"
+        thumbnail = f"https://i.ytimg.com/vi/{video_id}/sddefault.jpg"
         description = entry.findtext(
             "media:group/media:description", default="", namespaces=atom
         )
@@ -181,7 +181,7 @@ def youtube_from_channel_page() -> list[dict]:
                     relative_date = text
                     break
 
-        thumbnail = f"https://i.ytimg.com/vi/{video_id}/maxresdefault.jpg"
+        thumbnail = f"https://i.ytimg.com/vi/{video_id}/sddefault.jpg"
         seen.add(video_id)
         items.append(
             {

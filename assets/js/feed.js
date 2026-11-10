@@ -21,6 +21,28 @@
   const t = (text) =>
     typeof window.SHALOM_T === "function" ? window.SHALOM_T(text) : text;
 
+  const responsiveLocal = (src, alt, width, height, sizes) => {
+    if (!/^assets\/img\/(?:sermons\/|sermon-)/.test(src)) {
+      return (
+        '<img src="' + src + '" alt="' + alt + '" width="' + width +
+        '" height="' + height + '" loading="lazy" decoding="async">'
+      );
+    }
+    const base = src.split("?")[0].replace(/\.(webp|jpg|jpeg|png)$/i, "");
+    const name = base.split("/").pop();
+    const set = (ext) =>
+      [320, 480, 640, 960]
+        .map((w) => "assets/img/opt/" + name + "-" + w + "." + ext + " " + w + "w")
+        .join(", ");
+    return (
+      '<picture><source type="image/avif" srcset="' + set("avif") +
+      '" sizes="' + sizes + '"><source type="image/webp" srcset="' +
+      set("webp") + '" sizes="' + sizes + '"><img src="' + src + '" alt="' +
+      alt + '" width="' + width + '" height="' + height +
+      '" loading="lazy" decoding="async"></picture>'
+    );
+  };
+
   const sourceClass = (source) => {
     const key = String(source || "").toLowerCase();
     if (key === "facebook") return "update-card__source--facebook";
@@ -33,10 +55,13 @@
     name +
     '"></use></svg>';
 
-  const isExternal = (url) => /^https?:\/\//i.test(url || "");
+  const isExternal = (url) => {
+    const value = String(url || "").toLowerCase();
+    return value.startsWith("http://") || value.startsWith("https://");
+  };
 
   const hdThumb = (url) =>
-    String(url || "").replace(/\/(?:hq|sd|mq)default\.jpg/i, "/maxresdefault.jpg");
+    String(url || "").replace(/\/(?:maxres|hq|mq)default\.jpg/i, "/sddefault.jpg");
 
   const videoId = (url) => {
     const match = String(url || "").match(/[?&]v=([A-Za-z0-9_-]{11})/);
@@ -122,11 +147,13 @@
           " " +
           escapeHtml(t("on YouTube")) +
           '">' +
-          '<img src="' +
-          image +
-          '" alt="' +
-          title +
-          '" width="960" height="540" loading="lazy" decoding="async">' +
+          responsiveLocal(
+            image,
+            title,
+            960,
+            540,
+            "(max-width: 760px) 100vw, (max-width: 1200px) 50vw, 380px"
+          ) +
           '<span class="sermon-card__play">' +
           icon("play") +
           "</span></a>" +
@@ -176,11 +203,13 @@
             " " +
             source +
             '">' +
-            '<img src="' +
-            image +
-            '" alt="' +
-            text +
-            '" width="960" height="600" loading="lazy" decoding="async">' +
+            responsiveLocal(
+              image,
+              text,
+              960,
+              600,
+              "(max-width: 760px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            ) +
             '<span class="update-card__source ' +
             sourceClass(item.source) +
             '">' +
@@ -235,11 +264,13 @@
           " " +
           caption +
           '">' +
-          '<img src="' +
-          image +
-          '" alt="' +
-          caption +
-          '" width="800" height="800" loading="lazy" decoding="async">' +
+          responsiveLocal(
+            image,
+            caption,
+            800,
+            800,
+            "(max-width: 760px) 50vw, 33vw"
+          ) +
           '<span class="feed-gallery__source ' +
           sourceClass(item.source) +
           '">' +
@@ -345,8 +376,8 @@
         id,
         title: match[5].trim(),
         url: `https://www.youtube.com/watch?v=${id}`,
-        image: `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`,
-        thumbnail: `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`,
+        image: `https://i.ytimg.com/vi/${id}/sddefault.jpg`,
+        thumbnail: `https://i.ytimg.com/vi/${id}/sddefault.jpg`,
         date: relative,
         source: "YouTube",
       });

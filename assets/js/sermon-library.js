@@ -48,6 +48,28 @@
   const t = (text) =>
     typeof window.SHALOM_T === "function" ? window.SHALOM_T(text) : text;
 
+  const responsiveLocal = (src, alt, width, height, sizes) => {
+    if (!/^assets\/img\/(?:sermons\/|sermon-)/.test(src)) {
+      return (
+        '<img src="' + src + '" alt="' + alt + '" width="' + width +
+        '" height="' + height + '" loading="lazy" decoding="async">'
+      );
+    }
+    const base = src.split("?")[0].replace(/\.(webp|jpg|jpeg|png)$/i, "");
+    const name = base.split("/").pop();
+    const set = (ext) =>
+      [320, 480, 640, 960]
+        .map((w) => "assets/img/opt/" + name + "-" + w + "." + ext + " " + w + "w")
+        .join(", ");
+    return (
+      '<picture><source type="image/avif" srcset="' + set("avif") +
+      '" sizes="' + sizes + '"><source type="image/webp" srcset="' +
+      set("webp") + '" sizes="' + sizes + '"><img src="' + src + '" alt="' +
+      alt + '" width="' + width + '" height="' + height +
+      '" loading="lazy" decoding="async"></picture>'
+    );
+  };
+
   function inferType(title) {
     const text = normalize(title);
     if (/prayer|fast|night of|overnight|intercession|fire night/.test(text)) return "Prayer";
@@ -216,11 +238,13 @@
       " " +
       title +
       '">' +
-      '<img src="' +
-      image +
-      '" alt="' +
-      title +
-      '" width="960" height="540" decoding="async">' +
+      responsiveLocal(
+        image,
+        title,
+        960,
+        540,
+        "(max-width: 760px) 100vw, (max-width: 1200px) 50vw, 380px"
+      ) +
       '<span class="sermon-card__play"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-play"></use></svg></span>' +
       "</a>" +
       '<div class="sermon-card__body">' +
@@ -369,7 +393,7 @@
         id,
         title: match[5].trim(),
         url: "https://www.youtube.com/watch?v=" + id,
-        thumbnail: "https://i.ytimg.com/vi/" + id + "/maxresdefault.jpg",
+        thumbnail: "https://i.ytimg.com/vi/" + id + "/sddefault.jpg",
         date: relative,
         speaker: "Apostle Sunday Sinyangwe",
         type: inferType(match[5]),
