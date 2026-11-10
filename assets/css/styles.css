@@ -6432,3 +6432,9 @@ body.nav-open .nav-backdrop {
     padding: 20px;
   }
 }
+
+@media (min-width: 1025px) {
+  .upcoming-home .event-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
