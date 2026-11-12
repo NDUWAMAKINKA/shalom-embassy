@@ -334,17 +334,27 @@
     const nextButton = lightbox.querySelector("[data-lightbox-next]");
     let currentIndex = 0;
     let lastFocused = null;
+    let items = [];
 
-    const items = galleryTriggers.map((trigger) => ({
+    const visibleTriggers = () =>
+      galleryTriggers.filter(
+        (trigger) =>
+          !trigger.classList.contains("is-hidden") &&
+          !trigger.closest("[hidden]") &&
+          trigger.getClientRects().length > 0
+      );
+
+    const buildItem = (trigger) => ({
       src: trigger.dataset.lightbox,
       caption: trigger.dataset.caption || "",
       alt:
         (trigger.querySelector("img") && trigger.querySelector("img").alt) ||
         trigger.dataset.caption ||
         "Shalom Embassy photo",
-    }));
+    });
 
     const render = (index) => {
+      if (!items.length) return;
       currentIndex = (index + items.length) % items.length;
       const item = items[currentIndex];
       if (lightboxImage) {
@@ -354,8 +364,13 @@
       if (lightboxCaption) lightboxCaption.textContent = item.caption;
     };
 
-    const openLightbox = (index, trigger) => {
+    const openLightbox = (trigger) => {
       lastFocused = trigger || document.activeElement;
+      const visible = visibleTriggers();
+      if (!visible.length) return;
+      items = visible.map(buildItem);
+      let index = visible.indexOf(trigger);
+      if (index < 0) index = 0;
       if (prevButton) prevButton.hidden = items.length <= 1;
       if (nextButton) nextButton.hidden = items.length <= 1;
       render(index);
@@ -378,8 +393,8 @@
       }
     };
 
-    galleryTriggers.forEach((trigger, index) => {
-      trigger.addEventListener("click", () => openLightbox(index, trigger));
+    galleryTriggers.forEach((trigger) => {
+      trigger.addEventListener("click", () => openLightbox(trigger));
     });
 
     if (closeButton) closeButton.addEventListener("click", closeLightbox);
@@ -404,6 +419,12 @@
         render(currentIndex + 1);
       }
     });
+
+    window.ShalomLightbox = {
+      close: () => {
+        if (lightbox.open || lightbox.hasAttribute("open")) closeLightbox();
+      },
+    };
   }
 
   /* ---------- WhatsApp contact forms ---------- */
@@ -503,6 +524,474 @@
       }
     });
   });
+
+  /* ---------- Searchable / filterable card collections ---------- */
+
+  document.querySelectorAll("[data-card-filter]").forEach((root) => {
+    const search = root.querySelector("[data-card-search]");
+    const chips = Array.from(root.querySelectorAll("[data-card-chip]"));
+    const cards = Array.from(root.querySelectorAll("[data-card]"));
+    const count = root.querySelector("[data-card-count]");
+    const empty = root.querySelector("[data-card-empty]");
+    const singular = root.dataset.noun || "story";
+    const plural = root.dataset.nounPlural || singular + "s";
+    let active = "all";
+
+    const apply = () => {
+      const query = (search && search.value ? search.value : "")
+        .trim()
+        .toLowerCase();
+      let visible = 0;
+
+      cards.forEach((card) => {
+        const category = card.dataset.category || "";
+        const haystack = (
+          (card.dataset.search || "") +
+          " " +
+          (card.textContent || "")
+        ).toLowerCase();
+        const matchesCategory = active === "all" || category === active;
+        const matchesQuery = !query || haystack.indexOf(query) !== -1;
+        const show = matchesCategory && matchesQuery;
+        card.classList.toggle("is-hidden", !show);
+        if (show) visible += 1;
+      });
+
+      if (count) {
+        count.textContent =
+          visible + " " + (visible === 1 ? singular : plural);
+      }
+      if (empty) empty.hidden = visible !== 0;
+      if (window.ShalomLightbox) window.ShalomLightbox.close();
+    };
+
+    chips.forEach((chip) => {
+      chip.addEventListener("click", () => {
+        active = chip.dataset.cardChip || "all";
+        chips.forEach((item) => {
+          const isActive = item === chip;
+          item.classList.toggle("is-active", isActive);
+          item.setAttribute("aria-pressed", String(isActive));
+        });
+        apply();
+      });
+    });
+
+    if (search) {
+      let timer = 0;
+      search.addEventListener("input", () => {
+        window.clearTimeout(timer);
+        timer = window.setTimeout(apply, 120);
+      });
+      search.addEventListener("search", apply);
+    }
+
+    apply();
+  });
+
+  /* ---------- Share buttons ---------- */
+
+  const copyText = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch (error) {
+      const helper = document.createElement("textarea");
+      helper.value = text;
+      helper.setAttribute("readonly", "");
+      helper.style.position = "fixed";
+      helper.style.opacity = "0";
+      document.body.appendChild(helper);
+      helper.select();
+      const copied = document.execCommand("copy");
+      document.body.removeChild(helper);
+      return copied;
+    }
+  };
+
+  document.querySelectorAll("[data-share]").forEach((button) => {
+    button.addEventListener("click", async () => {
+      const network = button.dataset.share;
+      const url = button.dataset.shareUrl || window.location.href;
+      const title = button.dataset.shareTitle || document.title;
+
+      if (network === "copy") {
+        const copied = await copyText(url);
+        if (copied) {
+          button.classList.add("is-copied");
+          const previous = button.getAttribute("aria-label") || "";
+          button.setAttribute("aria-label", "Link copied");
+          window.setTimeout(() => {
+            button.classList.remove("is-copied");
+            button.setAttribute("aria-label", previous);
+          }, 1600);
+        }
+        return;
+      }
+
+      if (network === "native" && navigator.share) {
+        try {
+          await navigator.share({ title, text: title, url });
+          return;
+        } catch (error) {
+          if (error && error.name === "AbortError") return;
+        }
+      }
+
+      const encodedUrl = encodeURIComponent(url);
+      const encodedTitle = encodeURIComponent(title);
+      const links = {
+        whatsapp: "https://wa.me/?text=" + encodedTitle + "%20" + encodedUrl,
+        facebook:
+          "https://www.facebook.com/sharer/sharer.php?u=" + encodedUrl,
+        x:
+          "https://x.com/intent/tweet?text=" +
+          encodedTitle +
+          "&url=" +
+          encodedUrl,
+        telegram:
+          "https://t.me/share/url?url=" +
+          encodedUrl +
+          "&text=" +
+          encodedTitle,
+      };
+
+      if (links[network]) {
+        window.open(links[network], "_blank", "noopener,noreferrer");
+      }
+    });
+  });
+
+  /* ---------- Testimony form ---------- */
+
+  document.querySelectorAll("[data-testimony-form]").forEach((form) => {
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (typeof form.reportValidity === "function" && !form.reportValidity()) {
+        return;
+      }
+
+      const data = new FormData(form);
+      const name = String(data.get("name") || "").trim();
+      const category = String(data.get("category") || "").trim();
+      const testimony = String(data.get("testimony") || "").trim();
+      const number = form.dataset.waNumber || "260974807770";
+
+      const text = [
+        "Hello Shalom Embassy Ministries International,",
+        "",
+        "I would like to share a testimony.",
+        "",
+        "Name: " + (name || "Not shared"),
+        "Category: " + (category || "Testimony"),
+        "",
+        testimony,
+        "",
+        "Sent from the Shalom Embassy website.",
+      ].join("\n");
+
+      const url = "https://wa.me/" + number + "?text=" + encodeURIComponent(text);
+      const popup = window.open(url, "_blank", "noopener,noreferrer");
+      const status = form.querySelector("[data-form-status]");
+      if (status) {
+        status.hidden = false;
+        status.innerHTML =
+          "WhatsApp should open with your testimony ready to send. " +
+          '<a href="' +
+          url +
+          '" target="_blank" rel="noopener noreferrer">Open WhatsApp here</a> ' +
+          "if it does not.";
+      }
+      if (!popup && status) {
+        status.innerHTML =
+          "Your browser blocked the new window. " +
+          '<a href="' +
+          url +
+          '" target="_blank" rel="noopener noreferrer">Tap here to open WhatsApp</a>.';
+      }
+    });
+
+    form.addEventListener("input", () => {
+      const status = form.querySelector("[data-form-status]");
+      if (status) status.hidden = true;
+    });
+  });
+
+  /* ---------- Social invite-card generator ---------- */
+
+  const inviteCanvas = document.getElementById("invite-canvas");
+  const inviteForm = document.querySelector("[data-invite-form]");
+
+  if (inviteCanvas && inviteForm) {
+    const ctx = inviteCanvas.getContext("2d");
+    const W = inviteCanvas.width;
+    const H = inviteCanvas.height;
+    const logo = new Image();
+    let logoReady = false;
+
+    logo.addEventListener("load", () => {
+      logoReady = true;
+      drawInvite();
+    });
+    logo.src = "assets/img/logo-official.png";
+
+    const field = (name) => inviteForm.elements.namedItem(name);
+
+    const roundedRect = (x, y, width, height, radius) => {
+      const r = Math.min(radius, width / 2, height / 2);
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.arcTo(x + width, y, x + width, y + height, r);
+      ctx.arcTo(x + width, y + height, x, y + height, r);
+      ctx.arcTo(x, y + height, x, y, r);
+      ctx.arcTo(x, y, x + width, y, r);
+      ctx.closePath();
+    };
+
+    const wrapLines = (text, maxWidth) => {
+      const words = String(text).split(/\s+/).filter(Boolean);
+      const lines = [];
+      let line = "";
+      words.forEach((word) => {
+        const test = line ? line + " " + word : word;
+        if (ctx.measureText(test).width > maxWidth && line) {
+          lines.push(line);
+          line = word;
+        } else {
+          line = test;
+        }
+      });
+      if (line) lines.push(line);
+      return lines;
+    };
+
+    const drawDots = (startX, startY, cols, rows, gap) => {
+      ctx.fillStyle = "rgba(240, 193, 46, 0.42)";
+      for (let row = 0; row < rows; row += 1) {
+        for (let col = 0; col < cols; col += 1) {
+          ctx.beginPath();
+          ctx.arc(
+            startX + col * gap,
+            startY + row * gap,
+            2.2,
+            0,
+            Math.PI * 2
+          );
+          ctx.fill();
+        }
+      }
+    };
+
+    const formatDate = (value) => {
+      const date = value ? new Date(value + "T12:00:00") : new Date();
+      if (Number.isNaN(date.getTime())) return "Date to be confirmed";
+      return date.toLocaleDateString("en-GB", {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      });
+    };
+
+    function drawInvite() {
+      if (!ctx) return;
+
+      const gatheringField = field("gathering");
+      const dateField = field("date");
+      const nameField = field("name");
+      const gathering = (gatheringField && gatheringField.value) ||
+        "7 Hours of Nothing Missing, Nothing Broken";
+      const dateText = formatDate(dateField ? dateField.value : "");
+      const guest = nameField ? String(nameField.value).trim() : "";
+
+      const background = ctx.createLinearGradient(0, 0, W, H);
+      background.addColorStop(0, "#0b2a4c");
+      background.addColorStop(0.55, "#071a36");
+      background.addColorStop(1, "#041226");
+      ctx.fillStyle = background;
+      ctx.fillRect(0, 0, W, H);
+
+      const glow = ctx.createRadialGradient(860, 180, 0, 860, 180, 620);
+      glow.addColorStop(0, "rgba(226, 180, 44, 0.25)");
+      glow.addColorStop(0.55, "rgba(226, 180, 44, 0.06)");
+      glow.addColorStop(1, "rgba(226, 180, 44, 0)");
+      ctx.fillStyle = glow;
+      ctx.fillRect(0, 0, W, H);
+
+      drawDots(760, 100, 9, 9, 30);
+
+      ctx.strokeStyle = "rgba(240, 193, 46, 0.55)";
+      ctx.lineWidth = 2;
+      roundedRect(42, 42, W - 84, H - 84, 18);
+      ctx.stroke();
+
+      ctx.strokeStyle = "rgba(240, 193, 46, 0.2)";
+      ctx.lineWidth = 1;
+      roundedRect(56, 56, W - 112, H - 112, 12);
+      ctx.stroke();
+
+      ctx.textAlign = "center";
+      ctx.fillStyle = "#f0c12e";
+      ctx.font = "800 21px Arial, sans-serif";
+      ctx.fillText("SHALOM EMBASSY MINISTRIES INTERNATIONAL", W / 2, 142);
+
+      ctx.strokeStyle = "rgba(240, 193, 46, 0.45)";
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(360, 172);
+      ctx.lineTo(720, 172);
+      ctx.stroke();
+
+      ctx.fillStyle = "rgba(255, 255, 255, 0.68)";
+      ctx.font = "700 22px Arial, sans-serif";
+      ctx.fillText("YOU ARE INVITED", W / 2, 268);
+
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "600 52px Georgia, serif";
+      ctx.fillText("I'M ATTENDING", W / 2, 342);
+
+      let titleSize = 86;
+      let titleLines = [];
+      do {
+        ctx.font = "500 " + titleSize + "px Georgia, serif";
+        titleLines = wrapLines(gathering, 880);
+        if (titleLines.length <= 3) break;
+        titleSize -= 6;
+      } while (titleSize > 52);
+
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "500 " + titleSize + "px Georgia, serif";
+      const lineHeight = titleSize * 1.06;
+      const titleTop = 520 - ((titleLines.length - 1) * lineHeight) / 2;
+      titleLines.forEach((line, index) => {
+        ctx.fillText(line, W / 2, titleTop + index * lineHeight);
+      });
+
+      ctx.fillStyle = "#f0c12e";
+      ctx.font = "700 36px Arial, sans-serif";
+      ctx.fillText(dateText.toUpperCase(), W / 2, 742);
+
+      ctx.fillStyle = "rgba(255, 255, 255, 0.72)";
+      ctx.font = "400 27px Arial, sans-serif";
+      ctx.fillText("Plot 995, Garden House, Off Mumbwa Road, Lusaka", W / 2, 800);
+      ctx.fillText("Main Auditorium · Central Africa Time (CAT)", W / 2, 842);
+
+      if (guest) {
+        ctx.fillStyle = "rgba(255, 255, 255, 0.9)";
+        ctx.font = "italic 36px Georgia, serif";
+        ctx.fillText("With " + guest, W / 2, 942);
+      }
+
+      ctx.strokeStyle = "rgba(240, 193, 46, 0.32)";
+      ctx.beginPath();
+      ctx.moveTo(250, 1004);
+      ctx.lineTo(830, 1004);
+      ctx.stroke();
+
+      const cardX = 92;
+      const cardY = 1060;
+      const cardW = 360;
+      const cardH = 132;
+      ctx.fillStyle = "#f8f1e3";
+      roundedRect(cardX, cardY, cardW, cardH, 12);
+      ctx.fill();
+
+      if (logoReady) {
+        const maxW = cardW - 34;
+        const maxH = cardH - 30;
+        const ratio = Math.min(maxW / logo.width, maxH / logo.height);
+        const drawW = logo.width * ratio;
+        const drawH = logo.height * ratio;
+        ctx.drawImage(
+          logo,
+          cardX + (cardW - drawW) / 2,
+          cardY + (cardH - drawH) / 2,
+          drawW,
+          drawH
+        );
+      } else {
+        ctx.fillStyle = "#071a36";
+        ctx.font = "700 22px Arial, sans-serif";
+        ctx.fillText("SHALOM EMBASSY", cardX + cardW / 2, cardY + 74);
+      }
+
+      ctx.textAlign = "left";
+      ctx.fillStyle = "rgba(255, 255, 255, 0.88)";
+      ctx.font = "700 25px Arial, sans-serif";
+      ctx.fillText("Nothing missing.", 492, 1108);
+      ctx.fillText("Nothing broken.", 492, 1148);
+      ctx.fillStyle = "rgba(240, 193, 46, 0.82)";
+      ctx.font = "400 20px Arial, sans-serif";
+      ctx.fillText("Judges 6:24", 492, 1182);
+
+      ctx.textAlign = "center";
+      ctx.fillStyle = "rgba(255, 255, 255, 0.46)";
+      ctx.font = "600 18px Arial, sans-serif";
+      ctx.fillText("APOSTLE SUNDAY SINYANGWE  ·  PASTOR BUPE SINYANGWE", W / 2, 1248);
+    }
+
+    inviteForm.addEventListener("input", drawInvite);
+    inviteForm.addEventListener("change", drawInvite);
+    drawInvite();
+
+    const downloadButton = inviteForm.querySelector("[data-invite-download]");
+    if (downloadButton) {
+      downloadButton.addEventListener("click", () => {
+        const link = document.createElement("a");
+        link.download = "shalom-embassy-invite.png";
+        link.href = inviteCanvas.toDataURL("image/png");
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
+    }
+
+    const shareButton = inviteForm.querySelector("[data-invite-share]");
+    if (shareButton) {
+      shareButton.addEventListener("click", () => {
+        const gatheringField = field("gathering");
+        const dateField = field("date");
+        const nameField = field("name");
+        const gathering = (gatheringField && gatheringField.value) || "our gathering";
+        const dateText = formatDate(dateField ? dateField.value : "");
+        const guest = nameField ? String(nameField.value).trim() : "";
+        const message =
+          (guest ? guest + " invites you to " : "You are invited to ") +
+          gathering +
+          " on " +
+          dateText +
+          " at Shalom Embassy Ministries International, Plot 995, Garden House, Lusaka. Nothing missing. Nothing broken.";
+
+        inviteCanvas.toBlob(async (blob) => {
+          if (!blob) return;
+          const file = new File([blob], "shalom-embassy-invite.png", {
+            type: "image/png",
+          });
+          if (
+            navigator.canShare &&
+            navigator.canShare({ files: [file] }) &&
+            navigator.share
+          ) {
+            try {
+              await navigator.share({
+                files: [file],
+                title: "Shalom Embassy invitation",
+                text: message,
+              });
+              return;
+            } catch (error) {
+              if (error && error.name === "AbortError") return;
+            }
+          }
+          window.open(
+            "https://wa.me/?text=" + encodeURIComponent(message),
+            "_blank",
+            "noopener,noreferrer"
+          );
+        }, "image/png");
+      });
+    }
+  }
 
   /* ---------- Current year ---------- */
 

@@ -189,3 +189,34 @@ Before launch:
 ---
 
 Built for the glory of God — **Nothing missing. Nothing broken.**
+
+
+## 2026 feature upgrade (parity with the Dunamis 30th anniversary site)
+
+New pages and modules added in 2026, built without copying Dunamis pastors or
+photography. Everything uses Shalom Embassy's own information and official
+imagery.
+
+- `impact.html` - "17 years of impact" with verified milestones and a 6-card
+  impact grid.
+- `stories.html` - real testimonies from the official YouTube channel, with
+  search/filter, share buttons, and a WhatsApp testimony form.
+- `gallery.html` - searchable/filterable photo gallery with lightbox.
+- `contact.html` - faithful "Follow us" 3-card module after the service times.
+- `gatherings.html` - social invitation-card generator (canvas, 1080x1350).
+- `index.html` - anniversary ticker, stories preview, FAQ preview, and a
+  photo marquee.
+
+Navigation is now Home, About, Sermons, Gatherings, Impact, Stories, Give,
+Contact. Library remains in the footer, which also links Impact, Stories,
+Gallery, and Plan a visit.
+
+Shared cache version bumped to `?v=embassy2` across all pages. No build step
+is required; CSS was appended manually to both `styles.css` and
+`styles.min.css`.
+
+Verified Shalom Embassy facts used throughout: founded 9 March 2009; 17 years
+in 2026; 21+ branches; 1,500+ messages; 294K+ online family; headquarters at
+Plot 995, Garden House, Off Mumbwa Road, Behind Livonia Shopping Complex,
+Lusaka, Zambia. The phrase "Sons of the Prophet" is not used anywhere on
+the site.

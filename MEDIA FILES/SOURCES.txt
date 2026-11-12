@@ -143,3 +143,42 @@ Prayer line: +260 974 807 770
 Church office: +260 977 846 660
 Address: Behind Livonia Complex, Off Mumbwa Road, Garden House,
          Lusaka, Zambia
+
+
+2026 FEATURE UPGRADE (impact, stories, gallery, follow, invite)
+---------------------------------------------------------------
+New pages and modules added in 2026:
+  impact.html   - "17 years of impact" with verified milestones
+  stories.html  - testimony archive with search/filter and WhatsApp form
+  gallery.html  - searchable/filterable photo gallery with lightbox
+
+Official YouTube testimony videos used on stories.html (watch URLs):
+  ZqD414u0My8 - TESTIMONY TIME, "I GOT 6 POINTS"
+  ZKItIU2GcIc - TESTIMONY GLORY BE TO GOD
+  aI0PCeclZBQ - A TESTIMONY OF FAITH, PERSISTENCE & DIVINE INTERVENTION!!
+  sBN8a5VYhXY - TESTIMONY OF DIVINE TURNAROUND
+  JEaLV22kwL4 - When death tried to take her, God preserved her.
+  rhaNffYa0xI - Miraculous Safe Delivery: Mrs. Clara Chibwe's Anointing Oil Experience
+  s_YkzCm5IsE - Healed...AFTER 7 YEARS OF EPILEPSY
+  8hrpt7wv9lE - Former Footballer Healed from Career-Ending Injury
+  HvxDnmC83WY - Prayer Book Leads to Child's Holy Ghost Baptism (thumbnail via hqdefault)
+
+Fresh official photography downloaded from the church's YouTube thumbnails
+and optimized into assets/img and assets/img/opt (WebP + AVIF responsive sets):
+  power-supply (5GGjwFaH8uM), worship-deep (ey2jrizUceY), altar-honour (6dwCmvhVqNw),
+  revival-fire (JjcGamEqUxo), anniversary-day2 (Aqw-9dJpqN8), anniversary-day3 (SImK4jEk3T8),
+  story-six-points (ZqD414u0My8), story-glory (ZKItIU2GcIc), story-persistence (aI0PCeclZBQ),
+  story-turnaround (sBN8a5VYhXY), story-preserved (JEaLV22kwL4), story-safe-delivery (rhaNffYa0xI),
+  story-epilepsy (s_YkzCm5IsE), story-footballer (8hrpt7wv9lE), story-holy-ghost (HvxDnmC83WY)
+
+Note: anniversary-day2 and anniversary-day3 are identical source frames; day3 is retained
+only for backward compatibility and is not used in the new pages.
+
+History and counts used (verified against the church's own publications and channels):
+  Founded 9 March 2009 in Kanyama, Lusaka, by Apostle Dr. Sunday Sinyangwe and
+  Pastor Bupe Lumbwa Sinyangwe. 17th anniversary celebrated March 2026.
+  Headquarters: Plot 995, Garden House, Off Mumbwa Road, Behind Livonia Shopping
+  Complex, Lusaka, Zambia. 21+ branches. 1,500+ messages. 294K+ online family.
+  Spiritual heritage: Apostle Sunday is a spiritual son of Dr. Pastor Paul Enenche
+  (Dunamis International Gospel Centre, Abuja). No "Sons of the Prophet" wording
+  is used anywhere on the site.

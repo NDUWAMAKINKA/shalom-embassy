@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Gatherings & Services | Shalom Embassy Ministries International</title>
   <meta name="description" content="Join us for the monthly 7 Hours of Nothing Missing, Nothing Broken, quarterly Big Sunday, Wednesday Midweek Service and Night of Solution, Thursday Healing &amp; Deliverance, and our weekly gatherings at Shalom Embassy Ministries International in Lusaka.">
-  <meta name="theme-color" content="#071a36">
-  <meta name="author" content="Shalom Embassy Ministries International">
+  <link rel="canonical" href="https://nduwamakinka.github.io/shalom-embassy/gatherings.html">
+  <meta name="theme-color" content="#080808">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Shalom Embassy Ministries International">
   <meta property="og:title" content="Gatherings &amp; Services | Shalom Embassy Ministries International">
@@ -18,91 +18,139 @@
   <meta name="twitter:title" content="Gatherings &amp; Services | Shalom Embassy Ministries International">
   <meta name="twitter:description" content="Join us at Plot 995, Garden House, Off Mumbwa Road, Lusaka for the monthly 7 Hours healing and deliverance service, quarterly Big Sunday, Morning Glory, Virtuous Women, Midweek Service, Night of Solution, and Thursday Healing &amp; Deliverance.">
   <meta name="twitter:image" content="https://nduwamakinka.github.io/shalom-embassy/assets/img/og-image.jpg">
-  <link rel="canonical" href="https://nduwamakinka.github.io/shalom-embassy/gatherings.html">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="assets/img/logo-official-128.png" sizes="128x128" type="image/png">
+  <link rel="icon" type="image/png" href="assets/img/logo-official-128.png">
   <link rel="apple-touch-icon" href="assets/img/logo-official-128.png">
-  <link rel="preload" href="assets/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" as="image" type="image/avif" href="assets/img/opt/congregation-close-960.avif" imagesrcset="assets/img/opt/congregation-close-320.avif 320w, assets/img/opt/congregation-close-480.avif 480w, assets/img/opt/congregation-close-640.avif 640w, assets/img/opt/congregation-close-960.avif 960w, assets/img/opt/congregation-close-1200.avif 1200w" imagesizes="100vw" fetchpriority="high">
-  <link rel="preload" as="script" href="assets/js/main.js?v=library1">
-  <link rel="stylesheet" href="assets/css/styles.min.css?v=library1">
-  <script>document.documentElement.classList.add('js');</script>
-  
+  <link rel="preload" href="assets/img/congregation-close.webp" as="image" type="image/webp">
+  <link rel="stylesheet" href="assets/css/fonts.css?v=embassy4">
+  <link rel="stylesheet" href="assets/css/rpa30.css?v=embassy4">
+  <script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js');</script>
+  <style>
+    .calendar-nav { display:flex; align-items:center; gap:10px; }
+    .calendar-nav__btn { min-width:34px; min-height:34px; border:1px solid var(--line); border-radius:999px; background:rgba(255,255,255,.04); color:var(--fg); cursor:pointer; font-size:16px; line-height:1; }
+    .calendar-nav__label { color:var(--gold-light); font-weight:600; font-size:13px; }
+    .calendar { border:1px solid var(--hair); border-radius:var(--radius); padding:16px; background:var(--surface); }
+    .calendar__weekdays { display:grid; grid-template-columns:repeat(7,1fr); gap:6px; margin-bottom:8px; color:var(--muted); font-size:11px; text-transform:uppercase; letter-spacing:.08em; }
+    .calendar__grid { display:grid; grid-template-columns:repeat(7,1fr); gap:6px; }
+    .calendar__day { min-height:56px; border:1px solid var(--hair); border-radius:8px; padding:6px; background:#0b0b0b; }
+    .calendar__day--empty { background:transparent; border-color:transparent; }
+    .calendar__day--special { border-color:rgba(240,169,43,.45); }
+    .calendar__day--sunday { background:rgba(240,169,43,.04); }
+    .calendar__day-num { display:block; font-size:12px; color:var(--fg); }
+    .calendar__dots { display:flex; gap:4px; margin-top:6px; flex-wrap:wrap; }
+    .calendar__dot { width:7px; height:7px; border-radius:50%; background:var(--muted); display:inline-block; }
+    .calendar__dot--special { background:var(--gold); }
+    .calendar__dot--weekly { background:var(--gold-light); }
+    .calendar__legend { margin-top:10px; color:var(--muted); font-size:11px; display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+    .schedule-upcoming { margin-top:24px; }
+    .event-grid { display:grid; gap:16px; grid-template-columns:1fr; }
+    .event-card { border:1px solid var(--hair); border-radius:var(--radius); padding:16px; background:var(--surface); }
+    .event-card__body { display:grid; gap:8px; }
+    .event-card__date { color:var(--gold-light); font-size:11.5px; display:flex; align-items:center; gap:6px; }
+    .event-card__body h3 { font-size:1.05rem; margin:0; }
+    .feed-event__meta { display:flex; flex-wrap:wrap; gap:10px; color:var(--muted); font-size:11px; align-items:center; }
+    .schedule-card__recurrence { color:var(--muted); font-size:10.5px; }
+    .schedule-card__note { margin-left:8px; color:var(--muted); font-size:10.5px; }
+    @media (min-width:760px){ .event-grid { grid-template-columns:repeat(2,1fr);} }
+    @media (min-width:1024px){ .event-grid { grid-template-columns:repeat(3,1fr);} }
+  </style>
 </head>
-<body class="page-gatherings">
-<svg xmlns="http://www.w3.org/2000/svg" class="svg-sprite" aria-hidden="true" focusable="false"><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4.5 12h15M13 5.5l6.5 6.5-6.5 6.5"/></symbol><symbol id="i-arrow-up-right" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol><symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5 18.5 12 8 18.5v-13Z" fill="currentColor" stroke="none"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10.2c0 5.8-8 11.8-8 11.8S4 16 4 10.2a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.8"/></symbol><symbol id="i-phone" viewBox="0 0 24 24"><path d="M21.7 16.7v3a2 2 0 0 1-2.2 2 19.6 19.6 0 0 1-8.5-3 19.3 19.3 0 0 1-5.9-5.9 19.6 19.6 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.4 2.1L8.1 9.6a15.8 15.8 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.4c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2.1Z"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></symbol><symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="17" rx="2"/><path d="M16 2.5v4M8 2.5v4M3 10h18"/></symbol><symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></symbol><symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 4.7a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.5 1-1a5.5 5.5 0 0 0 0-7.8Z"/></symbol><symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></symbol><symbol id="i-music" viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></symbol><symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 22c4 0 7-2.7 7-6.5 0-2.4-1.4-4.4-3-6.2-1.2-1.4-2.4-2.8-3-4.8-.2-.7-1.1-.8-1.4-.1-.8 2.2-2 3.9-3.2 5.4C6.6 11.7 5 13.5 5 15.5 5 19.3 8 22 12 22Z"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2.5 3 6.1 6.8 1-4.9 4.8 1.2 6.8L12 17.9l-6.1 3.3 1.2-6.8-4.9-4.8 6.8-1 3-6.1Z"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="m20 6-11 11-5-5"/></symbol><symbol id="i-cross" viewBox="0 0 24 24"><path d="M12 2v20M5.5 8h13"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></symbol><symbol id="i-external" viewBox="0 0 24 24"><path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol><symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></symbol><symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></symbol><symbol id="i-gift" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M5 12v9h14v-9"/><path d="M12 8H7.5a2.5 2.5 0 1 1 0-5C11 3 12 8 12 8ZM12 8h4.5a2.5 2.5 0 1 0 0-5C13 3 12 8 12 8Z"/></symbol><symbol id="i-expand" viewBox="0 0 24 24"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol><symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol><symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z"/></symbol><symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol><symbol id="i-facebook" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3V2Z" fill="currentColor" stroke="none"/></symbol><symbol id="i-instagram" viewBox="0 0 24 24"><rect x="2.5" y="2.5" width="19" height="19" rx="5"/><path d="M16 11.4A4 4 0 1 1 12.6 8 4 4 0 0 1 16 11.4Z"/><path d="M17.5 6.5h.01"/></symbol><symbol id="i-youtube" viewBox="0 0 24 24"><path d="M22.5 6.4a2.8 2.8 0 0 0-2-2C18.8 4 12 4 12 4s-6.8 0-8.5.4a2.8 2.8 0 0 0-2 2A29 29 0 0 0 1 12a29 29 0 0 0 .5 5.6 2.8 2.8 0 0 0 2 2C5.2 20 12 20 12 20s6.8 0 8.5-.4a2.8 2.8 0 0 0 2-2A29 29 0 0 0 23 12a29 29 0 0 0-.5-5.6Z"/><path d="m10 15 5-3-5-3v6Z" fill="currentColor" stroke="none"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18.9 2H22l-7.3 8.3L23 22h-6.8l-5.3-6.9L4.8 22H1.7l7.8-8.9L1 2h7l4.8 6.4L18.9 2Z" fill="currentColor" stroke="none"/></symbol><symbol id="i-telegram" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></symbol><symbol id="i-whatsapp" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.4L3 21l2.2-5.6A8.5 8.5 0 1 1 21 11.5Z"/><path d="M8.4 8.3c.2 3.2 2.1 5.1 5.3 5.3l1.2-1.4 2.1 1.1c-.5 1.5-1.8 2.4-3.4 2.2-3.8-.4-6.8-3.4-7.2-7.2-.2-1.6.7-2.9 2.2-3.4l1.1 2.1-1.3 1.3Z" fill="currentColor" stroke="none"/></symbol></svg>
-<a class="skip-link" href="#main">Skip to content</a>
-<div class="site-topbar">
-  <div class="container topbar__inner">
-    <p class="topbar__verse"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-star"></use></svg> “Nothing missing. Nothing broken.” — Judges 6:24</p>
-    <div class="topbar__links">
-      <a href="tel:+260974807770"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-phone"></use></svg> Prayer line: +260 974 807 770</a>
-      <span class="topbar__divider" aria-hidden="true"></span>
-      <a class="topbar__location" href="contact.html#visit"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-pin"></use></svg> Lusaka, Zambia</a>
-    </div>
-  </div>
-</div><header class="site-header" id="site-header">
-  <div class="container header__inner">
-    <a class="brand " href="index.html" aria-label="Shalom Embassy Ministries International — home">
-  <picture><source type="image/avif" srcset="assets/img/opt/logo-official-160.avif 160w, assets/img/opt/logo-official-240.avif 240w, assets/img/opt/logo-official-320.avif 320w, assets/img/opt/logo-official-480.avif 480w" sizes="160px"><source type="image/webp" srcset="assets/img/opt/logo-official-160.webp 160w, assets/img/opt/logo-official-240.webp 240w, assets/img/opt/logo-official-320.webp 320w, assets/img/opt/logo-official-480.webp 480w" sizes="160px"><img class="brand__logo" src="assets/img/logo-official.webp?v=hd" alt="Shalom Embassy Ministries International" width="480" height="198" loading="eager" decoding="async" fetchpriority="high"></picture>
-</a>
-    <nav class="nav" id="primary-nav" aria-label="Primary navigation">
-      <ul class="nav__list">
-        <li><a class="nav__link" href="index.html">Home</a></li><li><a class="nav__link" href="about.html">About</a></li><li><a class="nav__link" href="sermons.html">Sermons</a></li><li><a class="nav__link" href="sermons.html#books">Library</a></li><li><a class="nav__link" href="gatherings.html" aria-current="page">Gatherings</a></li><li><a class="nav__link" href="give.html">Give</a></li><li><a class="nav__link" href="contact.html">Contact</a></li>
-      </ul>
-      <div class="nav__mobile-cta">
-        <a class="btn btn--gold" href="contact.html#visit">Plan a visit <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></a>
-        <a class="btn btn--ghost-light" href="tel:+260974807770"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-phone"></use></svg> Prayer line</a>
-      </div>
+<body data-page="gatherings">
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+<svg xmlns="http://www.w3.org/2000/svg" class="svg-sprite" aria-hidden="true" focusable="false"><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4.5 12h15M13 5.5l6.5 6.5-6.5 6.5"/></symbol><symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="17" rx="2"/><path d="M16 2.5v4M8 2.5v4M3 10h18"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10.2c0 5.8-8 11.8-8 11.8S4 16 4 10.2a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.8"/></symbol></svg>
+
+<header class="site-header" data-site-header>
+  <div class="nav-shell">
+    <a class="brand" href="index.html" aria-label="Shalom Embassy Ministries International home">
+      <span class="brand__mark"><img src="assets/img/logo-official.png" alt="" width="38" height="38"></span>
+      <span class="brand__text">
+        <span class="brand__name">Shalom Embassy</span>
+        <span class="brand__sub">Ministries International</span>
+      </span>
+    </a>
+
+    <nav class="nav-primary" aria-label="Primary">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="about.html">About</a>
+      <a class="nav-link" href="senior-pastor.html">Senior Pastor</a>
+      <a class="nav-link" href="sermons.html">Sermons</a>
+      <a class="nav-link" href="gatherings.html" aria-current="page">Gatherings</a>
+      <a class="nav-link" href="impact.html">Impact</a>
+      <a class="nav-link" href="stories.html">Stories</a>
+      <a class="nav-link" href="give.html">Give</a>
+      <a class="nav-link" href="gallery.html">Gallery</a>
+      <a class="nav-link" href="contact.html">Contact</a>
     </nav>
-    <div class="header__actions">
-      <div class="lang-switcher" data-lang-switcher>
-        <button class="lang-toggle" type="button" data-lang-toggle aria-expanded="false" aria-haspopup="listbox" aria-controls="lang-menu">
-          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-globe"></use></svg>
-          <span class="lang-toggle__current" data-lang-current>English</span>
-          <svg class="icon lang-toggle__chevron" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg>
-        </button>
-        <div class="lang-menu" id="lang-menu" data-lang-menu role="listbox" aria-label="Select language" hidden>
-          <p class="lang-group" role="presentation"><span class="lang-flag lang-flag--zambia" aria-hidden="true"></span> Zambian languages</p>
-          <button type="button" role="option" data-lang="bem" aria-selected="false"><span class="lang-option-main"><span>Bemba</span></span></button>
-          <button type="button" role="option" data-lang="nya" aria-selected="false"><span class="lang-option-main"><span>Nyanja</span></span></button>
-          <button type="button" role="option" data-lang="toi" aria-selected="false"><span class="lang-option-main"><span>Tonga</span></span></button>
-          <button type="button" role="option" data-lang="loz" aria-selected="false"><span class="lang-option-main"><span>Lozi</span></span></button>
-          <button type="button" role="option" data-lang="tum" aria-selected="false"><span class="lang-option-main"><span>Tumbuka</span></span></button>
-          <p class="lang-group" role="presentation">World languages</p>
-          <button type="button" role="option" data-lang="en" aria-selected="true"><span class="lang-option-main"><span class="lang-flag lang-flag--united-kingdom" aria-hidden="true"></span> <span>English</span></span></button>
-          <button type="button" role="option" data-lang="hi" aria-selected="false"><span class="lang-option-main"><span class="lang-flag lang-flag--india" aria-hidden="true"></span> <span>हिन्दी</span></span></button>
-          <button type="button" role="option" data-lang="fr" aria-selected="false"><span class="lang-option-main"><span class="lang-flag lang-flag--france" aria-hidden="true"></span> <span>Français</span></span></button>
-          <button type="button" role="option" data-lang="de" aria-selected="false"><span class="lang-option-main"><span class="lang-flag lang-flag--germany" aria-hidden="true"></span> <span>Deutsch</span></span></button>
-          <button type="button" role="option" data-lang="it" aria-selected="false"><span class="lang-option-main"><span class="lang-flag lang-flag--italy" aria-hidden="true"></span> <span>Italiano</span></span></button>
-          <button type="button" role="option" data-lang="pt" aria-selected="false"><span class="lang-option-main"><span class="lang-flag lang-flag--portugal" aria-hidden="true"></span> <span>Português</span></span></button>
-          <button type="button" role="option" data-lang="ru" aria-selected="false"><span class="lang-option-main"><span class="lang-flag lang-flag--russia" aria-hidden="true"></span> <span>Русский</span></span></button>
-          <button type="button" role="option" data-lang="es" aria-selected="false"><span class="lang-option-main"><span class="lang-flag lang-flag--spain" aria-hidden="true"></span> <span>Español</span></span></button>
-        </div>
-      </div>
+
+    <div class="nav-actions">
+      <div class="rpai-lang-switcher notranslate" data-rpai-lang-switcher translate="no">
+      					<button type="button" class="rpai-lang-toggle" data-rpai-lang-toggle aria-expanded="false" aria-haspopup="listbox" aria-controls="rpai-lang-menu" aria-label="Select language">
+      						<span class="rpai-lang-globe" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3Z"/></svg></span>
+      						<span class="rpai-lang-current" data-rpai-lang-current>English</span>
+      						<span class="rpai-lang-chevron" aria-hidden="true"></span>
+      					</button>
+      					<div class="rpai-lang-menu" id="rpai-lang-menu" data-rpai-lang-menu role="listbox" aria-label="Select language" hidden>
+      						<p class="rpai-lang-group" role="presentation"><img src="assets/img/flag-zm.svg" alt="" aria-hidden="true" width="20" height="14" loading="lazy" decoding="async"> <span data-i18n="lang.zambian">Zambian languages</span></p>
+      						<button type="button" role="option" data-lang="bem" aria-selected="false"> Bemba</button>
+      						<button type="button" role="option" data-lang="nya" aria-selected="false"> Nyanja</button>
+      						<button type="button" role="option" data-lang="toi" aria-selected="false"> Tonga</button>
+      						<button type="button" role="option" data-lang="loz" aria-selected="false"> Lozi</button>
+      						<button type="button" role="option" data-lang="tum" aria-selected="false"> Tumbuka</button>
+      						<p class="rpai-lang-group" role="presentation" data-i18n="lang.world">World languages</p>
+      					<button type="button" role="option" data-lang="en" aria-selected="true"><img src="assets/img/flag-gb.svg" alt="" aria-hidden="true" width="20" height="14" loading="lazy" decoding="async"> English</button>
       
-      <a class="btn btn--gold btn--sm" href="contact.html#visit">Plan a visit <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
-        <span class="nav-toggle__lines" aria-hidden="true"><span></span><span></span><span></span></span>
-        <span class="sr-only">Open menu</span>
+      <button type="button" role="option" data-lang="hi" aria-selected="false"><img src="assets/img/flag-in.svg" alt="" aria-hidden="true" width="20" height="14" loading="lazy" decoding="async"> Hindi</button>
+      
+      <button type="button" role="option" data-lang="fr" aria-selected="false"><img src="assets/img/flag-fr.svg" alt="" aria-hidden="true" width="20" height="14" loading="lazy" decoding="async"> French</button>
+      
+      <button type="button" role="option" data-lang="de" aria-selected="false"><img src="assets/img/flag-de.svg" alt="" aria-hidden="true" width="20" height="14" loading="lazy" decoding="async"> German</button>
+      
+      <button type="button" role="option" data-lang="it" aria-selected="false"><img src="assets/img/flag-it.svg" alt="" aria-hidden="true" width="20" height="14" loading="lazy" decoding="async"> Italian</button>
+      
+      <button type="button" role="option" data-lang="pt" aria-selected="false"><img src="assets/img/flag-pt.svg" alt="" aria-hidden="true" width="20" height="14" loading="lazy" decoding="async"> Portuguese</button>
+      
+      <button type="button" role="option" data-lang="ru" aria-selected="false"><img src="assets/img/flag-ru.svg" alt="" aria-hidden="true" width="20" height="14" loading="lazy" decoding="async"> Russian</button>
+      
+      <button type="button" role="option" data-lang="es" aria-selected="false"><img src="assets/img/flag-es.svg" alt="" aria-hidden="true" width="20" height="14" loading="lazy" decoding="async"> Spanish</button>
+      
+      					</div>
+      				</div>
+      <a class="btn btn-primary btn-sm nav-cta" href="contact.html#visit">Plan a visit</a>
+      <button class="nav-burger" type="button" data-nav-toggle aria-expanded="false" aria-controls="nav-panel" aria-label="Open menu">
+        <span class="nav-burger__box" aria-hidden="true"><span></span><span></span><span></span></span>
       </button>
+    </div>
+
+    <div class="nav-panel" id="nav-panel" data-nav-panel>
+      <p class="nav-panel__group">Explore</p>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="senior-pastor.html">Senior Pastor</a>
+      <a href="sermons.html">Sermons</a>
+      <a href="gatherings.html" aria-current="page">Gatherings</a>
+      <a href="impact.html">Impact</a>
+      <a href="stories.html">Stories</a>
+      <a href="gallery.html">Gallery</a>
+      <p class="nav-panel__group">Take part</p>
+      <a href="give.html">Give</a>
+      <a href="contact.html">Contact</a>
+      <a class="nav-panel__cta" href="contact.html#visit">Plan a visit</a>
     </div>
   </div>
 </header>
-<div class="nav-backdrop" data-nav-backdrop aria-hidden="true"></div><main id="main">
+
+<main id="main">
+
 <section class="page-hero">
-  <div class="page-hero__media">
-    <picture><source type="image/avif" srcset="assets/img/opt/congregation-close-320.avif 320w, assets/img/opt/congregation-close-480.avif 480w, assets/img/opt/congregation-close-640.avif 640w, assets/img/opt/congregation-close-960.avif 960w, assets/img/opt/congregation-close-1200.avif 1200w" sizes="100vw"><source type="image/webp" srcset="assets/img/opt/congregation-close-320.webp 320w, assets/img/opt/congregation-close-480.webp 480w, assets/img/opt/congregation-close-640.webp 640w, assets/img/opt/congregation-close-960.webp 960w, assets/img/opt/congregation-close-1200.webp 1200w" sizes="100vw"><img src="assets/img/congregation-close.webp?v=hd" alt="The Shalom Embassy congregation listening to the Word" width="1200" height="800" loading="eager" decoding="async" fetchpriority="high"></picture>
-  </div>
-  <div class="page-hero__overlay" aria-hidden="true"></div>
-  <div class="container page-hero__inner">
-    <nav class="breadcrumb" aria-label="Breadcrumb">
-      <a href="index.html">Home</a><span aria-hidden="true">/</span><span aria-current="page">Gatherings</span>
-    </nav>
-    <p class="eyebrow eyebrow--light">Gatherings</p>
-    <h1>Come expecting.<br><em>Leave whole.</em></h1>
-    <p class="page-hero__lead">There is a rhythm to life at Shalom Embassy — worship, the Word, prayer, and waiting on God together. Find your place in the family.</p>
+  <img class="page-hero__bg" src="assets/img/congregation-close.webp" alt="" aria-hidden="true" width="1200" height="800" fetchpriority="high" decoding="async">
+  <span class="page-hero__ticks" aria-hidden="true"></span>
+  <div class="container">
+    <div class="page-hero__inner reveal">
+      <p class="page-hero__eyebrow">Gatherings</p>
+      <h1 class="h1">Come expecting.<br>Leave whole.</h1>
+      <p class="page-hero__lead">There is a rhythm to life at Shalom Embassy — worship, the Word, prayer, and waiting on God together. Find your place in the family.</p>
+      <div class="page-hero__actions"><a class="btn btn-primary" href="contact.html#visit">Plan your visit</a><a class="btn btn-outline" href="#calendar">View calendar</a></div>
+    </div>
   </div>
 </section>
 
@@ -110,149 +158,137 @@
   <div class="container">
     <div class="section-head section-head--center reveal">
       <p class="eyebrow">Throughout the week</p>
-      <h2>Our weekly gatherings.</h2>
-      <p>Connect with us throughout the week at Shalom Embassy Headquarters in Garden House, Lusaka, and across our 21+ branch churches.</p>
+      <h2 class="h2">Our weekly gatherings.</h2>
+      <p class="lead">Connect with us throughout the week at Shalom Embassy Headquarters in Garden House, Lusaka, and across our 21+ branch churches.</p>
     </div>
 
-    <div class="weekly-grid">
-      <article class="weekly-card weekly-card--highlight reveal">
-        <div class="weekly-card__icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-heart"></use></svg></div>
-        <span class="weekly-card__day">Every Last Sunday</span>
-        <h3>7 Hours of Nothing Missing, Nothing Broken</h3>
-        <p>A seven-hour healing and deliverance service on the last Sunday of every month. Come expectant for worship, the Word, prophetic prayer, and ministry to the whole family.</p>
-        <p class="weekly-card__time"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg> 07:00 — 14:00 CAT</p>
-        <p class="weekly-card__place">Main Auditorium · Plot 995, Garden House, Off Mumbwa Road</p>
+    <div class="grid grid-3">
+      <article class="card card--pad reveal">
+        <p class="card__label">Every Last Sunday</p>
+        <h3 class="card__title">7 Hours of Nothing Missing, Nothing Broken</h3>
+        <p class="card__text">A seven-hour healing and deliverance service on the last Sunday of every month. Come expectant for worship, the Word, prophetic prayer, and ministry to the whole family.</p>
+        <p class="small mt-2"><strong>07:00 — 14:00 CAT</strong> · Main Auditorium · Plot 995, Garden House, Off Mumbwa Road</p>
       </article>
 
-      <article class="weekly-card reveal" style="--reveal-delay:.08s">
-        <div class="weekly-card__icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-sun"></use></svg></div>
-        <span class="weekly-card__day">Quarterly</span>
-        <h3>Big Sunday</h3>
-        <p>Our quarterly gathering of the whole church family for a full day of worship, the Word, prophetic prayer, healing, and deliverance.</p>
-        <p class="weekly-card__time"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg> 07:00 — 14:00 CAT · Quarterly</p>
-        <p class="weekly-card__place">Main Auditorium · Plot 995, Garden House, Off Mumbwa Road</p>
+      <article class="card card--pad reveal">
+        <p class="card__label">Quarterly</p>
+        <h3 class="card__title">Big Sunday</h3>
+        <p class="card__text">Our quarterly gathering of the whole church family for a full day of worship, the Word, prophetic prayer, healing, and deliverance.</p>
+        <p class="small mt-2"><strong>07:00 — 14:00 CAT</strong> · Quarterly · Main Auditorium · Plot 995, Garden House, Off Mumbwa Road</p>
       </article>
 
-      <article class="weekly-card reveal" style="--reveal-delay:.16s">
-        <div class="weekly-card__icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-star"></use></svg></div>
-        <span class="weekly-card__day">First Week of Every Month</span>
-        <h3>Empowerment Sunday</h3>
-        <p>Our monthly empowerment service on the first Sunday of every month — a full day of worship, the Word, and prayer for every area of your life.</p>
-        <p class="weekly-card__time"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg> 07:00 — 14:00 CAT</p>
-        <p class="weekly-card__place">Main Auditorium · Plot 995, Garden House, Off Mumbwa Road</p>
+      <article class="card card--pad reveal">
+        <p class="card__label">First Week of Every Month</p>
+        <h3 class="card__title">Empowerment Sunday</h3>
+        <p class="card__text">Our monthly empowerment service on the first Sunday of every month — a full day of worship, the Word, and prayer for every area of your life.</p>
+        <p class="small mt-2"><strong>07:00 — 14:00 CAT</strong> · Main Auditorium · Plot 995, Garden House, Off Mumbwa Road</p>
       </article>
 
-      <article class="weekly-card reveal">
-        <div class="weekly-card__icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-music"></use></svg></div>
-        <span class="weekly-card__day">First Week of Every Month</span>
-        <h3>My Worship My Weapon 4</h3>
-        <p>Our monthly worship encounter on the first Friday of every month — a night of deep worship, ministration, and encounter with the presence of God.</p>
-        <p class="weekly-card__time"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg> 21:00 CAT</p>
-        <p class="weekly-card__place">Main Auditorium · Plot 995, Garden House, Off Mumbwa Road</p>
+      <article class="card card--pad reveal">
+        <p class="card__label">First Week of Every Month</p>
+        <h3 class="card__title">My Worship My Weapon 4</h3>
+        <p class="card__text">Our monthly worship encounter on the first Friday of every month — a night of deep worship, ministration, and encounter with the presence of God.</p>
+        <p class="small mt-2"><strong>21:00 CAT</strong> · Main Auditorium · Plot 995, Garden House, Off Mumbwa Road</p>
       </article>
 
-      <article class="weekly-card reveal" style="--reveal-delay:.08s">
-        <div class="weekly-card__icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-flame"></use></svg></div>
-        <span class="weekly-card__day">Monday – Saturday</span>
-        <h3>Morning Glory</h3>
-        <p>Begin each morning at the altar of prayer with Morning Glory and Standing In The Gap intercession, committing your family, work, and nation into God's hands.</p>
-        <p class="weekly-card__time"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg> 06:00 CAT</p>
-        <p class="weekly-card__place">Main Auditorium &amp; Online Broadcast</p>
+      <article class="card card--pad reveal">
+        <p class="card__label">Monday – Saturday</p>
+        <h3 class="card__title">Morning Glory</h3>
+        <p class="card__text">Begin each morning at the altar of prayer with Morning Glory and Standing In The Gap intercession, committing your family, work, and nation into God's hands.</p>
+        <p class="small mt-2"><strong>06:00 CAT</strong> · Main Auditorium &amp; Online Broadcast</p>
       </article>
 
-      <article class="weekly-card reveal" style="--reveal-delay:.16s">
-        <div class="weekly-card__icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-users"></use></svg></div>
-        <span class="weekly-card__day">Every Tuesday</span>
-        <h3>Virtuous Women</h3>
-        <p>Led by Pastor Bupe Sinyangwe, equipping women through fervent intercession, practical teaching of the Word, fellowship, and spiritual mentorship.</p>
-        <p class="weekly-card__time"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg> 14:00 CAT</p>
-        <p class="weekly-card__place">Main Auditorium · Plot 995, Garden House</p>
+      <article class="card card--pad reveal">
+        <p class="card__label">Every Tuesday</p>
+        <h3 class="card__title">Virtuous Women</h3>
+        <p class="card__text">Led by Pastor Bupe Sinyangwe, equipping women through fervent intercession, practical teaching of the Word, fellowship, and spiritual mentorship.</p>
+        <p class="small mt-2"><strong>14:00 CAT</strong> · Main Auditorium · Plot 995, Garden House</p>
       </article>
 
-      <article class="weekly-card reveal">
-        <div class="weekly-card__icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-shield"></use></svg></div>
-        <span class="weekly-card__day">Every Wednesday</span>
-        <h3>Midweek Service</h3>
-        <p>Our Wednesday midweek service with Deliverance at 11:00 CAT and Preservation at 16:00 CAT — breaking yokes, ministering divine healing, and establishing spiritual preservation over your life and household.</p>
-        <p class="weekly-card__time"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg> 11:00 &amp; 16:00 CAT</p>
-        <p class="weekly-card__place">Main Auditorium · Plot 995, Garden House</p>
+      <article class="card card--pad reveal">
+        <p class="card__label">Every Wednesday</p>
+        <h3 class="card__title">Midweek Service</h3>
+        <p class="card__text">Our Wednesday midweek service with Deliverance at 11:00 CAT and Preservation at 16:00 CAT — breaking yokes, ministering divine healing, and establishing spiritual preservation over your life and household.</p>
+        <p class="small mt-2"><strong>11:00 &amp; 16:00 CAT</strong> · Main Auditorium · Plot 995, Garden House</p>
       </article>
 
-      <article class="weekly-card reveal" style="--reveal-delay:.08s">
-        <div class="weekly-card__icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-moon"></use></svg></div>
-        <span class="weekly-card__day">Wednesday Night</span>
-        <h3>Night of Solution</h3>
-        <p>An all-night prophetic and deliverance vigil for answers, divine direction, and supernatural breakthrough in the presence of God.</p>
-        <p class="weekly-card__time"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg> 21:00 — 04:00 CAT</p>
-        <p class="weekly-card__place">Main Auditorium · Plot 995, Garden House</p>
+      <article class="card card--pad reveal">
+        <p class="card__label">Wednesday Night</p>
+        <h3 class="card__title">Night of Solution</h3>
+        <p class="card__text">An all-night prophetic and deliverance vigil for answers, divine direction, and supernatural breakthrough in the presence of God.</p>
+        <p class="small mt-2"><strong>21:00 — 04:00 CAT</strong> · Main Auditorium · Plot 995, Garden House</p>
       </article>
 
-      <article class="weekly-card reveal" style="--reveal-delay:.16s">
-        <div class="weekly-card__icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-heart"></use></svg></div>
-        <span class="weekly-card__day">Every Thursday</span>
-        <h3>Healing &amp; Deliverance</h3>
-        <p>A weekly evening service dedicated to healing, deliverance, and restoration in spirit, soul, and body through the Word of God and the power of the Holy Spirit.</p>
-        <p class="weekly-card__time"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg> 18:00 CAT</p>
-        <p class="weekly-card__place">Main Auditorium · Plot 995, Garden House</p>
+      <article class="card card--pad reveal">
+        <p class="card__label">Every Thursday</p>
+        <h3 class="card__title">Healing &amp; Deliverance</h3>
+        <p class="card__text">A weekly evening service dedicated to healing, deliverance, and restoration in spirit, soul, and body through the Word of God and the power of the Holy Spirit.</p>
+        <p class="small mt-2"><strong>18:00 CAT</strong> · Main Auditorium · Plot 995, Garden House</p>
       </article>
 
-      <article class="weekly-card reveal">
-        <div class="weekly-card__icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-phone"></use></svg></div>
-        <span class="weekly-card__day">Daily &amp; Friday Vigils</span>
-        <h3>Standing In The Gap Prayer Line</h3>
-        <p>Call our daily prayer line for prayer and counsel, and join us for special Friday Night of Freedom and Standing In The Gap overnight vigils.</p>
-        <p class="weekly-card__time"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-phone"></use></svg> +260 974 807 770</p>
-        <p class="weekly-card__place">Phone, WhatsApp &amp; Friday Overnights</p>
+      <article class="card card--pad reveal">
+        <p class="card__label">Daily &amp; Friday Vigils</p>
+        <h3 class="card__title">Standing In The Gap Prayer Line</h3>
+        <p class="card__text">Call our daily prayer line for prayer and counsel, and join us for special Friday Night of Freedom and Standing In The Gap overnight vigils.</p>
+        <p class="small mt-2"><strong>+260 974 807 770</strong> · Phone, WhatsApp &amp; Friday Overnights</p>
       </article>
     </div>
   </div>
 </section>
 
-<section class="section section--cream">
+<section class="section section--flush-top">
   <div class="container">
     <div class="section-head section-head--center reveal">
       <p class="eyebrow">First time?</p>
-      <h2>What to expect.</h2>
-      <p>You don't need to have it all together. Come as you are — we will meet you where you are.</p>
+      <h2 class="h2">What to expect.</h2>
+      <p class="lead">You don't need to have it all together. Come as you are — we will meet you where you are.</p>
     </div>
 
-    <div class="expect__grid">
-      <article class="expect-card reveal">
-        <span class="expect-card__num">01</span>
-        <h3>A warm welcome</h3>
-        <p>From the moment you arrive, our team will help you find your way and settle in.</p>
+    <div class="story-grid">
+      <article class="story-card reveal">
+        <div>
+          <span class="story-card__num">01</span>
+          <h3 class="h3 mt-2">A warm welcome</h3>
+          <p class="card__text">From the moment you arrive, our team will help you find your way and settle in.</p>
+        </div>
       </article>
-      <article class="expect-card reveal" style="--reveal-delay:.08s">
-        <span class="expect-card__num">02</span>
-        <h3>Spirit-led worship</h3>
-        <p>We make room for the presence of God through heartfelt, joyful worship.</p>
+      <article class="story-card reveal" data-delay="1">
+        <div>
+          <span class="story-card__num">02</span>
+          <h3 class="h3 mt-2">Spirit-led worship</h3>
+          <p class="card__text">We make room for the presence of God through heartfelt, joyful worship.</p>
+        </div>
       </article>
-      <article class="expect-card reveal" style="--reveal-delay:.16s">
-        <span class="expect-card__num">03</span>
-        <h3>The Word with clarity</h3>
-        <p>Practical, Christ-centred teaching that you can live out beyond Sunday.</p>
+      <article class="story-card reveal" data-delay="2">
+        <div>
+          <span class="story-card__num">03</span>
+          <h3 class="h3 mt-2">The Word with clarity</h3>
+          <p class="card__text">Practical, Christ-centred teaching that you can live out beyond Sunday.</p>
+        </div>
       </article>
-      <article class="expect-card reveal" style="--reveal-delay:.24s">
-        <span class="expect-card__num">04</span>
-        <h3>Prayer for your need</h3>
-        <p>Come forward for prayer after the message; we will stand with you in faith.</p>
+      <article class="story-card reveal" data-delay="3">
+        <div>
+          <span class="story-card__num">04</span>
+          <h3 class="h3 mt-2">Prayer for your need</h3>
+          <p class="card__text">Come forward for prayer after the message; we will stand with you in faith.</p>
+        </div>
       </article>
     </div>
   </div>
 </section>
 
-<section class="section section--cream" id="calendar">
+<section class="section" id="calendar">
   <div class="container">
     <div class="section-head section-head--row reveal">
       <div>
         <p class="eyebrow">Church calendar</p>
-        <h2>The month at a glance.</h2>
-        <p>Our weekly rhythm and monthly encounters, laid out so you can plan ahead. All times are Central Africa Time (CAT).</p>
+        <h2 class="h2">The month at a glance.</h2>
+        <p class="lead">Our weekly rhythm and monthly encounters, laid out so you can plan ahead. All times are Central Africa Time (CAT).</p>
       </div>
       <div class="calendar-nav">
-        <button class="calendar-nav__btn" type="button" data-calendar-prev aria-label="Previous month"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></button>
+        <button class="calendar-nav__btn" type="button" data-calendar-prev aria-label="Previous month">&lsaquo;</button>
         <span class="calendar-nav__label" data-calendar-label>November 2026</span>
-        <button class="calendar-nav__btn calendar-nav__btn--next" type="button" data-calendar-next aria-label="Next month"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></button>
+        <button class="calendar-nav__btn" type="button" data-calendar-next aria-label="Next month">&rsaquo;</button>
       </div>
     </div>
     <div class="calendar reveal" data-calendar>
@@ -264,7 +300,7 @@
       <div class="section-head section-head--row">
         <div>
           <p class="eyebrow">Upcoming</p>
-          <h2>Dates to save.</h2>
+          <h2 class="h2">Dates to save.</h2>
         </div>
       </div>
       <div class="event-grid" data-schedule-upcoming></div>
@@ -277,67 +313,64 @@
     <div class="section-head section-head--row reveal">
       <div>
         <p class="eyebrow">Recent highlights</p>
-        <h2>Moments we will not forget.</h2>
-        <p>Catch up on the gatherings and encounters that marked our year. Every replay is a chance to receive what God said.</p>
+        <h2 class="h2">Moments we will not forget.</h2>
+        <p class="lead">Catch up on the gatherings and encounters that marked our year. Every replay is a chance to receive what God said.</p>
       </div>
       <a class="link-arrow section-head__link" href="sermons.html">All messages</a>
     </div>
 
-    <div class="event-grid">
-      <article class="event-card reveal">
-        <div class="event-card__media">
+    <div class="grid grid-3">
+      <article class="card card--hover reveal">
+        <div class="card__media card__media--wide">
           <picture><source type="image/avif" srcset="assets/img/opt/event-worship-weapon-320.avif 320w, assets/img/opt/event-worship-weapon-480.avif 480w, assets/img/opt/event-worship-weapon-640.avif 640w, assets/img/opt/event-worship-weapon-960.avif 960w, assets/img/opt/event-worship-weapon-1200.avif 1200w" sizes="(max-width: 760px) 100vw, (max-width: 1200px) 50vw, 33vw"><source type="image/webp" srcset="assets/img/opt/event-worship-weapon-320.webp 320w, assets/img/opt/event-worship-weapon-480.webp 480w, assets/img/opt/event-worship-weapon-640.webp 640w, assets/img/opt/event-worship-weapon-960.webp 960w, assets/img/opt/event-worship-weapon-1200.webp 1200w" sizes="(max-width: 760px) 100vw, (max-width: 1200px) 50vw, 33vw"><img src="assets/img/event-worship-weapon.webp?v=hd" alt="My Worship My Weapon 3.0 worship encounter" width="1280" height="720" loading="lazy" decoding="async"></picture>
-          <span class="event-card__tag">Worship encounter</span>
         </div>
-        <div class="event-card__body">
-          <p class="event-card__date"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-calendar"></use></svg> Nov 1, 2026</p>
-          <h3>My Worship My Weapon 3.0</h3>
-          <p>A 16-hour worship encounter with Apostle Sunday Sinyangwe and guest minister Pst Washy. Watch the replay and enter again.</p>
-          <a class="sermon-card__link" href="https://www.youtube.com/watch?v=9EermTXSfkM" target="_blank" rel="noopener noreferrer">Watch the replay <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></a>
+        <div class="card__body">
+          <p class="card__label">Worship encounter · Nov 1, 2026</p>
+          <h3 class="card__title">My Worship My Weapon 3.0</h3>
+          <p class="card__text">A 16-hour worship encounter with Apostle Sunday Sinyangwe and guest minister Pst Washy. Watch the replay and enter again.</p>
+          <div class="card__foot"><a class="link-arrow" href="https://www.youtube.com/watch?v=9EermTXSfkM" target="_blank" rel="noopener noreferrer">Watch the replay <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></a></div>
         </div>
       </article>
 
-      <article class="event-card reveal" style="--reveal-delay:.1s">
-        <div class="event-card__media">
+      <article class="card card--hover reveal">
+        <div class="card__media card__media--wide">
           <picture><source type="image/avif" srcset="assets/img/opt/event-night-freedom-320.avif 320w, assets/img/opt/event-night-freedom-480.avif 480w, assets/img/opt/event-night-freedom-640.avif 640w, assets/img/opt/event-night-freedom-960.avif 960w, assets/img/opt/event-night-freedom-1200.avif 1200w" sizes="(max-width: 760px) 100vw, (max-width: 1200px) 50vw, 33vw"><source type="image/webp" srcset="assets/img/opt/event-night-freedom-320.webp 320w, assets/img/opt/event-night-freedom-480.webp 480w, assets/img/opt/event-night-freedom-640.webp 640w, assets/img/opt/event-night-freedom-960.webp 960w, assets/img/opt/event-night-freedom-1200.webp 1200w" sizes="(max-width: 760px) 100vw, (max-width: 1200px) 50vw, 33vw"><img src="assets/img/event-night-freedom.webp?v=hd" alt="Night of Freedom prayer gathering" width="1280" height="720" loading="lazy" decoding="async"></picture>
-          <span class="event-card__tag">Prayer night</span>
         </div>
-        <div class="event-card__body">
-          <p class="event-card__date"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-calendar"></use></svg> Oct 23, 2026</p>
-          <h3>Night of Freedom</h3>
-          <p>A night of prayer, praise, and freedom in Christ. Watch the replay and stand in the liberty Jesus purchased for you.</p>
-          <a class="sermon-card__link" href="https://www.youtube.com/watch?v=0m0BfbNJNPI" target="_blank" rel="noopener noreferrer">Watch the replay <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></a>
+        <div class="card__body">
+          <p class="card__label">Prayer night · Oct 23, 2026</p>
+          <h3 class="card__title">Night of Freedom</h3>
+          <p class="card__text">A night of prayer, praise, and freedom in Christ. Watch the replay and stand in the liberty Jesus purchased for you.</p>
+          <div class="card__foot"><a class="link-arrow" href="https://www.youtube.com/watch?v=0m0BfbNJNPI" target="_blank" rel="noopener noreferrer">Watch the replay <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></a></div>
         </div>
       </article>
 
-      <article class="event-card reveal" style="--reveal-delay:.2s">
-        <div class="event-card__media">
+      <article class="card card--hover reveal">
+        <div class="card__media card__media--wide">
           <picture><source type="image/avif" srcset="assets/img/opt/sermon-prayer-fasting-320.avif 320w, assets/img/opt/sermon-prayer-fasting-480.avif 480w, assets/img/opt/sermon-prayer-fasting-640.avif 640w, assets/img/opt/sermon-prayer-fasting-800.avif 800w, assets/img/opt/sermon-prayer-fasting-960.avif 960w" sizes="(max-width: 760px) 100vw, (max-width: 1200px) 50vw, 33vw"><source type="image/webp" srcset="assets/img/opt/sermon-prayer-fasting-320.webp 320w, assets/img/opt/sermon-prayer-fasting-480.webp 480w, assets/img/opt/sermon-prayer-fasting-640.webp 640w, assets/img/opt/sermon-prayer-fasting-800.webp 800w, assets/img/opt/sermon-prayer-fasting-960.webp 960w" sizes="(max-width: 760px) 100vw, (max-width: 1200px) 50vw, 33vw"><img src="assets/img/sermon-prayer-fasting.webp?v=hd" alt="Prayer and Fasting Sunday Service" width="960" height="540" loading="lazy" decoding="async"></picture>
-          <span class="event-card__tag">Consecration</span>
         </div>
-        <div class="event-card__body">
-          <p class="event-card__date"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-calendar"></use></svg> Oct 18, 2026</p>
-          <h3>Prayer &amp; Fasting Sunday</h3>
-          <p>A day of consecration and seeking God together. Watch the replay and return to the altar with fresh hunger.</p>
-          <a class="sermon-card__link" href="https://www.youtube.com/watch?v=TLpDwYK1tLM" target="_blank" rel="noopener noreferrer">Watch the replay <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></a>
+        <div class="card__body">
+          <p class="card__label">Consecration · Oct 18, 2026</p>
+          <h3 class="card__title">Prayer &amp; Fasting Sunday</h3>
+          <p class="card__text">A day of consecration and seeking God together. Watch the replay and return to the altar with fresh hunger.</p>
+          <div class="card__foot"><a class="link-arrow" href="https://www.youtube.com/watch?v=TLpDwYK1tLM" target="_blank" rel="noopener noreferrer">Watch the replay <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></a></div>
         </div>
       </article>
     </div>
   </div>
 </section>
 
-<section class="section section--cream">
+<section class="section section--flush-top">
   <div class="container">
-    <div class="anniversary reveal">
-      <div class="anniversary__media">
+    <div class="split split--wide">
+      <div class="split__media reveal">
         <picture><source type="image/avif" srcset="assets/img/opt/event-anniversary-320.avif 320w, assets/img/opt/event-anniversary-480.avif 480w, assets/img/opt/event-anniversary-640.avif 640w, assets/img/opt/event-anniversary-960.avif 960w, assets/img/opt/event-anniversary-1200.avif 1200w" sizes="(max-width: 900px) 100vw, 50vw"><source type="image/webp" srcset="assets/img/opt/event-anniversary-320.webp 320w, assets/img/opt/event-anniversary-480.webp 480w, assets/img/opt/event-anniversary-640.webp 640w, assets/img/opt/event-anniversary-960.webp 960w, assets/img/opt/event-anniversary-1200.webp 1200w" sizes="(max-width: 900px) 100vw, 50vw"><img src="assets/img/event-anniversary.webp?v=hd" alt="Shalom Embassy 17th anniversary celebration" width="1280" height="720" loading="lazy" decoding="async"></picture>
       </div>
-      <div class="anniversary__body">
+      <div class="split__body reveal" data-delay="1">
         <p class="eyebrow">A milestone of grace</p>
-        <h2>Seventeen years of God's faithfulness.</h2>
-        <p>In March 2026, the Shalom Embassy family gathered to celebrate 17 years of ministry — 17 years of healing, deliverance, provision, and lives made whole. We give God all the glory, and we are believing Him for the next chapter.</p>
-        <div class="anniversary__actions">
-          <a class="btn btn--navy" href="about.html">Read our story <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></a>
+        <h2 class="h2">Seventeen years of God's faithfulness.</h2>
+        <p class="lead">In March 2026, the Shalom Embassy family gathered to celebrate 17 years of ministry — 17 years of healing, deliverance, provision, and lives made whole. We give God all the glory, and we are believing Him for the next chapter.</p>
+        <div class="row mt-2">
+          <a class="btn btn-primary" href="about.html">Read our story <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></a>
           <a class="link-arrow" href="sermons.html">Watch anniversary messages</a>
         </div>
       </div>
@@ -347,135 +380,186 @@
 
 <section class="section">
   <div class="container">
-    <div class="visit__grid">
-      <div class="visit__content reveal">
+    <div class="split split--wide">
+      <div class="split__body reveal">
         <p class="eyebrow">Plan your visit</p>
-        <h2>Your first Sunday, made simple.</h2>
-        <p>Tell us you are coming and we will look out for you. Our team can help with directions, seating, and any questions you have before you arrive.</p>
-        <div class="visit__details">
-          <div class="visit__detail">
-            <span class="visit__detail-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-pin"></use></svg></span>
-            <div>
-              <strong>Find us</strong>
-              <span>Plot 995, Garden House, Off Mumbwa Road, Behind Livonia Shopping Complex, Lusaka, Zambia</span>
-            </div>
-          </div>
-          <div class="visit__detail">
-            <span class="visit__detail-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg></span>
-            <div>
-              <strong>Sunday &amp; midweek services</strong>
-              <span>Every Last Sunday 07:00 — 14:00 CAT · Wednesdays 11:00, 16:00 &amp; 21:00 CAT · Thursdays 18:00 CAT</span>
-            </div>
-          </div>
-          <div class="visit__detail">
-            <span class="visit__detail-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-phone"></use></svg></span>
-            <div>
-              <strong>Talk to us</strong>
-              <span><a href="tel:+260974807770">+260 974 807 770</a> · <a href="tel:+260977846660">+260 977 846 660</a></span>
-            </div>
-          </div>
+        <h2 class="h2">Your first Sunday, made simple.</h2>
+        <p class="lead">Tell us you are coming and we will look out for you. Our team can help with directions, seating, and any questions you have before you arrive.</p>
+        <div class="detail-list">
+          <div><dt>Find us</dt><dd><strong>Plot 995, Garden House, Off Mumbwa Road, Behind Livonia Shopping Complex, Lusaka, Zambia</strong></dd></div>
+          <div><dt>Sunday &amp; midweek services</dt><dd><strong>Every Last Sunday 07:00 — 14:00 CAT</strong> · Wednesdays 11:00, 16:00 &amp; 21:00 CAT · Thursdays 18:00 CAT</dd></div>
+          <div><dt>Talk to us</dt><dd><a href="tel:+260974807770">+260 974 807 770</a> · <a href="tel:+260977846660">+260 977 846 660</a></dd></div>
         </div>
-        <a class="btn" href="contact.html#visit">Plan your visit <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></a>
+        <a class="btn btn-primary" href="contact.html#visit">Plan your visit <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></a>
       </div>
-      <div class="map-card reveal" style="--reveal-delay:.12s">
-        <div class="map-card__map">
-          <picture><source type="image/avif" srcset="assets/img/opt/map-lusaka-320.avif 320w, assets/img/opt/map-lusaka-480.avif 480w, assets/img/opt/map-lusaka-640.avif 640w, assets/img/opt/map-lusaka-800.avif 800w" sizes="(max-width: 900px) 100vw, 50vw"><source type="image/webp" srcset="assets/img/opt/map-lusaka-320.webp 320w, assets/img/opt/map-lusaka-480.webp 480w, assets/img/opt/map-lusaka-640.webp 640w, assets/img/opt/map-lusaka-800.webp 800w" sizes="(max-width: 900px) 100vw, 50vw"><img src="assets/img/map-lusaka.webp?v=hd" alt="Map of Garden House and Mumbwa Road in Lusaka showing Shalom Embassy Ministries International" width="900" height="600" loading="lazy" decoding="async"></picture>
-          <span class="map-card__pin"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-pin"></use></svg></span>
-          <span class="map-card__label">Plot 995 · Garden House, Mumbwa Rd</span>
-          <a class="map-card__open" href="https://www.google.com/maps/search/?api=1&amp;query=-15.41795,28.220929" target="_blank" rel="noopener noreferrer">Open in Maps <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></a>
-          <span class="map-card__credit">© OpenStreetMap contributors</span>
-        </div>
-        <div class="map-card__address">
-          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-pin"></use></svg>
-          <div>
-            <strong>Shalom Embassy Ministries International</strong>
-            Plot 995, Garden House, Off Mumbwa Road, Behind Livonia Shopping Complex, Lusaka
-          </div>
+      <div class="map-card reveal" data-delay="1">
+        <div class="map-card__inner">
+          <span class="map-card__pin"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg></span>
+          <h3>Plot 995, Garden House</h3>
+          <p>Off Mumbwa Road, Behind Livonia Shopping Complex, Lusaka. Look for the Shalom Embassy welcome team at the entrance.</p>
+          <a class="link-arrow" href="https://www.google.com/maps/search/?api=1&query=-15.41795,28.220929" target="_blank" rel="noopener noreferrer">Open in Google Maps</a>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="cta-band">
-  <div class="container cta-band__inner">
-    <div>
-      <p class="eyebrow eyebrow--light">We saved you a seat</p>
-      <h2>Sunday is better with you in the room.</h2>
-      <p>Come and worship with us. Bring your family, bring your questions, bring your expectation.</p>
+<section class="section section--flush-top" id="invite">
+  <div class="container">
+    <div class="section-head section-head--center reveal">
+      <p class="eyebrow">Invite someone</p>
+      <h2 class="h2">Create your invitation.</h2>
+      <p class="lead">Choose a gathering, add the date and your name, then download or share a ready-made invitation card for WhatsApp.</p>
     </div>
-    <div class="cta-band__actions">
-      <a class="btn" href="contact.html#visit">Plan your visit <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></a>
-      <a class="btn btn--ghost-light" href="sermons.html">Watch online</a>
+    <div class="card-maker">
+      <form class="card-maker__controls reveal" data-invite-form>
+        <div class="form-field">
+          <label for="invite-gathering">Gathering</label>
+          <select id="invite-gathering" name="gathering">
+            <option>7 Hours of Nothing Missing, Nothing Broken</option>
+            <option>Big Sunday</option>
+            <option>Night of Solution</option>
+            <option>Healing &amp; Deliverance Service</option>
+            <option>My Worship My Weapon 4</option>
+            <option>17th Anniversary Celebration</option>
+            <option>Virtuous Women Meeting</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="invite-date">Date</label>
+          <input id="invite-date" name="date" type="date" value="2026-11-29">
+        </div>
+        <div class="form-field">
+          <label for="invite-name">Your name (optional)</label>
+          <input id="invite-name" name="name" type="text" autocomplete="name" placeholder="e.g. Chanda Mwale">
+        </div>
+        <div class="card-maker__actions">
+          <button class="btn btn-primary" type="button" data-invite-download>Download card <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></button>
+          <button class="btn btn-outline" type="button" data-invite-share>Share card <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></button>
+        </div>
+        <p class="form-note">Your card is created in your browser. Nothing is uploaded to a server.</p>
+      </form>
+
+      <div class="card-maker__preview reveal" data-delay="1">
+        <canvas id="invite-canvas" width="1080" height="1350" role="img" aria-label="Preview of your Shalom Embassy invitation card"></canvas>
+        <p class="form-note mt-2">Designed for WhatsApp status and social sharing · 1080 × 1350</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--flush-top">
+  <div class="container">
+    <div class="cta-card reveal">
+      <p class="eyebrow" style="justify-self:center">We saved you a seat</p>
+      <h2 class="h2">Sunday is better with you in the room.</h2>
+      <p>Come and worship with us. Bring your family, bring your questions, bring your expectation.</p>
+      <div class="cta-card__actions">
+        <a class="btn btn-primary" href="contact.html#visit">Plan your visit <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></a>
+        <a class="btn btn-outline" href="sermons.html">Watch online</a>
+      </div>
     </div>
   </div>
 </section>
 
 </main>
+
 <footer class="site-footer">
-  <div class="container footer__grid">
-    <div class="footer__brand">
-      <a class="brand " href="index.html" aria-label="Shalom Embassy Ministries International — home">
-  <picture><source type="image/avif" srcset="assets/img/opt/logo-official-160.avif 160w, assets/img/opt/logo-official-240.avif 240w, assets/img/opt/logo-official-320.avif 320w, assets/img/opt/logo-official-480.avif 480w" sizes="160px"><source type="image/webp" srcset="assets/img/opt/logo-official-160.webp 160w, assets/img/opt/logo-official-240.webp 240w, assets/img/opt/logo-official-320.webp 320w, assets/img/opt/logo-official-480.webp 480w" sizes="160px"><img class="brand__logo" src="assets/img/logo-official.webp?v=hd" alt="Shalom Embassy Ministries International" width="480" height="198" loading="lazy" decoding="async"></picture>
-</a>
-      <p class="footer__desc">A home of healing and deliverance in Lusaka, Zambia, proclaiming the unconditional love of Jesus Christ through prayer, the Word, healing, and deliverance.</p>
-      <p class="footer__mission">Nothing missing. Nothing broken.</p>
-      <div class="socials footer__socials">
-        <a href="https://www.facebook.com/ApostleSundaySinyangwe/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-facebook"></use></svg></a><a href="https://www.instagram.com/apostlesundaysinyangwe/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-instagram"></use></svg></a><a href="https://www.youtube.com/@apostlesundaysinyangwe" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-youtube"></use></svg></a><a href="https://x.com/ApostleSundayS" target="_blank" rel="noopener noreferrer" aria-label="X"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></a><a href="https://t.me/apostlesundaysinyangwe" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-telegram"></use></svg></a>
+  <div class="footer-marquee" aria-hidden="true"><div class="marquee"><div class="marquee__group"><img src="assets/img/congregation.webp" alt="Worship at Shalom Embassy" width="160" height="105" loading="lazy" decoding="async">
+<img src="assets/img/pastor-preaching.webp" alt="The Word" width="160" height="105" loading="lazy" decoding="async">
+<img src="assets/img/prayer-standing-gap.webp" alt="Prayer" width="160" height="105" loading="lazy" decoding="async">
+<img src="assets/img/youth-worship.webp" alt="Youth" width="160" height="105" loading="lazy" decoding="async">
+<img src="assets/img/worship-crowd.webp" alt="Worship" width="160" height="105" loading="lazy" decoding="async">
+<img src="assets/img/auditorium.webp" alt="Family" width="160" height="105" loading="lazy" decoding="async"></div><div class="marquee__group"><img src="assets/img/congregation.webp" alt="Worship at Shalom Embassy" width="160" height="105" loading="lazy" decoding="async">
+<img src="assets/img/pastor-preaching.webp" alt="The Word" width="160" height="105" loading="lazy" decoding="async">
+<img src="assets/img/prayer-standing-gap.webp" alt="Prayer" width="160" height="105" loading="lazy" decoding="async">
+<img src="assets/img/youth-worship.webp" alt="Youth" width="160" height="105" loading="lazy" decoding="async">
+<img src="assets/img/worship-crowd.webp" alt="Worship" width="160" height="105" loading="lazy" decoding="async">
+<img src="assets/img/auditorium.webp" alt="Family" width="160" height="105" loading="lazy" decoding="async"></div></div></div>
+
+  <div class="footer-main">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="index.html" aria-label="Shalom Embassy Ministries International home">
+            <span class="brand__mark"><img src="assets/img/logo-official.png" alt="" width="42" height="42"></span>
+            <span class="brand__text">
+              <span class="brand__name">Shalom Embassy</span>
+              <span class="brand__sub">Ministries International</span>
+            </span>
+          </a>
+          <p class="footer-tagline">Nothing missing. Nothing broken.</p>
+          <p class="footer-about">A home of healing and deliverance in Lusaka, Zambia, proclaiming the unconditional love of Jesus Christ through prayer, the Word, healing, and deliverance.</p>
+          <div class="footer-contact">
+            <a href="https://www.google.com/maps/search/?api=1&query=-15.41795,28.220929" target="_blank" rel="noopener">Plot 995, Garden House, Off Mumbwa Road, Lusaka, Zambia</a>
+            <a href="tel:+260974807770">+260 974 807 770</a>
+            <a href="tel:+260977846660">+260 977 846 660</a>
+            <span>Sunday 7 Hours service · 07:00 AM CAT</span>
+          </div>
+          <div class="footer-social">
+            <a href="https://www.facebook.com/ApostleSundaySinyangwe/" target="_blank" rel="noopener" aria-label="Facebook">Facebook</a>
+            <a href="https://www.instagram.com/apostlesundaysinyangwe/" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a>
+            <a href="https://www.youtube.com/@apostlesundaysinyangwe" target="_blank" rel="noopener" aria-label="YouTube">YouTube</a>
+            <a href="https://x.com/ApostleSundayS" target="_blank" rel="noopener" aria-label="X">X</a>
+            <a href="https://t.me/apostlesundaysinyangwe" target="_blank" rel="noopener" aria-label="Telegram">Telegram</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h2>Explore</h2>
+          <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+      <a href="senior-pastor.html">Senior Pastor</a>
+            <a href="sermons.html">Sermons</a>
+            <a href="gatherings.html">Gatherings</a>
+            <a href="impact.html">Impact</a>
+            <a href="stories.html">Stories</a>
+            <a href="gallery.html">Gallery</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h2>Take part</h2>
+          <div class="footer-links">
+            <a href="give.html">Give</a>
+            <a href="contact.html">Contact</a>
+            <a href="contact.html#visit">Plan a visit</a>
+            <a href="gatherings.html#invite">Invite someone</a>
+            <a href="stories.html#share">Share your testimony</a>
+            <a href="contact.html#faq">Questions</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h2>Gather with us</h2>
+          <div class="footer-links">
+            <a href="contact.html#visit">Plan your visit</a>
+            <a href="contact.html#visit">Ask about transport</a>
+            <a href="contact.html#prayer">Send a prayer request</a>
+            <a href="give.html">Give online</a>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="footer__col">
-      <h3>Explore</h3>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">Our story</a></li>
-        <li><a href="sermons.html">Sermons</a></li><li><a href="sermons.html#books">Library</a></li>
-        <li><a href="gatherings.html">Gatherings</a></li>
-        <li><a href="give.html">Give</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </div>
-    <div class="footer__col">
-      <h3>Gather</h3>
-      <ul>
-        <li>Every Last Sunday · 7 Hours 07:00 — 14:00</li>
-        <li>Quarterly · Big Sunday 07:00 — 14:00</li>
-        <li>Mon–Sat · Morning Glory 06:00</li>
-        <li>Tuesday · Virtuous Women 14:00</li>
-        <li>Wednesday · Midweek 11:00 &amp; 16:00 · Night of Solution 21:00</li>
-        <li>Thursday · Healing &amp; Deliverance 18:00</li>
-        <li>First week · Empowerment Sunday &amp; My Worship My Weapon 4</li>
-        <li><a href="gatherings.html#calendar">See church calendar</a></li>
-      </ul>
-    </div>
-    <div class="footer__col">
-      <h3>Visit</h3>
-      <ul class="footer__contact-list">
-        <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-pin"></use></svg> <span>Plot 995, Garden House, Off Mumbwa Road, Behind Livonia Shopping Complex, Lusaka, Zambia</span></li>
-        <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-phone"></use></svg> <a href="tel:+260974807770">+260 974 807 770</a></li>
-        <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-phone"></use></svg> <a href="tel:+260977846660">+260 977 846 660</a></li>
-        <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-whatsapp"></use></svg> <a href="https://wa.me/260974807770" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a></li>
-      </ul>
-    </div>
   </div>
-  <div class="container footer__bottom">
-    <p>© <span data-year>2026</span> Shalom Embassy Ministries International. All rights reserved.</p>
-    <p>Nothing missing. Nothing broken.</p>
-  </div>
-</footer><div class="whatsapp-float">
-  <a href="https://wa.me/260974807770?text=Hello%20Shalom%20Embassy%2C%20I%20would%20like%20to%20know%20more." target="_blank" rel="noopener noreferrer" aria-label="Chat with Shalom Embassy on WhatsApp"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-whatsapp"></use></svg></a>
-</div>
-<button class="to-top" type="button" aria-label="Back to top"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></button>
 
-<dialog class="lightbox" id="lightbox" aria-labelledby="lightbox-caption">
-  <button class="lightbox__close" type="button" data-lightbox-close aria-label="Close photo viewer"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-close"></use></svg></button>
-  <button class="lightbox__nav lightbox__nav--prev" type="button" data-lightbox-prev aria-label="Previous photo"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></button>
-  <figure class="lightbox__figure">
-    <img data-lightbox-image src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="">
-    <figcaption id="lightbox-caption" data-lightbox-caption></figcaption>
-  </figure>
-  <button class="lightbox__nav lightbox__nav--next" type="button" data-lightbox-next aria-label="Next photo"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></button>
-</dialog><script src="assets/js/main.js?v=library1" defer></script>
-<script src="assets/js/schedule.js?v=fast4" defer></script>
+  <div class="container">
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> Shalom Embassy Ministries International. All rights reserved.</span>
+      <div class="footer-bottom__links">
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  <script src="assets/js/rpa30.js?v=1" defer></script>
+  <script src="assets/js/i18n.js?v=1" defer></script>
+  <script src="assets/js/local-text.js?v=1" defer></script>
+  <script src="assets/js/main.js?v=embassy2" defer></script>
+  <script src="assets/js/schedule.js?v=embassy2" defer></script>
 </body>
 </html>
+
+
