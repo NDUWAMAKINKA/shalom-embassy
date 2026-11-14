@@ -1,0 +1,143 @@
+/* =========================================================
+   Shalom Embassy — improvements cloned from Dunamis 30th
+   ========================================================= */
+
+/* Nav link hover/active underline effect */
+.nav__link {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 2px;
+}
+.nav__link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: currentColor;
+  transition: width .25s ease, left .25s ease;
+  border-radius: 2px;
+}
+.nav__link:hover::after,
+.nav__link[aria-current="page"]::after {
+  width: 100%;
+  left: 0;
+}
+.nav-toggle {
+  transition: transform .2s ease;
+}
+.nav-toggle:hover { transform: scale(1.05); }
+.nav-toggle__lines span {
+  transition: transform .25s ease, opacity .2s ease;
+}
+body.nav-open .nav-toggle__lines span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+body.nav-open .nav-toggle__lines span:nth-child(2) { opacity: 0; }
+body.nav-open .nav-toggle__lines span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+/* Buttons hover lift */
+.btn { transition: transform .18s ease, box-shadow .18s ease; }
+.btn:hover { transform: translateY(-2px); }
+
+/* Testimony grid */
+.testimony-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+.testimony {
+  background: var(--card-bg, #fff);
+  border: 1px solid rgba(16,112,156,.12);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 18px rgba(0,0,0,.06);
+  margin: 0;
+}
+.testimony p { font-style: italic; line-height: 1.6; }
+.testimony footer { margin-top: .75rem; font-weight: 600; color: #10709c; }
+
+/* Invite envelope + card */
+.invite-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+@media (max-width: 760px) {
+  .invite-grid { grid-template-columns: 1fr; }
+}
+.invite-envelope {
+  position: relative;
+  background: #f8f1e3;
+  border: 2px solid #f0c12e;
+  border-radius: 1rem;
+  padding: 2rem;
+  min-height: 280px;
+  overflow: hidden;
+  transition: transform .3s ease;
+}
+.invite-envelope__flap {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 60px;
+  background: linear-gradient(135deg, #e2b42c, #f0c12e);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top;
+  transition: transform .4s ease;
+}
+.invite-envelope.is-open .invite-envelope__flap { transform: rotateX(180deg); }
+.invite-envelope__body { margin-top: 2rem; }
+.invite-envelope__to, .invite-envelope__from { margin: .25rem 0; font-weight: 600; }
+.invite-card {
+  margin-top: 1.5rem;
+  background: #fff;
+  border: 1px solid rgba(16,112,156,.15);
+  border-radius: .75rem;
+  padding: 1.5rem;
+  box-shadow: 0 6px 24px rgba(0,0,0,.08);
+  animation: inviteFade .4s ease;
+}
+.invite-card[hidden] { display: none; }
+.invite-card__eyebrow { font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; color: #10709c; }
+.invite-card__title { font-family: 'Fraunces', serif; margin: .25rem 0 1rem; }
+.invite-card__line { margin: .5rem 0; }
+.invite-card__actions { display: flex; gap: .75rem; flex-wrap: wrap; margin-top: 1rem; }
+@keyframes inviteFade { from { opacity: 0; transform: translateY(8px);} to { opacity:1; transform:none;} }
+
+/* Form fields */
+.field { display: block; margin-bottom: 1rem; }
+.field span { display: block; margin-bottom: .35rem; font-weight: 600; }
+.field input, .field textarea {
+  width: 100%;
+  padding: .65rem .85rem;
+  border: 1px solid rgba(16,112,156,.25);
+  border-radius: .5rem;
+  font: inherit;
+}
+.field input:focus, .field textarea:focus {
+  outline: 2px solid #10709c;
+  outline-offset: 1px;
+}
+
+/* Footer polish: social icon hover */
+.footer__socials a { transition: transform .18s ease, color .18s ease; display: inline-flex; }
+.footer__socials a:hover { transform: translateY(-2px); color: #e2b42c; }
+
+/* Gallery carousel hint */
+.gallery-carousel { display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: .5rem; }
+.gallery-carousel > * { scroll-snap-align: start; flex: 0 0 260px; }
+
+/* Page hero */
+.page-hero { padding: 4rem 0 2rem; }
+.page-hero__lead { max-width: 60ch; font-size: 1.1rem; opacity: .85; }
+
+/* Responsive images polish */
+img { max-width: 100%; height: auto; }
+
+/* Skip link focus */
+.skip-link:focus { position: absolute; top: 0; left: 0; background: #071a36; color: #fff; padding: .5rem 1rem; z-index: 1000; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .btn, .nav__link::after, .invite-envelope__flap, .invite-card { transition: none; animation: none; }
+}
